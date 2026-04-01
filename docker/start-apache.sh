@@ -10,6 +10,11 @@ fi
 
 sed -ri "s/^Listen .*/Listen ${PORT}/" /etc/apache2/ports.conf
 
+# Railway restarts can occasionally surface the wrong Apache MPM state.
+# Force the PHP-compatible prefork MPM at container start.
+a2dismod -f mpm_event mpm_worker >/dev/null 2>&1 || true
+a2enmod mpm_prefork >/dev/null 2>&1 || true
+
 STORAGE_DIR="${GW_STORAGE_DIR:-/var/www/html/form_submissions}"
 mkdir -p "${STORAGE_DIR}"
 chown -R www-data:www-data "${STORAGE_DIR}" || true
