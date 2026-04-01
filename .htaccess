@@ -7,11 +7,13 @@ DirectoryIndex index.html index.php
 RewriteEngine On
 
 # Force the canonical HTTPS + www host.
+RewriteCond %{REQUEST_URI} !^/health\.php$ [NC]
 RewriteCond %{ENV:GW_DISABLE_CANONICAL_REDIRECT} !1
 RewriteCond %{HTTP_HOST} !\.railway\.app$ [NC]
 RewriteCond %{HTTP_HOST} !^www\.greywolf3pl\.com$ [NC]
 RewriteRule ^ https://www.greywolf3pl.com%{REQUEST_URI} [L,R=301]
 
+RewriteCond %{REQUEST_URI} !^/health\.php$ [NC]
 RewriteCond %{ENV:GW_DISABLE_CANONICAL_REDIRECT} !1
 RewriteCond %{HTTP_HOST} !\.railway\.app$ [NC]
 RewriteCond %{HTTP_HOST} ^www\.greywolf3pl\.com$ [NC]
