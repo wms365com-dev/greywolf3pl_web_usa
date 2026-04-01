@@ -1,0 +1,10 @@
+.git
+.gitignore
+.codex
+node_modules
+.npm-cache
+form_submissions
+*.zip
+*.log
+Thumbs.db
+Desktop.ini

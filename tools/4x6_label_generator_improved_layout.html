@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LPN Generator | Grey Wolf Tools</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Private Grey Wolf LPN generator for pallet and carton labels.">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(216, 106, 45, 0.12), transparent 22%),
+        linear-gradient(180deg, #08131d 0%, #0d1824 100%);
+      color: #eef4fb;
+      font-family: "Mulish", sans-serif;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      margin: 0 auto;
+      padding: 1.4rem 0 2.5rem;
+      width: min(1120px, calc(100% - 2rem));
+    }
+
+    .utility-header {
+      align-items: center;
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      margin-bottom: 1.4rem;
+    }
+
+    .utility-brand {
+      align-items: center;
+      display: inline-flex;
+      gap: 0.85rem;
+      text-decoration: none;
+    }
+
+    .utility-brand img {
+      display: block;
+      height: 60px;
+      width: auto;
+    }
+
+    .utility-brand-copy strong {
+      display: block;
+      font-family: "Poppins", sans-serif;
+      font-size: 1.28rem;
+      line-height: 1.02;
+    }
+
+    .utility-brand-copy span {
+      color: #b7c6d4;
+      display: block;
+      font-size: 0.92rem;
+      margin-top: 0.15rem;
+    }
+
+    .utility-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .utility-links a {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      color: #eef4fb;
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 0.78rem 1.05rem;
+      text-decoration: none;
+    }
+
+    .utility-links a.primary-link {
+      background: linear-gradient(135deg, #0d3b66 0%, #16558f 100%);
+      border-color: rgba(13, 59, 102, 0.85);
+    }
+
+    .intro {
+      margin-bottom: 1.25rem;
+    }
+
+    .eyebrow {
+      color: #f0a14a;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      margin: 0 0 0.65rem;
+      text-transform: uppercase;
+    }
+
+    .intro h1 {
+      font-family: "Poppins", sans-serif;
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      letter-spacing: -0.04em;
+      line-height: 0.98;
+      margin: 0 0 0.7rem;
+    }
+
+    .intro p {
+      color: #bfd0df;
+      font-size: 1rem;
+      line-height: 1.68;
+      margin: 0;
+      max-width: 760px;
+    }
+
+    .workspace {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: minmax(310px, 360px) minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(9, 21, 33, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.22);
+      padding: 1.2rem;
+    }
+
+    .card h2 {
+      font-family: "Poppins", sans-serif;
+      font-size: 1.28rem;
+      line-height: 1.08;
+      margin: 0 0 0.45rem;
+    }
+
+    .card p {
+      color: #b7c6d4;
+      line-height: 1.62;
+      margin: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 0.85rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 1rem;
+    }
+
+    .field-full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #eef4fb;
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 800;
+      margin-bottom: 0.42rem;
+    }
+
+    input,
+    select {
+      appearance: none;
+      background: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+      color: #102131;
+      font: inherit;
+      padding: 0.88rem 0.95rem;
+      width: 100%;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #f0a14a;
+      box-shadow: 0 0 0 4px rgba(240, 161, 74, 0.16);
+      outline: none;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.1rem;
+    }
+
+    .actions button {
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+      padding: 0.92rem 1.15rem;
+    }
+
+    .actions .generate-btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: #eef4fb;
+    }
+
+    .actions .print-btn {
+      background: linear-gradient(135deg, #d86a2d 0%, #f0a14a 100%);
+      color: #08131d;
+    }
+
+    .microcopy {
+      color: #9fb2c4;
+      font-size: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    .preview-head {
+      align-items: center;
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .preview-status {
+      background: rgba(13, 59, 102, 0.22);
+      border: 1px solid rgba(119, 141, 169, 0.24);
+      border-radius: 999px;
+      color: #dfe9f4;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 0.48rem 0.76rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .preview-shell {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      min-height: 220px;
+      overflow: auto;
+      padding: 1rem;
+    }
+
+    .preview-empty {
+      color: #9fb2c4;
+      font-size: 0.98rem;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .labels-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .preview-sheet {
+      align-items: flex-start;
+      display: flex;
+      justify-content: center;
+    }
+
+    .label {
+      background: #fff;
+      border: 4px solid #000;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      height: 6in;
+      overflow: hidden;
+      padding: 0.12in;
+      width: 4in;
+    }
+
+    .header-box {
+      border: 2px solid #000;
+      flex: 0 0 auto;
+      padding: 0.08in 0.07in;
+      text-align: center;
+    }
+
+    .vendor {
+      font-size: 0.20in;
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 0.04in;
+      min-height: 0.22in;
+      word-break: break-word;
+    }
+
+    .container-code {
+      font-size: 0.25in;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      line-height: 1.05;
+      margin-bottom: 0.04in;
+      word-break: break-word;
+    }
+
+    .date-row {
+      align-items: center;
+      display: flex;
+      font-size: 0.16in;
+      font-weight: 800;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .middle {
+      align-items: center;
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      padding: 0.10in 0 0.08in;
+    }
+
+    .pallet-word {
+      font-size: 0.26in;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.08in;
+    }
+
+    .number {
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 0.85;
+    }
+
+    .footer-box {
+      border: 2px solid #000;
+      flex: 0 0 auto;
+      padding: 0.02in 0.06in 0.06in;
+    }
+
+    .of-total {
+      font-size: 0.24in;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 0.04in;
+      text-align: center;
+    }
+
+    .barcode-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.03in;
+    }
+
+    .barcode-svg {
+      display: block;
+      height: 0.68in;
+      width: 100%;
+    }
+
+    .barcode-text {
+      font-size: 0.11in;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      text-align: center;
+      word-break: break-all;
+    }
+
+    .print-frame {
+      border: 0;
+      height: 0;
+      left: -9999px;
+      position: absolute;
+      top: 0;
+      width: 0;
+    }
+
+    @media (max-width: 980px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .utility-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .utility-brand img {
+        height: 54px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 1rem, 1120px);
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .utility-links,
+      .actions {
+        flex-direction: column;
+      }
+
+      .utility-links a,
+      .actions button {
+        text-align: center;
+        width: 100%;
+      }
+
+      .preview-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .preview-shell {
+        padding: 0.7rem;
+      }
+
+      .labels-preview {
+        justify-content: center;
+      }
+
+      .preview-sheet {
+        overflow-x: auto;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="utility-header">
+      <a class="utility-brand" href="index.php">
+        <img src="../logo_wolf_invert.png" alt="Grey Wolf 3PL logo">
+        <span class="utility-brand-copy">
+          <strong>Grey Wolf 3PL</strong>
+          <span>Private tools</span>
+        </span>
+      </a>
+      <nav class="utility-links" aria-label="Tool navigation">
+        <a href="index.php">Back to tools</a>
+        <a class="primary-link" href="../index.html">Back to site</a>
+      </nav>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">Internal tool</p>
+      <h1>LPN generator</h1>
+      <p>Generate license plate labels, choose pallet or carton format, preview the run, then print straight to 4x6 stock without opening a pop-up window.</p>
+    </section>
+
+    <section class="workspace">
+      <form class="card" onsubmit="event.preventDefault(); printLabels();">
+        <h2>LPN details</h2>
+        <p>Enter the run details below. The preview updates on the page, and print sends the same layout into a hidden print document.</p>
+
+        <div class="form-grid">
+          <div class="field-full">
+            <label for="vendor">Vendor</label>
+            <input id="vendor" value="" placeholder="Enter vendor name">
+          </div>
+
+          <div class="field-full">
+            <label for="container">Container / Reference</label>
+            <input id="container" value="TCNU3258822" placeholder="Enter container or reference">
+          </div>
+
+          <div>
+            <label for="labelType">Label type</label>
+            <select id="labelType">
+              <option value="PALLET">Pallet label</option>
+              <option value="CARTON">Carton label</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="date">Date</label>
+            <input id="date" type="date">
+          </div>
+
+          <div>
+            <label for="total">Total labels</label>
+            <input id="total" type="number" min="1" value="39">
+          </div>
+
+          <div>
+            <label for="startPallet">Starting LPN #</label>
+            <input id="startPallet" type="number" min="1" value="1">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="generate-btn" type="button" onclick="generate()">Generate labels</button>
+          <button class="print-btn" type="submit">Print / Save PDF</button>
+        </div>
+
+        <p class="microcopy">No pop-up window is used. If the printer preview still looks off, check the Zebra stock size and browser margins.</p>
+      </form>
+
+      <section class="card">
+        <div class="preview-head">
+          <div>
+            <h2>Preview</h2>
+            <p>The preview uses the same label markup sent to the printer.</p>
+          </div>
+          <span class="preview-status" id="preview-status">1 label</span>
+        </div>
+
+        <div class="preview-shell">
+          <div class="preview-empty" id="preview-empty">Enter the run details and generate labels.</div>
+          <div class="labels-preview" id="labels-preview"></div>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <iframe id="print-frame" class="print-frame" title="4x6 label print frame"></iframe>
+
+  <script>
+    document.getElementById("date").valueAsDate = new Date();
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function safeCode39(text) {
+      return String(text).toUpperCase().replace(/[^0-9A-Z\-\.\ \$\/\+\%]/g, "-");
+    }
+
+    function getPalletFontSize(num) {
+      const len = String(num).length;
+      if (len === 1) return "3.05in";
+      if (len === 2) return "2.70in";
+      if (len === 3) return "2.05in";
+      return "1.55in";
+    }
+
+    const code39Map = {
+      "0": "nnnwwnwnn",
+      "1": "wnnwnnnnw",
+      "2": "nnwwnnnnw",
+      "3": "wnwwnnnnn",
+      "4": "nnnwwnnnw",
+      "5": "wnnwwnnnn",
+      "6": "nnwwwnnnn",
+      "7": "nnnwnnwnw",
+      "8": "wnnwnnwnn",
+      "9": "nnwwnnwnn",
+      "A": "wnnnnwnnw",
+      "B": "nnwnnwnnw",
+      "C": "wnwnnwnnn",
+      "D": "nnnnwwnnw",
+      "E": "wnnnwwnnn",
+      "F": "nnwnwwnnn",
+      "G": "nnnnnwwnw",
+      "H": "wnnnnwwnn",
+      "I": "nnwnnwwnn",
+      "J": "nnnnwwwnn",
+      "K": "wnnnnnnww",
+      "L": "nnwnnnnww",
+      "M": "wnwnnnnwn",
+      "N": "nnnnwnnww",
+      "O": "wnnnwnnwn",
+      "P": "nnwnwnnwn",
+      "Q": "nnnnnnwww",
+      "R": "wnnnnnwwn",
+      "S": "nnwnnnwwn",
+      "T": "nnnnwnwwn",
+      "U": "wwnnnnnnw",
+      "V": "nwwnnnnnw",
+      "W": "wwwnnnnnn",
+      "X": "nwnnwnnnw",
+      "Y": "wwnnwnnnn",
+      "Z": "nwwnwnnnn",
+      "-": "nwnnnnwnw",
+      ".": "wwnnnnwnn",
+      " ": "nwwnnnwnn",
+      "$": "nwnwnwnnn",
+      "/": "nwnwnnnwn",
+      "+": "nwnnnwnwn",
+      "%": "nnnwnwnwn",
+      "*": "nwnnwnwnn"
+    };
+
+    function buildCode39Svg(value) {
+      const encoded = "*" + value + "*";
+      const narrow = 2;
+      const wide = 5;
+      const height = 68;
+      const quiet = 10;
+      let x = quiet;
+      let svgBars = "";
+
+      for (let i = 0; i < encoded.length; i += 1) {
+        const ch = encoded[i];
+        const pattern = code39Map[ch] || code39Map["-"];
+
+        for (let j = 0; j < pattern.length; j += 1) {
+          const unit = pattern[j] === "w" ? wide : narrow;
+          const isBar = j % 2 === 0;
+          if (isBar) {
+            svgBars += '<rect x="' + x + '" y="0" width="' + unit + '" height="' + height + '" fill="#000"/>';
+          }
+          x += unit;
+        }
+
+        if (i < encoded.length - 1) {
+          x += narrow;
+        }
+      }
+
+      const totalWidth = x + quiet;
+      return '<svg class="barcode-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + totalWidth + ' ' + height + '" preserveAspectRatio="none" aria-label="barcode">' + svgBars + '</svg>';
+    }
+
+    function pad2(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function getBatchTimestamp(dateValue) {
+      const now = new Date();
+      const datePart = dateValue ? dateValue.replace(/-/g, "") : (
+        now.getFullYear().toString() + pad2(now.getMonth() + 1) + pad2(now.getDate())
+      );
+      const timePart = pad2(now.getHours()) + pad2(now.getMinutes()) + pad2(now.getSeconds());
+      return { datePart, timePart };
+    }
+
+    function buildLabelMarkup(vendor, container, date, total, palletNo, uniqueRaw, barcodeSvg, labelType) {
+      return `
+        <div class="label">
+          <div class="header-box">
+            <div class="vendor">${vendor || "&nbsp;"}</div>
+            <div class="container-code">${container}</div>
+            <div class="date-row">
+              <span>${date}</span>
+            </div>
+          </div>
+
+          <div class="middle">
+            <div class="pallet-word">${labelType}</div>
+            <div class="number" style="font-size:${getPalletFontSize(palletNo)};">${palletNo}</div>
+          </div>
+
+          <div class="footer-box">
+            <div class="of-total">OF ${total}</div>
+            <div class="barcode-wrap">
+              ${barcodeSvg}
+              <div class="barcode-text">${escapeHtml(uniqueRaw)}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildLabels() {
+      const vendorRaw = document.getElementById("vendor").value.trim();
+      const containerRaw = document.getElementById("container").value.trim() || "TCNU3258822";
+      const labelTypeRaw = document.getElementById("labelType").value || "PALLET";
+      const dateRaw = document.getElementById("date").value;
+      const totalRaw = parseInt(document.getElementById("total").value, 10);
+      const startRaw = parseInt(document.getElementById("startPallet").value, 10);
+
+      const vendor = escapeHtml(vendorRaw);
+      const container = escapeHtml(containerRaw.toUpperCase());
+      const date = escapeHtml(dateRaw);
+      const labelType = escapeHtml(labelTypeRaw.toUpperCase());
+      const total = (!isNaN(totalRaw) && totalRaw > 0) ? totalRaw : 1;
+      const startPallet = (!isNaN(startRaw) && startRaw > 0) ? startRaw : 1;
+      const stamp = getBatchTimestamp(dateRaw);
+      const previewLabels = [];
+      const printLabels = [];
+
+      for (let idx = 0; idx < total; idx += 1) {
+        const palletNo = startPallet + idx;
+        const uniqueRaw = safeCode39(labelTypeRaw.toUpperCase() + "-" + stamp.datePart + "-" + stamp.timePart + "-" + containerRaw.toUpperCase() + "-" + palletNo);
+        const barcodeSvg = buildCode39Svg(uniqueRaw);
+        const labelMarkup = buildLabelMarkup(vendor, container, date, total, palletNo, uniqueRaw, barcodeSvg, labelType);
+
+        previewLabels.push('<div class="preview-sheet">' + labelMarkup + "</div>");
+        printLabels.push(labelMarkup);
+      }
+
+      return {
+        count: total,
+        previewHtml: previewLabels.join(""),
+        printHtml: printLabels.join("")
+      };
+    }
+
+    function updatePreviewStatus(count) {
+      const status = document.getElementById("preview-status");
+      status.textContent = count === 1 ? "1 LPN label" : count + " LPN labels";
+    }
+
+    function generate() {
+      const labels = buildLabels();
+      document.getElementById("labels-preview").innerHTML = labels.previewHtml;
+      document.getElementById("preview-empty").style.display = labels.count > 0 ? "none" : "block";
+      updatePreviewStatus(labels.count);
+      return labels;
+    }
+
+    function getPrintStyles() {
+      return `
+        @page {
+          size: 4in 6in;
+          margin: 0;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        html, body {
+          margin: 0;
+          padding: 0;
+          background: #fff;
+        }
+
+        body {
+          color: #000;
+          font-family: Arial, sans-serif;
+        }
+
+        .label {
+          background: #fff;
+          border: 4px solid #000;
+          color: #000;
+          display: flex;
+          flex-direction: column;
+          height: 6in;
+          overflow: hidden;
+          padding: 0.12in;
+          page-break-after: always;
+          break-after: page;
+          width: 4in;
+        }
+
+        .label:last-child {
+          page-break-after: auto;
+          break-after: auto;
+        }
+
+        .header-box {
+          border: 2px solid #000;
+          flex: 0 0 auto;
+          padding: 0.08in 0.07in;
+          text-align: center;
+        }
+
+        .vendor {
+          font-size: 0.20in;
+          font-weight: 800;
+          line-height: 1.05;
+          margin-bottom: 0.04in;
+          min-height: 0.22in;
+          word-break: break-word;
+        }
+
+        .container-code {
+          font-size: 0.25in;
+          font-weight: 900;
+          letter-spacing: 0.01em;
+          line-height: 1.05;
+          margin-bottom: 0.04in;
+          word-break: break-word;
+        }
+
+        .date-row {
+          align-items: center;
+          display: flex;
+          font-size: 0.16in;
+          font-weight: 800;
+          justify-content: center;
+          line-height: 1;
+        }
+
+        .middle {
+          align-items: center;
+          display: flex;
+          flex: 1 1 auto;
+          flex-direction: column;
+          justify-content: center;
+          min-height: 0;
+          padding: 0.10in 0 0.08in;
+        }
+
+        .pallet-word {
+          font-size: 0.26in;
+          font-weight: 900;
+          letter-spacing: 0.04em;
+          margin-bottom: 0.08in;
+        }
+
+        .number {
+          font-weight: 900;
+          letter-spacing: -0.05em;
+          line-height: 0.85;
+        }
+
+        .footer-box {
+          border: 2px solid #000;
+          flex: 0 0 auto;
+          padding: 0.02in 0.06in 0.06in;
+        }
+
+        .of-total {
+          font-size: 0.24in;
+          font-weight: 900;
+          line-height: 1;
+          margin-bottom: 0.04in;
+          text-align: center;
+        }
+
+        .barcode-wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 0.03in;
+        }
+
+        .barcode-svg {
+          display: block;
+          height: 0.68in;
+          width: 100%;
+        }
+
+        .barcode-text {
+          font-size: 0.11in;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          line-height: 1.1;
+          text-align: center;
+          word-break: break-all;
+        }
+      `;
+    }
+
+    function printLabels() {
+      const labels = generate();
+      const frame = document.getElementById("print-frame");
+      const printWindow = frame.contentWindow;
+      const printDocument = printWindow.document;
+
+      printDocument.open();
+      printDocument.write(
+        "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Grey Wolf LPN Labels</title><style>" +
+        getPrintStyles() +
+        "</style></head><body>" +
+        labels.printHtml +
+        "</body></html>"
+      );
+      printDocument.close();
+
+      window.setTimeout(function () {
+        printWindow.focus();
+        printWindow.print();
+      }, 150);
+    }
+
+    document.querySelectorAll("input").forEach(function (input) {
+      input.addEventListener("input", generate);
+      input.addEventListener("change", generate);
+    });
+
+    generate();
+  </script>
+</body>
+</html>

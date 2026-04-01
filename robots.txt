@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /wp-
+Disallow: /wp-includes/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /xmlrpc.php
+Disallow: /appointment-availability.php
+Disallow: /delivery-appointment-submit.php
+Disallow: /inbound-tracker.php
+Disallow: /form_submissions/
+Disallow: /tools/
+Sitemap: https://www.greywolf3pl.com/sitemap.xml

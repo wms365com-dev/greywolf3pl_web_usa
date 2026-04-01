@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow">
+<title>Grey Wolf 3PL and Logistics | New Customer Setup</title>
+<link rel="icon" type="image/webp" href="data:image/webp;base64,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">
+
+<style>
+  :root{
+    --bg:#0f1115;--card:#171a22;--ink:#e8ecf4;--muted:#9aa3af;--line:rgba(255,255,255,.08);
+    --brand:#3a7bd5;--brand2:#335d9c;--ok:#45c486;--err:#ff6b6b;--warn:#ffcc66;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;}
+
+  /* Top site nav */
+  .sitebar{position:sticky;top:0;z-index:50;background:rgba(15,17,21,.96);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid var(--line)}
+  .sitebar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px 14px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+  .brand img{width:36px;height:36px;display:block}
+  .brand span{font-weight:800;letter-spacing:.2px}
+  .nav{margin-left:auto;display:flex;gap:14px;align-items:center}
+  .nav a{color:#e9eef9;text-decoration:none;padding:10px 12px;border-radius:10px;font-size:14px;border:1px solid transparent}
+  .nav a:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.04)}
+  .cta{background:linear-gradient(180deg,var(--brand),var(--brand2));color:#fff !important;border-color:transparent !important}
+  .hamburger{display:none;margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:8px 10px;color:#fff}
+  .drawer{display:none;position:fixed;inset:0 0 auto 0;top:56px;background:rgba(15,17,21,.98);border-top:1px solid var(--line);padding:10px 12px}
+  .drawer a{display:block;color:#e9eef9;text-decoration:none;padding:12px;border-radius:10px}
+  .drawer a:hover{background:rgba(255,255,255,.05)}
+
+  /* Page header */
+  header.page{padding:22px 12px 10px;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(15,17,21,.98),rgba(15,17,21,.92));position:sticky;top:56px;z-index:40}
+  h1{margin:0;font-size:clamp(20px,3.6vw,30px);}
+  .sub{color:var(--muted);font-size:14px;margin-top:4px}
+
+  .container{max-width:1000px;margin:0 auto 40px;padding:0 14px}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.35);overflow:hidden;margin-top:12px}
+  .intro{padding:16px 18px;border-bottom:1px solid var(--line);color:#d7deea}
+  label{font-size:13px;color:#d1d5db;margin:2px 0 6px}
+  .req::after{content:" *"; color:var(--warn); font-weight:700}
+  input,select{background:var(--card);color:#e5e7eb;border:1px solid var(--line);border-radius:10px;padding:12px 12px;font-size:15px;outline:none;min-height:44px}
+  input.error,select.error{border-color:var(--err);box-shadow:0 0 0 2px rgba(255,107,107,.18)}
+  small.hint{color:#9aa3af}
+  .footer{text-align:center;color:#8b93a4;font-size:12px;padding:14px 8px}
+  .toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:rgba(24,30,40,.96);
+    color:#dff7ea;border:1px solid rgba(255,255,255,.08);padding:10px 14px;border-radius:10px;display:none;box-shadow:0 6px 18px rgba(0,0,0,.35);z-index:999}
+  .toast.err{border-left:4px solid var(--err);color:#ffecec}
+
+  /* Desktop layout */
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px; padding:16px}
+  .section-title{grid-column:1/-1;margin:10px 0 2px;font-weight:700;color:#d6deeb}
+  .field{grid-column:span 6;display:flex;flex-direction:column}
+  .field.full{grid-column:1/-1}
+  .actions-desktop{display:flex;justify-content:center;padding:16px;border-top:1px solid var(--line);background:rgba(15,17,21,.85);}
+  .btn{border:none;background:linear-gradient(180deg,var(--brand),var(--brand2));color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;min-width:160px;}
+
+  /* Mobile wizard */
+  #mobileSteps{display:none}              /* HIDE on desktop */
+  .progress{display:none;height:6px;background:#0f141d}
+  .progress > span{flex:1;background:#223048;border-right:2px solid #0f141d;transition:background .2s}
+  .progress > span.active{background:var(--brand)}
+  .step{display:none;padding:14px}
+  .step.active{display:block}
+  .actions-mobile{display:none;position:fixed;left:0;right:0;bottom:0;padding:10px env(safe-area-inset-right) calc(10px + env(safe-area-inset-bottom)) env(safe-area-inset-left);
+    background:linear-gradient(180deg,rgba(15,17,21,.8),rgba(15,17,21,.95));backdrop-filter:blur(6px);border-top:1px solid var(--line);gap:8px;justify-content:center}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.12)}
+  .btn.primary{background:linear-gradient(180deg,var(--brand),var(--brand2))}
+
+  /* Modal popup */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(2px)}
+  .modal{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45);max-width:520px;width:92%;padding:18px}
+  .modal h3{margin:0 0 8px;font-size:18px}
+  .modal p{margin:0 0 14px;color:#cfd6e4}
+  .modal .modal-actions{display:flex;gap:10px;justify-content:flex-end}
+  .modal .btn{min-width:120px}
+
+  /* Responsive breakpoints */
+  @media (max-width: 1024px){
+    .nav{display:none}
+    .hamburger{display:block}
+  }
+  @media (max-width: 879px){
+    .grid, .actions-desktop{display:none}
+    #mobileSteps{display:block}
+    .progress{display:flex}
+    .actions-mobile{display:flex}
+    header.page{top:56px}
+  }
+
+  .nav {justify-content: center !important;}
+  .drawer {text-align:center;}
+
+</style>
+</head>
+<body>
+
+  <!-- Full site navigation header -->
+  <div class="sitebar">
+    <div class="sitebar-inner">
+      <a class="brand" href="https://www.greywolf3pl.com" target="_blank" rel="noopener">
+        <img alt="Grey Wolf logo" src="data:image/webp;base64,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">
+        <span>Grey Wolf 3PL and Logistics</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="https://www.greywolf3pl.com">Home</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="drawerMenu">Menu ?</button>
+    </div>
+    <div class="drawer" id="drawerMenu" aria-label="Mobile Menu">
+      <a href="https://www.greywolf3pl.com">Home</a>
+    </div>
+  </div>
+
+  <!-- Page title area -->
+  <header class="page">
+    <h1>New Customer Setup</h1>
+    <div class="sub">This takes 2-3 minutes. Fields marked * are required.</div>
+  </header>
+
+  <div class="container">
+    <div class="card">
+
+      <!-- ONE FORM used by both layouts -->
+      <form id="customerForm" autocomplete="on">
+        <!-- DESKTOP GRID -->
+        <div id="desktopGrid" class="grid">
+          <div class="section-title">Primary Contact</div>
+          <div class="field"><label class="req">Contact Name</label><input name="Contact Name" autocomplete="name" required></div>
+          <div class="field"><label class="req">Company Name</label><input name="Company Name" autocomplete="organization" required></div>
+          <div class="field"><label class="req">Email</label><input type="email" name="Email" inputmode="email" autocomplete="email" required></div>
+          <div class="field"><label>Phone</label><input name="Phone" inputmode="tel" autocomplete="tel"></div>
+          <div class="field"><label>Website</label><input name="Website" inputmode="url" autocomplete="url" placeholder="https://"></div>
+
+          <div class="section-title">Billing Address</div>
+          <div class="field"><label>Address Line 1</label><input name="Billing Address1" autocomplete="address-line1"></div>
+          <div class="field"><label>Address Line 2</label><input name="Billing Address2" autocomplete="address-line2"></div>
+          <div class="field"><label>City</label><input name="Billing City" autocomplete="address-level2"></div>
+          <div class="field">
+            <label>Country</label>
+            <select name="Billing Country" id="billingCountry" autocomplete="country-name">
+              <option value="Canada" selected>Canada</option>
+              <option value="United States">United States</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Province/State</label>
+            <select name="Billing Province" id="billingProvince"></select>
+          </div>
+          <div class="field">
+            <label>Postal/ZIP Code</label>
+            <input name="Billing Postal" id="billingPostal" placeholder="A1A 1A1 or 12345" autocapitalize="characters">
+            <small class="hint">Canada: A1A 1A1 (space optional) - US: 12345 or 12345-6789</small>
+          </div>
+
+          <div class="section-title">Shipping Address</div>
+          <div class="field full" style="display:flex;align-items:center;gap:10px">
+            <label style="margin:0"><input type="checkbox" id="sameAsBilling"> Shipping same as Billing</label>
+          </div>
+          <div class="field"><label>Address Line 1</label><input name="Shipping Address1" id="shipAddress1" autocomplete="address-line1"></div>
+          <div class="field"><label>Address Line 2</label><input name="Shipping Address2" id="shipAddress2" autocomplete="address-line2"></div>
+          <div class="field"><label>City</label><input name="Shipping City" id="shipCity" autocomplete="address-level2"></div>
+          <div class="field">
+            <label>Country</label>
+            <select name="Shipping Country" id="shippingCountry" autocomplete="country-name">
+              <option value="Canada" selected>Canada</option>
+              <option value="United States">United States</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Province/State</label>
+            <select name="Shipping Province" id="shippingProvince"></select>
+          </div>
+          <div class="field">
+            <label>Postal/ZIP Code</label>
+            <input name="Shipping Postal" id="shippingPostal" placeholder="A1A 1A1 or 12345" autocapitalize="characters">
+          </div>
+
+          <input type="hidden" name="Display Name" id="displayNameHidden">
+        </div>
+
+        <!-- MOBILE STEPS -->
+        <div id="mobileSteps">
+          <!-- STEP 1 -->
+          <div class="step active" data-step="1">
+            <div class="section-title">Primary Contact</div>
+            <div class="field"><label class="req">Contact Name</label><input name="Contact Name" autocomplete="name" required></div>
+            <div class="field"><label class="req">Company Name</label><input name="Company Name" autocomplete="organization" required></div>
+            <div class="field"><label class="req">Email</label><input type="email" name="Email" inputmode="email" autocomplete="email" required></div>
+            <div class="field"><label>Phone</label><input name="Phone" inputmode="tel" autocomplete="tel"></div>
+            <div class="field"><label>Website</label><input name="Website" inputmode="url" autocomplete="url" placeholder="https://"></div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="step" data-step="2">
+            <div class="section-title">Billing Address</div>
+            <div class="field"><label>Address Line 1</label><input name="Billing Address1" autocomplete="address-line1"></div>
+            <div class="field"><label>Address Line 2</label><input name="Billing Address2" autocomplete="address-line2"></div>
+            <div class="field"><label>City</label><input name="Billing City" autocomplete="address-level2"></div>
+            <div class="field">
+              <label>Country</label>
+              <select name="Billing Country" id="billingCountry_m" autocomplete="country-name">
+                <option value="Canada" selected>Canada</option>
+                <option value="United States">United States</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Province/State</label>
+              <select name="Billing Province" id="billingProvince_m"></select>
+            </div>
+            <div class="field">
+              <label>Postal/ZIP Code</label>
+              <input name="Billing Postal" id="billingPostal_m" placeholder="A1A 1A1 or 12345" autocapitalize="characters">
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="step" data-step="3">
+            <div class="section-title">Shipping Address</div>
+            <div class="field" style="display:flex;align-items:center;gap:10px">
+              <label style="margin:0"><input type="checkbox" id="sameAsBilling_m"> Shipping same as Billing</label>
+            </div>
+            <div class="field"><label>Address Line 1</label><input name="Shipping Address1" id="shipAddress1_m" autocomplete="address-line1"></div>
+            <div class="field"><label>Address Line 2</label><input name="Shipping Address2" id="shipAddress2_m" autocomplete="address-line2"></div>
+            <div class="field"><label>City</label><input name="Shipping City" id="shipCity_m" autocomplete="address-level2"></div>
+            <div class="field">
+              <label>Country</label>
+              <select name="Shipping Country" id="shippingCountry_m" autocomplete="country-name">
+                <option value="Canada" selected>Canada</option>
+                <option value="United States">United States</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Province/State</label>
+              <select name="Shipping Province" id="shippingProvince_m"></select>
+            </div>
+            <div class="field">
+              <label>Postal/ZIP Code</label>
+              <input name="Shipping Postal" id="shippingPostal_m" placeholder="A1A 1A1 or 12345" autocapitalize="characters">
+            </div>
+          </div>
+
+          <input type="hidden" name="Display Name" id="displayNameHidden_m">
+        </div>
+      </form>
+
+      <!-- Desktop button -->
+      <div class="actions-desktop">
+        <button class="btn" id="submitDesktop">Submit</button>
+      </div>
+    </div>
+    <div class="footer">ï¿½ Grey Wolf 3PL and Logistics</div>
+  </div>
+
+  <!-- Mobile sticky actions -->
+  <div class="actions-mobile">
+    <button class="btn ghost" id="backBtn">Back</button>
+    <button class="btn primary" id="nextBtn">Next</button>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-backdrop" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+    <div class="modal">
+      <h3 id="successTitle">Submitted successfully</h3>
+      <p>Your information has been submitted. We'll be in touch shortly.</p>
+      <div class="modal-actions">
+        <button class="btn primary" id="closeModalBtn">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast err" id="toastErr">Please check the highlighted fields.</div>
+
+
+<script>
+(function(){
+  const SCRIPT_URL = (function(){
+    const m = document.documentElement.innerHTML.match(/https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec/);
+    return m ? m[0] : "";
+  })();
+
+  const burger = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawerMenu');
+  if (burger && drawer){
+    burger.addEventListener('click', ()=>{
+      const open = drawer.style.display === 'block';
+      drawer.style.display = open ? 'none' : 'block';
+      burger.setAttribute('aria-expanded', String(!open));
+    });
+  }
+
+  const CA_PROVINCES = ["AB","BC","MB","NB","NL","NS","NT","NU","ON","PE","QC","SK","YT"];
+  const US_STATES   = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC"];
+
+  const form = document.getElementById('customerForm');
+  const submitDesktop = document.getElementById('submitDesktop');
+  const backBtn = document.getElementById('backBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const toastErr = document.getElementById('toastErr');
+
+  const successModal = document.getElementById('successModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  const displayNameHidden = document.getElementById('displayNameHidden');
+  const displayNameHidden_m = document.getElementById('displayNameHidden_m');
+  form.querySelectorAll('[name="Company Name"]').forEach(el=>{
+    el.addEventListener('input', (e)=>{
+      const company = (e.target.value || "").trim();
+      if (displayNameHidden) displayNameHidden.value = company;
+      if (displayNameHidden_m) displayNameHidden_m.value = company;
+    });
+  });
+
+  const billingCountry = document.getElementById('billingCountry');
+  const billingProvince = document.getElementById('billingProvince');
+  const billingPostal = document.getElementById('billingPostal');
+  const sameAsBilling = document.getElementById('sameAsBilling');
+  const shipAddress1 = document.getElementById('shipAddress1');
+  const shipAddress2 = document.getElementById('shipAddress2');
+  const shipCity = document.getElementById('shipCity');
+  const shippingCountry = document.getElementById('shippingCountry');
+  const shippingProvince = document.getElementById('shippingProvince');
+  const shippingPostal = document.getElementById('shippingPostal');
+
+  const billingCountry_m = document.getElementById('billingCountry_m');
+  const billingProvince_m = document.getElementById('billingProvince_m');
+  const billingPostal_m = document.getElementById('billingPostal_m');
+  const sameAsBilling_m = document.getElementById('sameAsBilling_m');
+  const shipAddress1_m = document.getElementById('shipAddress1_m');
+  const shipAddress2_m = document.getElementById('shipAddress2_m');
+  const shipCity_m = document.getElementById('shipCity_m');
+  const shippingCountry_m = document.getElementById('shippingCountry_m');
+  const shippingProvince_m = document.getElementById('shippingProvince_m');
+  const shippingPostal_m = document.getElementById('shippingPostal_m');
+
+  function isMobileView(){ return window.matchMedia("(max-width: 879px)").matches; }
+  function isVisible(el){ return !!(el && el.offsetParent !== null); }
+  function getActiveFieldByName(name){
+    const all = Array.from(form.querySelectorAll(`[name="${name}"]`));
+    return all.find(isVisible) || all[0] || null;
+  }
+  function setErr(el, bad){
+    if (el && el.name){
+      form.querySelectorAll(`[name="${el.name}"]`).forEach(n => n.classList.remove('error'));
+    }
+    if (el){ el.classList.toggle('error', !!bad); }
+  }
+  function scrollToField(el){
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 120;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    try { el.focus({ preventScroll: true }); } catch(e) {}
+  }
+
+  function fillProvinceSelect(selectEl, country){
+    if (!selectEl) return;
+    const list = country === "United States" ? US_STATES : CA_PROVINCES;
+    const previous = selectEl.value;
+    selectEl.innerHTML = "<option value=''>Select...</option>" + list.map(c => `<option value='${c}'>${c}</option>`).join("");
+    if (list.includes(previous)) selectEl.value = previous;
+  }
+  if (billingProvince && billingCountry){ fillProvinceSelect(billingProvince, billingCountry.value); billingCountry.addEventListener('change', ()=> fillProvinceSelect(billingProvince, billingCountry.value)); }
+  if (shippingProvince && shippingCountry){ fillProvinceSelect(shippingProvince, shippingCountry.value); shippingCountry.addEventListener('change', ()=> fillProvinceSelect(shippingProvince, shippingCountry.value)); }
+  if (billingProvince_m && billingCountry_m){ fillProvinceSelect(billingProvince_m, billingCountry_m.value); billingCountry_m.addEventListener('change', ()=> fillProvinceSelect(billingProvince_m, billingCountry_m.value)); }
+  if (shippingProvince_m && shippingCountry_m){ fillProvinceSelect(shippingProvince_m, shippingCountry_m.value); shippingCountry_m.addEventListener('change', ()=> fillProvinceSelect(shippingProvince_m, shippingCountry_m.value)); }
+
+  function isValidCAPostal(v){ return /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/.test((v||"").trim()); }
+  function isValidUSZip(v){ return /^\d{5}(?:-\d{4})?$/.test((v||"").trim()); }
+  function validatePostal(country, value){ if(!value) return true; return country === "United States" ? isValidUSZip(value) : isValidCAPostal(value); }
+
+  function setShippingDisabled(disabled){
+    [shipAddress1, shipAddress2, shipCity, shippingCountry, shippingProvince, shippingPostal].forEach(el => { if(el) el.disabled = disabled; });
+  }
+  function copyBillingToShipping(){
+    if (!shipAddress1) return;
+    shipAddress1.value = (getActiveFieldByName('Billing Address1')?.value || "").trim();
+    shipAddress2.value = (getActiveFieldByName('Billing Address2')?.value || "").trim();
+    shipCity.value     = (getActiveFieldByName('Billing City')?.value || "").trim();
+    const bc = isMobileView() ? billingCountry_m : billingCountry;
+    const bp = isMobileView() ? billingProvince_m : billingProvince;
+    if (shippingCountry && bc) shippingCountry.value = bc.value;
+    if (shippingProvince && shippingCountry){ fillProvinceSelect(shippingProvince, shippingCountry.value); }
+    if (shippingProvince && bp) shippingProvince.value = bp.value || "";
+    const bpo = isMobileView() ? billingPostal_m : billingPostal;
+    if (shippingPostal && bpo) shippingPostal.value = bpo.value || "";
+  }
+  if (sameAsBilling) sameAsBilling.addEventListener('change', e => { if (e.target.checked){ copyBillingToShipping(); setShippingDisabled(true); } else { setShippingDisabled(false); } });
+
+  function setShippingDisabled_m(disabled){
+    [shipAddress1_m, shipAddress2_m, shipCity_m, shippingCountry_m, shippingProvince_m, shippingPostal_m].forEach(el => { if(el) el.disabled = disabled; });
+  }
+  function copyBillingToShipping_m(){
+    if (!shipAddress1_m) return;
+    shipAddress1_m.value = (getActiveFieldByName('Billing Address1')?.value || "").trim();
+    shipAddress2_m.value = (getActiveFieldByName('Billing Address2')?.value || "").trim();
+    shipCity_m.value     = (getActiveFieldByName('Billing City')?.value || "").trim();
+    const bc = isMobileView() ? billingCountry_m : billingCountry;
+    const bp = isMobileView() ? billingProvince_m : billingProvince;
+    if (shippingCountry_m && bc) shippingCountry_m.value = bc.value;
+    if (shippingProvince_m && shippingCountry_m){ fillProvinceSelect(shippingProvince_m, shippingCountry_m.value); }
+    if (shippingProvince_m && bp) shippingProvince_m.value = bp.value || "";
+    const bpo = isMobileView() ? billingPostal_m : billingPostal;
+    if (shippingPostal_m && bpo) shippingPostal_m.value = bpo.value || "";
+  }
+  if (sameAsBilling_m) sameAsBilling_m.addEventListener('change', e => { if (e.target.checked){ copyBillingToShipping_m(); setShippingDisabled_m(true); } else { setShippingDisabled_m(false); } });
+
+  function validateCommon(){
+    let ok = true;
+    const requiredNames = ["Contact Name","Company Name","Email"];
+    let firstBad = null;
+    requiredNames.forEach(name => {
+      const el = getActiveFieldByName(name);
+      if(!el || !el.value.trim()){ setErr(el || getActiveFieldByName(name), true); ok=false; if(!firstBad) firstBad = el; }
+      else setErr(el,false);
+    });
+    const emailEl = getActiveFieldByName('Email');
+    if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) { setErr(emailEl, true); ok=false; if(!firstBad) firstBad = emailEl; }
+    if (!ok) { scrollToField(firstBad); }
+    return ok;
+  }
+
+  function validateAddresses(){
+    let ok = true;
+    let firstBad = null;
+    const mobile = isMobileView();
+    const bc = mobile ? billingCountry_m : billingCountry;
+    const bp = mobile ? billingPostal_m : billingPostal;
+    const sc = mobile ? shippingCountry_m : shippingCountry;
+    const sp = mobile ? shippingPostal_m : shippingPostal;
+
+    if (bc && bp){
+      const good = validatePostal(bc.value, bp.value);
+      setErr(bp, !good); if(!good){ ok = false; if(!firstBad) firstBad = bp; }
+    }
+    if (sc && sp){
+      const good = validatePostal(sc.value, sp.value);
+      setErr(sp, !good); if(!good){ ok = false; if(!firstBad) firstBad = sp; }
+    }
+    if (!ok) { scrollToField(firstBad); }
+    return ok;
+  }
+
+  const steps = Array.from(document.querySelectorAll('#mobileSteps .step'));
+  let stepIdx = 1;
+  const p1 = document.getElementById('p1'), p2 = document.getElementById('p2'), p3 = document.getElementById('p3');
+  function setProgress(n){ [p1,p2,p3].forEach((el,i)=> el && el.classList.toggle('active', i < n)); }
+  function showStep(n){
+    stepIdx = n;
+    steps.forEach(s => s.classList.toggle('active', Number(s.dataset.step) === n));
+    if (nextBtn) nextBtn.textContent = n === steps.length ? 'Submit' : 'Next';
+    setProgress(n);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function buildAddresses(fd){
+    const getV = name => (getActiveFieldByName(name)?.value || "").toString().trim();
+    const billing  = [getV("Billing Address1"),getV("Billing Address2"),getV("Billing City"),getV("Billing Province"),getV("Billing Postal"),getV("Billing Country")].filter(Boolean).join(", ");
+    const shipping = [getV("Shipping Address1"),getV("Shipping Address2"),getV("Shipping City"),getV("Shipping Province"),getV("Shipping Postal"),getV("Shipping Country")].filter(Boolean).join(", ");
+    fd.append("Billing Address", billing);
+    fd.append("Shipping Address", shipping);
+  }
+
+  function openModal(){ successModal.style.display = 'flex'; closeModalBtn && closeModalBtn.focus(); }
+  function closeModal(){ successModal.style.display = 'none'; }
+  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+  if (successModal) successModal.addEventListener('click', (e)=>{ if (e.target === successModal) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeModal(); });
+
+  function show(el){ if(!el) return; el.style.display='block'; setTimeout(()=> el.style.display='none', 3500); }
+
+  async function submitAll(){
+    const fd = new FormData(form);
+    const companyEl = getActiveFieldByName('Company Name');
+    const company = (companyEl && companyEl.value || "").trim();
+    if (displayNameHidden) displayNameHidden.value = company;
+    if (displayNameHidden_m) displayNameHidden_m.value = company;
+    if(!fd.get("Display Name")) fd.set("Display Name", company);
+    fd.append("Client Timestamp", new Date().toISOString());
+    buildAddresses(fd);
+    try{
+      await fetch(SCRIPT_URL, { method:'POST', body:fd, mode:'no-cors' });
+      openModal();
+      const subject = `New Account Setup - "${company || (getActiveFieldByName("Contact Name")?.value) || "New Customer"}"`;
+      const lines = [
+        "Please set up this new customer account.","",
+        "Submitted Details:",
+        `- Contact Name: ${getActiveFieldByName("Contact Name")?.value || ""}`,
+        `- Company Name: ${company}`,
+        `- Email: ${getActiveFieldByName("Email")?.value || ""}`,
+        `- Phone: ${getActiveFieldByName("Phone")?.value || ""}`,
+        `- Website: ${getActiveFieldByName("Website")?.value || ""}`,
+        `- Billing Address: ${fd.get("Billing Address")||""}`,
+        `- Shipping Address: ${fd.get("Shipping Address")||""}`,
+        "","Thank you."
+      ].join("\n");
+      setTimeout(()=> window.location.href = `mailto:info@greywolf3pl.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`, 200);
+      form.reset();
+      showStep(1);
+      if (sameAsBilling) sameAsBilling.checked = false;
+      if (sameAsBilling_m) sameAsBilling_m.checked = false;
+      setShippingDisabled(false);
+      setShippingDisabled_m(false);
+    } catch(err){
+      console.error(err);
+      show(toastErr);
+    }
+  }
+
+  if (submitDesktop){
+    submitDesktop.addEventListener('click', (e)=>{
+      e.preventDefault();
+      if (validateCommon() && validateAddresses()) submitAll(); else show(toastErr);
+    });
+  }
+
+  if (backBtn) backBtn.addEventListener('click', ()=>{ if (stepIdx > 1) showStep(stepIdx - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', ()=>{
+    if (stepIdx < steps.length){
+      if (stepIdx === 1 && !validateCommon()) { show(toastErr); return; }
+      if (stepIdx === 2 && !validateAddresses()) { show(toastErr); return; }
+      showStep(stepIdx + 1);
+    } else {
+      if (validateCommon() && validateAddresses()) submitAll(); else show(toastErr);
+    }
+  });
+
+  showStep(1);
+})();
+</script>
+
+  <script src="js/site.js?v=20260330-2"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,29 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+watchPatterns = [
+  "/Dockerfile",
+  "/.dockerignore",
+  "/docker/**",
+  "/.htaccess",
+  "/app-*.php",
+  "/quote-submit.php",
+  "/lead-submit.php",
+  "/drayage-submit.php",
+  "/drayage-draft-sync.php",
+  "/appointment-*.php",
+  "/delivery-appointment-submit.php",
+  "/health.php",
+  "/RAILWAY.md",
+  "/**/*.html",
+  "/**/*.css",
+  "/**/*.js",
+  "/**/*.php",
+  "/assets/**"
+]
+
+[deploy]
+healthcheckPath = "/health.php"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

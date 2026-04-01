@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Walmart",
+    "logo": "assets/retailers/walmart.png",
+    "url": "https://www.walmart.ca/"
+  },
+  {
+    "name": "Costco",
+    "logo": "assets/retailers/costco.png",
+    "url": "https://www.costco.ca/"
+  },
+  {
+    "name": "Home Depot",
+    "logo": "assets/retailers/homedepot.png",
+    "url": "https://www.homedepot.ca/"
+  },
+  {
+    "name": "Canadian Tire",
+    "logo": "assets/retailers/canadian-tire.png",
+    "url": "https://www.canadiantire.ca/"
+  },
+  {
+    "name": "Staples",
+    "logo": "assets/retailers/staple.png",
+    "url": "https://www.staples.ca/"
+  },
+  {
+    "name": "SAIL",
+    "logo": "assets/retailers/sail.png",
+    "url": "https://www.sail.ca/"
+  },
+  {
+    "name": "RONA",
+    "logo": "assets/retailers/rona.png",
+    "url": "https://www.rona.ca/"
+  },
+  {
+    "name": "Best Buy",
+    "logo": "assets/retailers/best-buy.png",
+    "url": "https://www.bestbuy.ca/"
+  }
+]

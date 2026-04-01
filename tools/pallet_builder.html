@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pallet Builder | Grey Wolf Tools</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Private Grey Wolf pallet builder for Canadian pallet planning and load instructions.">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(216, 106, 45, 0.14), transparent 24%),
+        linear-gradient(180deg, #08131d 0%, #0d1824 100%);
+      color: #eef4fb;
+      font-family: "Mulish", sans-serif;
+      min-height: 100vh;
+    }
+    button, input, select { font: inherit; }
+    a { color: inherit; }
+    .page {
+      margin: 0 auto;
+      padding: 1.4rem 0 2.8rem;
+      width: min(1180px, calc(100% - 2rem));
+    }
+    .utility-header {
+      align-items: center;
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      margin-bottom: 1.4rem;
+    }
+    .utility-brand {
+      align-items: center;
+      display: inline-flex;
+      gap: 0.85rem;
+      text-decoration: none;
+    }
+    .utility-brand img {
+      display: block;
+      height: 60px;
+      width: auto;
+    }
+    .utility-brand-copy strong {
+      display: block;
+      font-family: "Poppins", sans-serif;
+      font-size: 1.28rem;
+      line-height: 1.02;
+    }
+    .utility-brand-copy span {
+      color: #b7c6d4;
+      display: block;
+      font-size: 0.92rem;
+      margin-top: 0.15rem;
+    }
+    .utility-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .utility-links a {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      color: #eef4fb;
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 0.78rem 1.05rem;
+      text-decoration: none;
+    }
+    .utility-links a.primary-link {
+      background: linear-gradient(135deg, #0d3b66 0%, #16558f 100%);
+      border-color: rgba(13, 59, 102, 0.85);
+    }
+    .intro { margin-bottom: 1.35rem; }
+    .eyebrow {
+      color: #f0a14a;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      margin: 0 0 0.65rem;
+      text-transform: uppercase;
+    }
+    .intro h1 {
+      font-family: "Poppins", sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.3rem);
+      letter-spacing: -0.04em;
+      line-height: 0.98;
+      margin: 0 0 0.75rem;
+      max-width: 12ch;
+    }
+    .intro p {
+      color: #bfd0df;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin: 0;
+      max-width: 860px;
+    }
+    .workspace {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: minmax(320px, 390px) minmax(0, 1fr);
+      align-items: start;
+    }
+    .card {
+      background: rgba(9, 21, 33, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+      padding: 1.2rem;
+    }
+    .card h2, .card h3 {
+      font-family: "Poppins", sans-serif;
+      margin: 0 0 0.45rem;
+    }
+    .card h2 { font-size: 1.34rem; line-height: 1.08; }
+    .card h3 { font-size: 1.04rem; line-height: 1.15; }
+    .card p { color: #b7c6d4; line-height: 1.62; margin: 0; }
+    .stack { display: grid; gap: 1rem; }
+    .subcard {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 1rem;
+    }
+    .subcard-head {
+      align-items: flex-start;
+      display: flex;
+      gap: 0.75rem;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+    .subcard-tag {
+      background: rgba(13, 59, 102, 0.24);
+      border: 1px solid rgba(119, 141, 169, 0.22);
+      border-radius: 999px;
+      color: #dfe9f4;
+      display: inline-flex;
+      font-size: 0.77rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 0.46rem 0.72rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .form-grid {
+      display: grid;
+      gap: 0.85rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .field-full { grid-column: 1 / -1; }
+    label {
+      color: #eef4fb;
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 800;
+      margin-bottom: 0.42rem;
+    }
+    input, select {
+      appearance: none;
+      background: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+      color: #102131;
+      padding: 0.88rem 0.95rem;
+      width: 100%;
+    }
+    input:focus, select:focus {
+      border-color: #f0a14a;
+      box-shadow: 0 0 0 4px rgba(240, 161, 74, 0.16);
+      outline: none;
+    }
+    .helper-text {
+      color: #9fb2c4;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-top: 0.45rem;
+    }
+    .note-block {
+      background: rgba(13, 59, 102, 0.18);
+      border: 1px solid rgba(119, 141, 169, 0.14);
+      border-radius: 18px;
+      color: #dbe6f2;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      padding: 0.9rem 1rem;
+    }
+    .item-list { display: grid; gap: 0.9rem; }
+    .item-row {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 1rem;
+    }
+    .item-row-header {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
+    .item-row-title {
+      color: #eef4fb;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .item-remove {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      color: #eef4fb;
+      cursor: pointer;
+      font-weight: 800;
+      padding: 0.65rem 0.9rem;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .actions button {
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 800;
+      padding: 0.92rem 1.15rem;
+    }
+    .actions .secondary-btn, .item-add-btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: #eef4fb;
+    }
+    .actions .primary-btn, .print-btn {
+      background: linear-gradient(135deg, #d86a2d 0%, #f0a14a 100%);
+      color: #08131d;
+    }
+    .results-wrap { display: grid; gap: 1rem; }
+    .summary-grid {
+      display: grid;
+      gap: 0.8rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 1rem;
+    }
+    .summary-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 0.95rem;
+    }
+    .summary-pill span {
+      color: #a8bbcc;
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+    }
+    .summary-pill strong {
+      color: #f7fafc;
+      display: block;
+      font-family: "Poppins", sans-serif;
+      font-size: 1.45rem;
+      line-height: 1.05;
+    }
+    .result-card, .instruction-sheet {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(16, 33, 49, 0.08);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(10, 20, 30, 0.12);
+      color: #102131;
+      padding: 1.2rem;
+    }
+    .result-header {
+      align-items: flex-start;
+      display: flex;
+      gap: 0.85rem;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .result-header h3 { margin: 0 0 0.3rem; }
+    .result-header p, .instruction-sheet p, .sheet-meta { color: #5b6b7a; }
+    .result-tag {
+      background: rgba(13, 59, 102, 0.08);
+      border-radius: 999px;
+      color: #0d3b66;
+      display: inline-flex;
+      font-size: 0.79rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 0.48rem 0.72rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .metric-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 1rem;
+    }
+    .metric {
+      background: rgba(16, 33, 49, 0.04);
+      border: 1px solid rgba(16, 33, 49, 0.08);
+      border-radius: 18px;
+      padding: 0.9rem;
+    }
+    .metric span {
+      color: #5b6b7a;
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.32rem;
+      text-transform: uppercase;
+    }
+    .metric strong {
+      color: #102131;
+      display: block;
+      font-family: "Poppins", sans-serif;
+      font-size: 1.22rem;
+      line-height: 1.08;
+    }
+    .result-layout {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: minmax(280px, 1.05fr) minmax(250px, 0.95fr);
+      align-items: start;
+    }
+    .visual-card, .instruction-card {
+      background: rgba(16, 33, 49, 0.04);
+      border: 1px solid rgba(16, 33, 49, 0.08);
+      border-radius: 20px;
+      padding: 1rem;
+    }
+    .visual-grid {
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: minmax(0, 1.15fr) minmax(160px, 0.85fr);
+    }
+    .viz-head {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .viz-head span {
+      color: #5b6b7a;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+    .pallet-svg-wrap, .stack-visual {
+      background: #f7fafc;
+      border: 1px solid rgba(16, 33, 49, 0.08);
+      border-radius: 18px;
+      padding: 0.8rem;
+    }
+    .pallet-svg { display: block; height: auto; width: 100%; }
+    .layer-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.8rem;
+    }
+    .legend-item {
+      align-items: center;
+      color: #405262;
+      display: inline-flex;
+      font-size: 0.84rem;
+      font-weight: 700;
+      gap: 0.45rem;
+    }
+    .legend-swatch {
+      border-radius: 999px;
+      display: inline-block;
+      height: 12px;
+      width: 12px;
+    }
+    .legend-swatch.primary { background: #0d3b66; }
+    .legend-swatch.rotated { background: #d86a2d; }
+    .stack-bars {
+      align-items: flex-end;
+      display: flex;
+      gap: 0.8rem;
+      height: 210px;
+      justify-content: center;
+      margin-top: 0.6rem;
+    }
+    .stack-bar {
+      align-items: center;
+      background: linear-gradient(180deg, #0d3b66 0%, #12324f 100%);
+      border-radius: 16px 16px 6px 6px;
+      color: #eef4fb;
+      display: flex;
+      font-size: 0.9rem;
+      font-weight: 800;
+      justify-content: center;
+      min-width: 74px;
+      padding: 0.75rem 0.45rem;
+      position: relative;
+      text-align: center;
+    }
+    .stack-bar.partial {
+      background: linear-gradient(180deg, #d86a2d 0%, #f0a14a 100%);
+      color: #08131d;
+    }
+    .stack-bar-label {
+      bottom: -1.55rem;
+      color: #5b6b7a;
+      font-size: 0.78rem;
+      font-weight: 800;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+    .instruction-list {
+      color: #213447;
+      display: grid;
+      gap: 0.7rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .instruction-list li {
+      align-items: flex-start;
+      display: flex;
+      gap: 0.7rem;
+      line-height: 1.58;
+    }
+    .instruction-list li::before {
+      color: #d86a2d;
+      content: "•";
+      font-size: 1.15rem;
+      line-height: 1;
+      margin-top: 0.05rem;
+    }
+    .instruction-summary {
+      color: #5b6b7a;
+      font-size: 0.92rem;
+      line-height: 1.62;
+      margin-top: 0.8rem;
+    }
+    .empty-state, .warning-block {
+      border-radius: 20px;
+      padding: 1rem;
+    }
+    .empty-state {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      color: #bfd0df;
+      text-align: center;
+    }
+    .warning-block {
+      background: rgba(166, 43, 34, 0.12);
+      border: 1px solid rgba(166, 43, 34, 0.24);
+      color: #f7d6d2;
+      line-height: 1.6;
+    }
+    .sheet-row {
+      border-top: 1px solid rgba(16, 33, 49, 0.08);
+      margin-top: 0.95rem;
+      padding-top: 0.95rem;
+    }
+    .sheet-row:first-of-type {
+      border-top: none;
+      margin-top: 1rem;
+      padding-top: 0;
+    }
+    .print-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+    @media (max-width: 980px) {
+      .workspace, .result-layout, .visual-grid {
+        grid-template-columns: 1fr;
+      }
+      .summary-grid, .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .utility-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+    @media (max-width: 760px) {
+      .page { width: min(100% - 1rem, 1180px); }
+      .form-grid, .summary-grid, .metric-grid {
+        grid-template-columns: 1fr;
+      }
+      .utility-links, .actions {
+        flex-direction: column;
+      }
+      .utility-links a, .actions button, .print-btn {
+        text-align: center;
+        width: 100%;
+      }
+      .result-header, .subcard-head {
+        flex-direction: column;
+      }
+    }
+    @media print {
+      body { background: #fff; color: #000; }
+      .utility-header, .intro, .tool-form-column { display: none !important; }
+      .page { padding: 0; width: 100%; }
+      .workspace { display: block; }
+      .results-wrap, .result-card, .instruction-sheet {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .card, .result-card, .instruction-sheet {
+        background: #fff !important;
+        border: 1px solid #d0d7de;
+        box-shadow: none !important;
+      }
+      .print-actions { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="utility-header">
+      <a class="utility-brand" href="index.php">
+        <img src="../logo_wolf_invert.png" alt="Grey Wolf 3PL logo">
+        <span class="utility-brand-copy">
+          <strong>Grey Wolf 3PL</strong>
+          <span>Private tools</span>
+        </span>
+      </a>
+      <nav class="utility-links" aria-label="Tool navigation">
+        <a href="index.php">Back to tools</a>
+        <a class="primary-link" href="../index.html">Back to site</a>
+      </nav>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">Internal planner</p>
+      <h1>Pallet builder</h1>
+      <p>Build a Canadian pallet plan from one box type or several. Enter carton dimensions, choose the pallet type, set the maximum loaded height, and the tool will estimate pallets required, recommend a layer pattern, create a simple instruction sheet, and show a visual aid for each SKU.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="tool-form-column stack">
+        <section class="card">
+          <h2>Pallet setup</h2>
+          <p>Use Canadian pallet dimensions in inches. The height restriction is the full loaded height including the pallet deck.</p>
+
+          <div class="stack" style="margin-top: 1rem;">
+            <div class="subcard">
+              <div class="subcard-head">
+                <div>
+                  <h3>Pallet profile</h3>
+                  <p>Select a common pallet size or enter a custom Canadian pallet footprint.</p>
+                </div>
+                <span class="subcard-tag">Preset</span>
+              </div>
+
+              <div class="form-grid">
+                <div class="field-full">
+                  <label for="palletPreset">Pallet type</label>
+                  <select id="palletPreset">
+                    <option value="chep">CHEP (40 x 48)</option>
+                    <option value="standard">Standard (40 x 48)</option>
+                    <option value="long_40_60">Long Pallet (40 x 60)</option>
+                    <option value="long_48_60">Long Pallet (48 x 60)</option>
+                    <option value="long_48_72">Long Pallet (48 x 72)</option>
+                    <option value="custom">Custom Canadian pallet</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="palletWidth">Pallet width (in)</label>
+                  <input id="palletWidth" type="number" min="1" step="0.01" value="40">
+                </div>
+
+                <div>
+                  <label for="palletLength">Pallet length (in)</label>
+                  <input id="palletLength" type="number" min="1" step="0.01" value="48">
+                </div>
+
+                <div>
+                  <label for="maxLoadedHeight">Max loaded height (in)</label>
+                  <input id="maxLoadedHeight" type="number" min="1" step="0.01" value="72">
+                </div>
+
+                <div>
+                  <label for="palletDeckHeight">Pallet deck height (in)</label>
+                  <input id="palletDeckHeight" type="number" min="1" step="0.01" value="5.5">
+                </div>
+              </div>
+
+              <p class="helper-text" id="palletPresetNote">CHEP pallets use the common 40 x 48 Canadian / North American footprint.</p>
+            </div>
+
+            <div class="subcard">
+              <div class="subcard-head">
+                <div>
+                  <h3>Box types</h3>
+                  <p>Add one SKU or several. This version calculates each box type on its own pallet plan and totals the pallets required across all SKUs.</p>
+                </div>
+                <span class="subcard-tag">SKU input</span>
+              </div>
+
+              <div class="item-list" id="itemList"></div>
+
+              <div class="actions">
+                <button class="item-add-btn" id="addItemBtn" type="button">Add another box type</button>
+              </div>
+            </div>
+
+            <div class="note-block">
+              The planner checks both straight and rotated case placement and picks the stronger layer pattern it can fit on the selected pallet.
+            </div>
+
+            <div class="actions">
+              <button class="primary-btn" id="calculateBtn" type="button">Build pallet plan</button>
+              <button class="secondary-btn" id="resetBtn" type="button">Reset tool</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="results-wrap">
+        <section class="card">
+          <h2>Results overview</h2>
+          <p>Use this summary to confirm total pallet demand before reviewing each SKU instruction sheet below.</p>
+
+          <div class="summary-grid">
+            <div class="summary-pill"><span>Total pallets</span><strong id="summaryPallets">0</strong></div>
+            <div class="summary-pill"><span>Total units</span><strong id="summaryUnits">0</strong></div>
+            <div class="summary-pill"><span>Pallet footprint</span><strong id="summaryFootprint">40 x 48</strong></div>
+            <div class="summary-pill"><span>Max height</span><strong id="summaryHeight">72"</strong></div>
+          </div>
+        </section>
+
+        <section class="card" id="resultsContainer">
+          <div class="empty-state" id="emptyState">Add your carton dimensions on the left, then click <strong>Build pallet plan</strong> to calculate pallets, instructions, and visuals.</div>
+        </section>
+
+        <section class="instruction-sheet" id="instructionSheet" hidden>
+          <h2>Instruction sheet</h2>
+          <p>Use this sheet for the floor team when building the pallet load.</p>
+          <div id="instructionSheetRows"></div>
+          <div class="print-actions">
+            <button class="print-btn" type="button" id="printInstructionsBtn">Print instruction sheet</button>
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <template id="itemRowTemplate">
+    <div class="item-row">
+      <div class="item-row-header">
+        <span class="item-row-title">Box type</span>
+        <button class="item-remove" type="button">Remove</button>
+      </div>
+      <div class="form-grid">
+        <div class="field-full">
+          <label>Item / SKU label</label>
+          <input data-field="label" type="text" placeholder="Example: 12-pack cartons">
+        </div>
+        <div>
+          <label>Box width (in)</label>
+          <input data-field="width" type="number" min="0.01" step="0.01" placeholder="12">
+        </div>
+        <div>
+          <label>Box length (in)</label>
+          <input data-field="length" type="number" min="0.01" step="0.01" placeholder="16">
+        </div>
+        <div>
+          <label>Box height (in)</label>
+          <input data-field="height" type="number" min="0.01" step="0.01" placeholder="10">
+        </div>
+        <div>
+          <label>Quantity</label>
+          <input data-field="quantity" type="number" min="1" step="1" placeholder="120">
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    (function () {
+      var palletPresets = {
+        chep: { label: "CHEP (40 x 48)", width: 40, length: 48, deckHeight: 5.5, note: "CHEP pallets use the common 40 x 48 Canadian / North American footprint." },
+        standard: { label: "Standard (40 x 48)", width: 40, length: 48, deckHeight: 5.5, note: "Standard 40 x 48 skids are the most common footprint for Canadian warehouse and retailer freight." },
+        long_40_60: { label: "Long Pallet (40 x 60)", width: 40, length: 60, deckHeight: 5.5, note: "Use 40 x 60 when cartons run too long for a standard skid." },
+        long_48_60: { label: "Long Pallet (48 x 60)", width: 48, length: 60, deckHeight: 5.5, note: "48 x 60 pallets give more deck area for bulky or oversized cartons." },
+        long_48_72: { label: "Long Pallet (48 x 72)", width: 48, length: 72, deckHeight: 5.5, note: "48 x 72 pallets are useful for very long cartons, display loads, or oversized packaging." },
+        custom: { label: "Custom Canadian pallet", width: 40, length: 48, deckHeight: 5.5, note: "Use a custom pallet when the skid footprint is different from the common Canadian presets." }
+      };
+
+      var itemList = document.getElementById("itemList");
+      var itemTemplate = document.getElementById("itemRowTemplate");
+      var palletPresetField = document.getElementById("palletPreset");
+      var palletWidthField = document.getElementById("palletWidth");
+      var palletLengthField = document.getElementById("palletLength");
+      var maxLoadedHeightField = document.getElementById("maxLoadedHeight");
+      var palletDeckHeightField = document.getElementById("palletDeckHeight");
+      var palletPresetNote = document.getElementById("palletPresetNote");
+      var resultsContainer = document.getElementById("resultsContainer");
+      var emptyState = document.getElementById("emptyState");
+      var summaryPallets = document.getElementById("summaryPallets");
+      var summaryUnits = document.getElementById("summaryUnits");
+      var summaryFootprint = document.getElementById("summaryFootprint");
+      var summaryHeight = document.getElementById("summaryHeight");
+      var instructionSheet = document.getElementById("instructionSheet");
+      var instructionSheetRows = document.getElementById("instructionSheetRows");
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function round2(value) {
+        return Math.round(value * 100) / 100;
+      }
+
+      function formatInches(value) {
+        return round2(value).toFixed(round2(value) % 1 === 0 ? 0 : 2).replace(/\.00$/, "") + '"';
+      }
+
+      function numberValue(field) {
+        var value = parseFloat(field.value);
+        return Number.isFinite(value) ? value : 0;
+      }
+
+      function updatePalletPreset() {
+        var preset = palletPresets[palletPresetField.value] || palletPresets.chep;
+        var isCustom = palletPresetField.value === "custom";
+
+        if (!isCustom) {
+          palletWidthField.value = preset.width;
+          palletLengthField.value = preset.length;
+          palletDeckHeightField.value = preset.deckHeight;
+        }
+
+        palletWidthField.readOnly = !isCustom;
+        palletLengthField.readOnly = !isCustom;
+        palletDeckHeightField.readOnly = !isCustom;
+        palletPresetNote.textContent = preset.note;
+      }
+
+      function addItemRow(data) {
+        var fragment = itemTemplate.content.cloneNode(true);
+        var row = fragment.querySelector(".item-row");
+        var title = row.querySelector(".item-row-title");
+        var removeBtn = row.querySelector(".item-remove");
+
+        if (data) {
+          Object.keys(data).forEach(function (key) {
+            var field = row.querySelector("[data-field=\"" + key + "\"]");
+            if (field) {
+              field.value = data[key];
+            }
+          });
+        }
+
+        function updateTitle() {
+          var labelField = row.querySelector("[data-field=\"label\"]");
+          var index = Array.prototype.indexOf.call(itemList.children, row) + 1;
+          title.textContent = (labelField && labelField.value.trim()) || ("Box type " + index);
+        }
+
+        row.querySelectorAll("[data-field]").forEach(function (field) {
+          field.addEventListener("input", updateTitle);
+        });
+
+        removeBtn.addEventListener("click", function () {
+          if (itemList.children.length === 1) {
+            row.querySelectorAll("[data-field]").forEach(function (field) {
+              field.value = "";
+            });
+            updateTitle();
+            return;
+          }
+
+          row.remove();
+          refreshItemTitles();
+        });
+
+        itemList.appendChild(row);
+        updateTitle();
+      }
+
+      function refreshItemTitles() {
+        Array.prototype.slice.call(itemList.children).forEach(function (row, index) {
+          var title = row.querySelector(".item-row-title");
+          var labelField = row.querySelector("[data-field=\"label\"]");
+          title.textContent = (labelField && labelField.value.trim()) || ("Box type " + (index + 1));
+        });
+      }
+
+      function collectItems() {
+        return Array.prototype.slice.call(itemList.children).map(function (row, index) {
+          return {
+            index: index,
+            label: row.querySelector("[data-field=\"label\"]").value.trim() || ("Box type " + (index + 1)),
+            width: parseFloat(row.querySelector("[data-field=\"width\"]").value),
+            length: parseFloat(row.querySelector("[data-field=\"length\"]").value),
+            height: parseFloat(row.querySelector("[data-field=\"height\"]").value),
+            quantity: parseInt(row.querySelector("[data-field=\"quantity\"]").value, 10)
+          };
+        });
+      }
+
+      function sanitizeItems(items) {
+        var errors = [];
+        var validItems = [];
+
+        items.forEach(function (item) {
+          var missing = [];
+          if (!(item.width > 0)) missing.push("width");
+          if (!(item.length > 0)) missing.push("length");
+          if (!(item.height > 0)) missing.push("height");
+          if (!(item.quantity > 0)) missing.push("quantity");
+
+          if (missing.length > 0) {
+            errors.push(item.label + ": add a valid " + missing.join(", ") + ".");
+            return;
+          }
+
+          validItems.push(item);
+        });
+
+        return { errors: errors, items: validItems };
+      }
+
+      function compareCandidate(a, b) {
+        if (!a) return b;
+        if (b.count > a.count) return b;
+        if (b.count < a.count) return a;
+        if (b.groupCount < a.groupCount) return b;
+        if (b.groupCount > a.groupCount) return a;
+        if (b.primaryCount > a.primaryCount) return b;
+        return a;
+      }
+
+      function buildWidthPattern(palletWidth, palletLength, boxWidth, boxLength, primaryRotated) {
+        var primaryWidth = primaryRotated ? boxLength : boxWidth;
+        var primaryLength = primaryRotated ? boxWidth : boxLength;
+        var secondaryWidth = primaryRotated ? boxWidth : boxLength;
+        var secondaryLength = primaryRotated ? boxLength : boxWidth;
+        var maxPrimary = Math.floor(palletWidth / primaryWidth);
+        var best = null;
+
+        for (var primaryCount = 0; primaryCount <= maxPrimary; primaryCount += 1) {
+          var remainingWidth = palletWidth - (primaryCount * primaryWidth);
+          var secondaryCount = Math.floor(remainingWidth / secondaryWidth);
+          var primaryPerStrip = Math.floor(palletLength / primaryLength);
+          var secondaryPerStrip = Math.floor(palletLength / secondaryLength);
+          var count = (primaryCount * primaryPerStrip) + (secondaryCount * secondaryPerStrip);
+          var boxes = [];
+          var x = 0;
+
+          if (count <= 0) {
+            continue;
+          }
+
+          for (var stripIndex = 0; stripIndex < primaryCount; stripIndex += 1) {
+            for (var itemIndex = 0; itemIndex < primaryPerStrip; itemIndex += 1) {
+              boxes.push({ x: x, y: itemIndex * primaryLength, width: primaryWidth, length: primaryLength, rotated: primaryRotated });
+            }
+            x += primaryWidth;
+          }
+
+          for (var fillIndex = 0; fillIndex < secondaryCount; fillIndex += 1) {
+            for (var fillItemIndex = 0; fillItemIndex < secondaryPerStrip; fillItemIndex += 1) {
+              boxes.push({ x: x, y: fillItemIndex * secondaryLength, width: secondaryWidth, length: secondaryLength, rotated: !primaryRotated });
+            }
+            x += secondaryWidth;
+          }
+
+          best = compareCandidate(best, {
+            count: count,
+            boxes: boxes,
+            primaryCount: primaryCount,
+            secondaryCount: secondaryCount,
+            groupCount: (primaryCount > 0 ? 1 : 0) + (secondaryCount > 0 ? 1 : 0),
+            description: primaryCount > 0 && secondaryCount > 0 ? (primaryCount + " " + (primaryRotated ? "rotated" : "standard") + " width strips + " + secondaryCount + " " + (primaryRotated ? "standard" : "rotated") + " fill strips") : (primaryCount > 0 ? (primaryCount + " " + (primaryRotated ? "rotated" : "standard") + " width strips") : (secondaryCount + " " + (!primaryRotated ? "rotated" : "standard") + " width strips"))
+          });
+        }
+
+        return best;
+      }
+
+      function buildLengthPattern(palletWidth, palletLength, boxWidth, boxLength, primaryRotated) {
+        var primaryWidth = primaryRotated ? boxLength : boxWidth;
+        var primaryLength = primaryRotated ? boxWidth : boxLength;
+        var secondaryWidth = primaryRotated ? boxWidth : boxLength;
+        var secondaryLength = primaryRotated ? boxLength : boxWidth;
+        var maxPrimary = Math.floor(palletLength / primaryLength);
+        var best = null;
+
+        for (var primaryCount = 0; primaryCount <= maxPrimary; primaryCount += 1) {
+          var remainingLength = palletLength - (primaryCount * primaryLength);
+          var secondaryCount = Math.floor(remainingLength / secondaryLength);
+          var primaryPerRow = Math.floor(palletWidth / primaryWidth);
+          var secondaryPerRow = Math.floor(palletWidth / secondaryWidth);
+          var count = (primaryCount * primaryPerRow) + (secondaryCount * secondaryPerRow);
+          var boxes = [];
+          var y = 0;
+
+          if (count <= 0) {
+            continue;
+          }
+
+          for (var rowIndex = 0; rowIndex < primaryCount; rowIndex += 1) {
+            for (var itemIndex = 0; itemIndex < primaryPerRow; itemIndex += 1) {
+              boxes.push({ x: itemIndex * primaryWidth, y: y, width: primaryWidth, length: primaryLength, rotated: primaryRotated });
+            }
+            y += primaryLength;
+          }
+
+          for (var fillRowIndex = 0; fillRowIndex < secondaryCount; fillRowIndex += 1) {
+            for (var fillItemIndex = 0; fillItemIndex < secondaryPerRow; fillItemIndex += 1) {
+              boxes.push({ x: fillItemIndex * secondaryWidth, y: y, width: secondaryWidth, length: secondaryLength, rotated: !primaryRotated });
+            }
+            y += secondaryLength;
+          }
+
+          best = compareCandidate(best, {
+            count: count,
+            boxes: boxes,
+            primaryCount: primaryCount,
+            secondaryCount: secondaryCount,
+            groupCount: (primaryCount > 0 ? 1 : 0) + (secondaryCount > 0 ? 1 : 0),
+            description: primaryCount > 0 && secondaryCount > 0 ? (primaryCount + " " + (primaryRotated ? "rotated" : "standard") + " length rows + " + secondaryCount + " " + (primaryRotated ? "standard" : "rotated") + " fill rows") : (primaryCount > 0 ? (primaryCount + " " + (primaryRotated ? "rotated" : "standard") + " length rows") : (secondaryCount + " " + (!primaryRotated ? "rotated" : "standard") + " length rows"))
+          });
+        }
+
+        return best;
+      }
+
+      function bestLayerPattern(palletWidth, palletLength, boxWidth, boxLength) {
+        return [
+          buildWidthPattern(palletWidth, palletLength, boxWidth, boxLength, false),
+          buildWidthPattern(palletWidth, palletLength, boxWidth, boxLength, true),
+          buildLengthPattern(palletWidth, palletLength, boxWidth, boxLength, false),
+          buildLengthPattern(palletWidth, palletLength, boxWidth, boxLength, true)
+        ].filter(Boolean).reduce(compareCandidate, null);
+      }
+
+      function buildConfig() {
+        var preset = palletPresets[palletPresetField.value] || palletPresets.chep;
+        return {
+          palletLabel: preset.label,
+          palletWidth: numberValue(palletWidthField),
+          palletLength: numberValue(palletLengthField),
+          maxLoadedHeight: numberValue(maxLoadedHeightField),
+          palletDeckHeight: numberValue(palletDeckHeightField)
+        };
+      }
+
+      function buildInstructionLines(plan) {
+        var lines = [];
+        lines.push("Use a " + plan.palletLabel + " pallet with a maximum loaded height of " + formatInches(plan.maxLoadedHeight) + ".");
+        lines.push("Each layer fits " + plan.unitsPerLayer + " units using " + plan.pattern.description + ".");
+        lines.push("Stack up to " + plan.maxLayers + " layer" + (plan.maxLayers === 1 ? "" : "s") + " per full pallet for " + plan.unitsPerPallet + " units total.");
+        if (plan.fullPallets > 0) {
+          lines.push("Build " + plan.fullPallets + " full pallet" + (plan.fullPallets === 1 ? "" : "s") + " at " + plan.unitsPerPallet + " units each.");
+        }
+        if (plan.partialUnits > 0) {
+          lines.push("Build 1 final partial pallet with " + plan.partialUnits + " units across " + plan.partialLayers + " layer" + (plan.partialLayers === 1 ? "" : "s") + ".");
+        }
+        lines.push("Estimated full pallet height is " + formatInches(plan.fullPalletHeight) + " including the pallet deck.");
+        return lines;
+      }
+
+      function planForItem(item, config) {
+        var usableHeight = config.maxLoadedHeight - config.palletDeckHeight;
+        var pattern;
+        var maxLayers;
+        var unitsPerLayer;
+        var unitsPerPallet;
+        var palletsRequired;
+        var fullPallets;
+        var partialUnits;
+        var partialLayers;
+        var coverage;
+
+        if (usableHeight <= 0) {
+          return { item: item, error: "The maximum loaded height must be greater than the pallet deck height." };
+        }
+
+        if (item.height > usableHeight) {
+          return { item: item, error: "The box height of " + formatInches(item.height) + " is taller than the usable stacking height of " + formatInches(usableHeight) + "." };
+        }
+
+        pattern = bestLayerPattern(config.palletWidth, config.palletLength, item.width, item.length);
+        if (!pattern || pattern.count < 1) {
+          return { item: item, error: "The box footprint does not fit on the selected pallet." };
+        }
+
+        maxLayers = Math.floor(usableHeight / item.height);
+        if (maxLayers < 1) {
+          return { item: item, error: "No full layer can fit within the selected height restriction." };
+        }
+
+        unitsPerLayer = pattern.count;
+        unitsPerPallet = unitsPerLayer * maxLayers;
+        palletsRequired = Math.ceil(item.quantity / unitsPerPallet);
+        fullPallets = Math.floor(item.quantity / unitsPerPallet);
+        partialUnits = item.quantity - (fullPallets * unitsPerPallet);
+        partialLayers = partialUnits > 0 ? Math.ceil(partialUnits / unitsPerLayer) : 0;
+        coverage = (unitsPerLayer * item.width * item.length) / (config.palletWidth * config.palletLength);
+
+        return {
+          item: item,
+          pattern: pattern,
+          palletLabel: config.palletLabel,
+          palletWidth: config.palletWidth,
+          palletLength: config.palletLength,
+          maxLoadedHeight: config.maxLoadedHeight,
+          palletDeckHeight: config.palletDeckHeight,
+          maxLayers: maxLayers,
+          unitsPerLayer: unitsPerLayer,
+          unitsPerPallet: unitsPerPallet,
+          palletsRequired: palletsRequired,
+          fullPallets: fullPallets,
+          partialUnits: partialUnits,
+          partialLayers: partialLayers,
+          fullPalletHeight: config.palletDeckHeight + (maxLayers * item.height),
+          partialPalletHeight: partialUnits > 0 ? config.palletDeckHeight + (partialLayers * item.height) : config.palletDeckHeight + (maxLayers * item.height),
+          floorCoverage: round2(coverage * 100),
+          instructionLines: buildInstructionLines({
+            palletLabel: config.palletLabel,
+            maxLoadedHeight: config.maxLoadedHeight,
+            unitsPerLayer: unitsPerLayer,
+            pattern: pattern,
+            maxLayers: maxLayers,
+            unitsPerPallet: unitsPerPallet,
+            fullPallets: fullPallets,
+            partialUnits: partialUnits,
+            partialLayers: partialLayers,
+            fullPalletHeight: config.palletDeckHeight + (maxLayers * item.height)
+          })
+        };
+      }
+
+      function metricBlock(label, value) {
+        return '<div class="metric"><span>' + escapeHtml(label) + '</span><strong>' + escapeHtml(String(value)) + "</strong></div>";
+      }
+
+      function svgForPattern(plan) {
+        var palletWidth = plan.palletWidth;
+        var palletLength = plan.palletLength;
+        var boxes = plan.pattern.boxes;
+        var svg = '<svg class="pallet-svg" viewBox="0 0 ' + palletWidth + " " + palletLength + '" role="img" aria-label="Top view pallet layout">';
+        svg += '<rect x="0" y="0" width="' + palletWidth + '" height="' + palletLength + '" rx="2.5" fill="#eef3f7" stroke="#102131" stroke-width="0.8"></rect>';
+
+        boxes.forEach(function (box, index) {
+          var fill = box.rotated ? "#d86a2d" : "#0d3b66";
+          var textColor = box.rotated ? "#08131d" : "#eef4fb";
+          var fontSize = Math.max(2.2, Math.min(box.width, box.length) * 0.18);
+          svg += '<rect x="' + box.x + '" y="' + box.y + '" width="' + box.width + '" height="' + box.length + '" fill="' + fill + '" fill-opacity="0.88" stroke="#ffffff" stroke-width="0.45"></rect>';
+          if (fontSize >= 3.2) {
+            svg += '<text x="' + (box.x + (box.width / 2)) + '" y="' + (box.y + (box.length / 2)) + '" fill="' + textColor + '" font-size="' + fontSize + '" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="middle">' + (index + 1) + "</text>";
+          }
+        });
+
+        svg += '<text x="' + (palletWidth / 2) + '" y="' + (palletLength - 1.6) + '" fill="#5b6b7a" font-size="2.2" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">' + formatInches(plan.palletWidth) + " x " + formatInches(plan.palletLength) + "</text>";
+        svg += "</svg>";
+        return svg;
+      }
+
+      function stackVisual(plan) {
+        var fullHeightPercent = Math.min(100, (plan.fullPalletHeight / plan.maxLoadedHeight) * 100);
+        var partialHeightPercent = plan.partialUnits > 0 ? Math.min(100, (plan.partialPalletHeight / plan.maxLoadedHeight) * 100) : 0;
+        var html = '<div class="stack-visual"><div class="viz-head"><strong>Height view</strong><span>Max ' + formatInches(plan.maxLoadedHeight) + '</span></div><div class="stack-bars">';
+        html += '<div class="stack-bar" style="height:' + Math.max(fullHeightPercent, 12) + '%;">' + plan.maxLayers + ' layers<span class="stack-bar-label">Full pallet</span></div>';
+        if (plan.partialUnits > 0) {
+          html += '<div class="stack-bar partial" style="height:' + Math.max(partialHeightPercent, 12) + '%;">' + plan.partialLayers + ' layers<span class="stack-bar-label">Final pallet</span></div>';
+        }
+        html += "</div></div>";
+        return html;
+      }
+
+      function resultCard(plan) {
+        var html = '<article class="result-card">';
+        html += '<div class="result-header"><div><h3>' + escapeHtml(plan.item.label) + '</h3><p>' + escapeHtml(plan.item.quantity.toString()) + ' units at ' + formatInches(plan.item.width) + " W x " + formatInches(plan.item.length) + " L x " + formatInches(plan.item.height) + ' H</p></div><span class="result-tag">' + plan.palletsRequired + ' pallet' + (plan.palletsRequired === 1 ? '' : 's') + '</span></div>';
+        html += '<div class="metric-grid">' + metricBlock("Units / layer", plan.unitsPerLayer) + metricBlock("Layers / full pallet", plan.maxLayers) + metricBlock("Units / full pallet", plan.unitsPerPallet) + metricBlock("Floor use", plan.floorCoverage + "%") + '</div>';
+        html += '<div class="result-layout"><div class="visual-card"><div class="visual-grid"><div><div class="viz-head"><strong>Layer layout</strong><span>' + escapeHtml(plan.pattern.description) + '</span></div><div class="pallet-svg-wrap">' + svgForPattern(plan) + '</div><div class="layer-legend"><span class="legend-item"><span class="legend-swatch primary"></span>Standard orientation</span><span class="legend-item"><span class="legend-swatch rotated"></span>Rotated 90°</span></div></div><div>' + stackVisual(plan) + '</div></div></div>';
+        html += '<div class="instruction-card"><h3>Build instructions</h3><ul class="instruction-list">';
+        plan.instructionLines.forEach(function (line) {
+          html += '<li>' + escapeHtml(line) + '</li>';
+        });
+        html += '</ul><p class="instruction-summary">Full pallets: ' + plan.fullPallets + '. ' + (plan.partialUnits > 0 ? ('Final pallet: ' + plan.partialUnits + ' units across ' + plan.partialLayers + ' layers.') : 'No partial pallet needed.') + '</p></div></div></article>';
+        return html;
+      }
+
+      function buildInstructionSheet(plans, config) {
+        var html = "";
+        plans.forEach(function (plan) {
+          html += '<div class="sheet-row"><h3>' + escapeHtml(plan.item.label) + '</h3><div class="sheet-meta">' + escapeHtml(config.palletLabel) + " | " + formatInches(plan.item.width) + " W x " + formatInches(plan.item.length) + " L x " + formatInches(plan.item.height) + " H | " + plan.item.quantity + ' total units</div><ul class="instruction-list">';
+          plan.instructionLines.forEach(function (line) {
+            html += '<li>' + escapeHtml(line) + '</li>';
+          });
+          html += "</ul></div>";
+        });
+        return html;
+      }
+
+      function renderErrors(errors) {
+        emptyState.hidden = true;
+        instructionSheet.hidden = true;
+        resultsContainer.innerHTML = '<div class="warning-block">' + errors.map(function (error) {
+          return '<div>' + escapeHtml(error) + '</div>';
+        }).join("") + "</div>";
+      }
+
+      function renderResults(results, config) {
+        var validPlans = results.filter(function (result) { return !result.error; });
+        var errors = results.filter(function (result) { return !!result.error; });
+        var totalPallets = validPlans.reduce(function (sum, plan) { return sum + plan.palletsRequired; }, 0);
+        var totalUnits = validPlans.reduce(function (sum, plan) { return sum + plan.item.quantity; }, 0);
+        var html = "";
+
+        summaryPallets.textContent = totalPallets;
+        summaryUnits.textContent = totalUnits;
+        summaryFootprint.textContent = round2(config.palletWidth) + " x " + round2(config.palletLength);
+        summaryHeight.textContent = formatInches(config.maxLoadedHeight);
+
+        if (errors.length > 0) {
+          html += '<div class="warning-block" style="margin-bottom: 1rem;">' + errors.map(function (result) {
+            return '<div><strong>' + escapeHtml(result.item.label) + ':</strong> ' + escapeHtml(result.error) + '</div>';
+          }).join("") + "</div>";
+        }
+
+        if (validPlans.length === 0) {
+          resultsContainer.innerHTML = html + '<div class="empty-state">No pallet plan could be generated from the data provided yet.</div>';
+          instructionSheet.hidden = true;
+          emptyState.hidden = true;
+          return;
+        }
+
+        validPlans.forEach(function (plan) {
+          html += resultCard(plan);
+        });
+
+        resultsContainer.innerHTML = html;
+        emptyState.hidden = true;
+        instructionSheetRows.innerHTML = buildInstructionSheet(validPlans, config);
+        instructionSheet.hidden = false;
+      }
+
+      function calculate() {
+        var items = collectItems();
+        var sanitized = sanitizeItems(items);
+        var config = buildConfig();
+        var configErrors = [];
+
+        if (!(config.palletWidth > 0)) configErrors.push("Enter a valid pallet width.");
+        if (!(config.palletLength > 0)) configErrors.push("Enter a valid pallet length.");
+        if (!(config.maxLoadedHeight > 0)) configErrors.push("Enter a valid maximum loaded height.");
+        if (!(config.palletDeckHeight > 0)) configErrors.push("Enter a valid pallet deck height.");
+        if (config.maxLoadedHeight <= config.palletDeckHeight) configErrors.push("The loaded height must be greater than the pallet deck height.");
+        if (sanitized.items.length === 0) configErrors.push("Add at least one complete box type before building the pallet plan.");
+
+        if (sanitized.errors.length > 0 || configErrors.length > 0) {
+          renderErrors(configErrors.concat(sanitized.errors));
+          return;
+        }
+
+        renderResults(sanitized.items.map(function (item) {
+          return planForItem(item, config);
+        }), config);
+      }
+
+      document.getElementById("addItemBtn").addEventListener("click", function () {
+        addItemRow();
+        refreshItemTitles();
+      });
+      document.getElementById("calculateBtn").addEventListener("click", calculate);
+      document.getElementById("resetBtn").addEventListener("click", function () {
+        itemList.innerHTML = "";
+        addItemRow({ label: "", width: "", length: "", height: "", quantity: "" });
+        palletPresetField.value = "chep";
+        maxLoadedHeightField.value = "72";
+        palletDeckHeightField.value = "5.5";
+        updatePalletPreset();
+        summaryPallets.textContent = "0";
+        summaryUnits.textContent = "0";
+        summaryFootprint.textContent = "40 x 48";
+        summaryHeight.textContent = '72"';
+        resultsContainer.innerHTML = "";
+        emptyState.hidden = false;
+        resultsContainer.appendChild(emptyState);
+        instructionSheet.hidden = true;
+      });
+      document.getElementById("printInstructionsBtn").addEventListener("click", function () {
+        window.print();
+      });
+      palletPresetField.addEventListener("change", updatePalletPreset);
+
+      addItemRow({ label: "Example carton", width: "12", length: "16", height: "10", quantity: "120" });
+      updatePalletPreset();
+    })();
+  </script>
+</body>
+</html>

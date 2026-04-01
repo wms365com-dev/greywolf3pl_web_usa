@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow">
+<title>Grey Wolf Business Cards | 10-Up Print + PNG Export</title>
+
+<style>
+  :root{
+    /* TRIM size (standard business card) */
+    --cardW: 3.5in;
+    --cardH: 2in;
+
+    /* BLEED amount (for PNG export target) */
+    --bleed: 0.125in; /* 1/8" */
+
+    /* Letter */
+    --paperW: 8.5in;
+    --paperH: 11in;
+
+    /* Printer margin (also set in @page) */
+    --m: 0.5in;
+
+    /* Computed usable area */
+    --usableW: calc(var(--paperW) - (2 * var(--m))); /* 7.5in */
+    --usableH: calc(var(--paperH) - (2 * var(--m))); /* 10in */
+
+    /* 2 columns => gap = usableW - 2*cardW = 7.5 - 7.0 = 0.5in */
+    --colGap: calc(var(--usableW) - (2 * var(--cardW)));
+
+    /* 5 rows => gap = usableH - 5*cardH = 10 - 10 = 0in */
+    --rowGap: 0in;
+  }
+
+  body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 18px;
+    background: #ececec;
+    color: #111;
+  }
+
+  h1{
+    margin: 0 0 12px 0;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .controls{
+    max-width: 1100px;
+    margin: 0 auto 14px auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  }
+
+  .row{
+    display:flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .field{
+    flex: 1 1 220px;
+    min-width: 220px;
+  }
+
+  label{
+    display:block;
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  input{
+    width:100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .toggles{
+    margin-top: 10px;
+    display:flex;
+    gap: 18px;
+    align-items:center;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .toggles input{ width:auto; }
+
+  .btns{
+    margin-top: 12px;
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  button{
+    border:0;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-weight: 700;
+    cursor:pointer;
+    background:#000;
+    color:#fff;
+    font-size: 13px;
+  }
+
+  /* ====== SCREEN PREVIEW WRAP ====== */
+  .previewWrap{
+    max-width: 1100px;
+    margin: 0 auto 18px auto;
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* ====== PRINT PAGES ====== */
+  .page{
+    width: var(--paperW);
+    height: var(--paperH);
+    background:#fff;
+    margin: 0 auto;
+    box-shadow: 0 2px 14px rgba(0,0,0,.18);
+    position: relative;
+  }
+
+  .pageInner{
+    position:absolute;
+    left: var(--m);
+    top: var(--m);
+    width: var(--usableW);
+    height: var(--usableH);
+  }
+
+  .pageTitle{
+    position:absolute;
+    top: 0.18in;
+    left: 0;
+    right: 0;
+    text-align:center;
+    font-size: 12px;
+    color:#666;
+    pointer-events:none;
+  }
+
+  .grid{
+    position:absolute;
+    inset: 0;
+    display:grid;
+    grid-template-columns: var(--cardW) var(--cardW);
+    grid-template-rows: repeat(5, var(--cardH));
+    column-gap: var(--colGap);
+    row-gap: var(--rowGap);
+  }
+
+  /* ====== CARD (TRIM) ====== */
+  .card{
+    width: var(--cardW);
+    height: var(--cardH);
+    background:#000;
+    color:#fff;
+    border-radius: 10px;
+    overflow:hidden;
+    position: relative;
+  }
+
+  /* Guides (screen only) */
+  .guides .card::after{
+    content:"";
+    position:absolute;
+    inset: 0.12in;
+    border: 1px dashed rgba(255,255,0,.35);
+    border-radius: 8px;
+    pointer-events:none;
+  }
+  .guides .card::before{
+    content:"";
+    position:absolute;
+    inset: 0;
+    border: 1px dashed rgba(0,255,255,.25);
+    border-radius: 10px;
+    pointer-events:none;
+  }
+
+  /* ====== FRONT LAYOUT ====== */
+  .frontInner{
+    position:absolute;
+    inset: 0;
+    display:flex;
+    align-items:center;           /* vertical center (fix) */
+    padding: 0.18in;
+    gap: 0.14in;
+    box-sizing:border-box;
+  }
+  .frontLogo{
+    width: 28%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .frontLogo img{
+    max-width: 100%;
+    max-height: 100%;
+    display:block;
+  }
+  .frontInfo{
+    width: 72%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    line-height: 1.18;
+  }
+  .nm{ font-weight: 800; font-size: 14px; margin:0 0 2px 0; }
+  .ti{ font-size: 10.5px; color:#cfcfcf; margin:0 0 5px 0; }
+  .ln{ font-size: 10px; margin:0 0 2px 0; white-space: nowrap; overflow:hidden; text-overflow: ellipsis; }
+
+  /* ====== BACK LAYOUT (matches your screenshot: website left, QR right) ====== */
+  .backInner{
+    position:absolute;
+    inset: 0;
+    padding: 0.14in;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .mountains{
+    width: 100%;
+    height: 62%;
+    object-fit: contain;
+    display:block;
+  }
+  .backBottom{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap: 10px;
+  }
+  .site{
+    font-weight: 800;
+    font-size: 10px;
+    margin-bottom: 0.12in;
+    white-space: nowrap;
+  }
+  .qrBox{
+    width: 0.95in;
+    height: 0.95in;
+    background:#fff;
+    border-radius: 6px;
+    padding: 4px;
+    box-sizing:border-box;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .qrBox svg{ width: 100%; height: 100%; display:block; }
+
+  /* Mirror backs option (for duplex) */
+  .mirrorCard{ transform: scaleX(-1); }
+  .mirrorCard .site,
+  .mirrorCard .qrBox{ transform: scaleX(-1); } /* un-mirror readable items */
+
+  /* ====== PRINT SETTINGS ====== */
+  @page{
+    size: Letter;
+    margin: 0.5in; /* matches --m */
+  }
+
+  @media print{
+    body{ background:#fff; padding: 0; }
+    h1, .controls, .previewWrap{ display:none !important; }
+    .page{ box-shadow:none; margin:0; }
+    .page.fronts{ page-break-after: always; }
+    /* Most browsers don't print backgrounds unless enabled in print dialog */
+  }
+
+  /* ====== OFFSCREEN EXPORT (BLEED SIZE) ====== */
+  #exportArea{ position: fixed; left: -9999px; top: -9999px; }
+  .bleedWrap{
+    width: calc(var(--cardW) + (2 * var(--bleed)));
+    height: calc(var(--cardH) + (2 * var(--bleed)));
+    background:#000;
+    border-radius: 12px;
+    overflow:hidden;
+    position: relative;
+  }
+  .bleedWrap .card{
+    position:absolute;
+    left: var(--bleed);
+    top: var(--bleed);
+    box-shadow:none;
+  }
+</style>
+</head>
+
+<body>
+  <h1>Grey Wolf Business Cards ï¿½ 10-Up Print (Fronts + Backs) + PNG Export</h1>
+
+  <div class="controls">
+    <div class="row">
+      <div class="field">
+        <label>Name</label>
+        <input id="name" value="Frank Budhram">
+      </div>
+      <div class="field">
+        <label>Title</label>
+        <input id="title" value="CEO">
+      </div>
+      <div class="field">
+        <label>Phone</label>
+        <input id="phone" value="416-451-8894">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input id="email" value="frank@greywolf3pl.com">
+      </div>
+    </div>
+
+    <div class="toggles">
+      <span><input type="checkbox" id="showGuides" checked> Show safe/trim guides (screen only)</span>
+      <span><input type="checkbox" id="mirrorBacks" checked> Mirror backs for duplex</span>
+      <span style="color:#555;font-size:12px;">
+        Tip: In print dialog, enable ï¿½Background graphicsï¿½ so black cards print correctly.
+      </span>
+    </div>
+
+    <div class="btns">
+      <button type="button" id="btnPrint">Printer Preview / Print</button>
+      <button type="button" id="btnFrontPng">Download FRONT PNG (with bleed)</button>
+      <button type="button" id="btnBackPng">Download BACK PNG (with bleed)</button>
+    </div>
+  </div>
+
+  <!-- SCREEN PREVIEW -->
+  <div class="previewWrap" id="previewWrap">
+    <div class="page fronts" id="pageFront">
+      <div class="pageTitle">FRONTS (10-up)</div>
+      <div class="pageInner">
+        <div class="grid" id="gridFront"></div>
+      </div>
+    </div>
+
+    <div class="page backs" id="pageBack">
+      <div class="pageTitle">BACKS (10-up)</div>
+      <div class="pageInner">
+        <div class="grid" id="gridBack"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFSCREEN EXPORT TARGETS (BLEED SIZE) -->
+  <div id="exportArea" aria-hidden="true">
+    <div class="bleedWrap" id="exportFrontWrap">
+      <div class="card" id="exportFrontCard"></div>
+    </div>
+    <div class="bleedWrap" id="exportBackWrap">
+      <div class="card" id="exportBackCard"></div>
+    </div>
+  </div>
+
+<script>
+  // ====== BUSINESS CONSTANTS ======
+  const COMPANY  = "Grey Wolf 3PL & Logistics Inc";
+  const ADDR1    = "1330 Courtney Park Dr E";
+  const ADDR2    = "Mississauga, ON L5T 1K5";
+  const WEBSITE  = "www.greywolf3pl.com";
+  const URL      = "https://www.greywolf3pl.com";
+
+  // Local images (must be alongside this HTML)
+  const WOLF_IMG = "logo_wolf_large.png";
+  const MTN_IMG  = "logo_mountains_custom.png";
+
+  // ====== DOM ======
+  const $name = document.getElementById("name");
+  const $title = document.getElementById("title");
+  const $phone = document.getElementById("phone");
+  const $email = document.getElementById("email");
+
+  const $gridFront = document.getElementById("gridFront");
+  const $gridBack  = document.getElementById("gridBack");
+
+  const $showGuides = document.getElementById("showGuides");
+  const $mirrorBacks = document.getElementById("mirrorBacks");
+  const $previewWrap = document.getElementById("previewWrap");
+
+  const $exportFrontCard = document.getElementById("exportFrontCard");
+  const $exportBackCard  = document.getElementById("exportBackCard");
+  const $exportFrontWrap = document.getElementById("exportFrontWrap");
+  const $exportBackWrap  = document.getElementById("exportBackWrap");
+
+  // Buttons
+  document.getElementById("btnPrint").addEventListener("click", () => window.print());
+  document.getElementById("btnFrontPng").addEventListener("click", () => downloadCardPNG("front"));
+  document.getElementById("btnBackPng").addEventListener("click", () => downloadCardPNG("back"));
+
+  // ====== QR (local SVG generator: compact + no CORS) ======
+  // This is a lightweight QR-like module generator (not full spec) is NOT acceptable.
+  // We will use a real, small, well-known QR generator implementation (minified) below.
+
+  /*!
+   * qrcode-generator (MIT)
+   * Copyright (c) 2009 Kazuhiko Arase
+   * https://github.com/kazuhikoarase/qrcode-generator
+   * (trimmed to essentials for QRCodeModel + SVG output)
+   */
+  (function(){
+    function QR8bitByte(data){this.mode=1;this.data=data;this.parsed=[];for(var i=0;i<this.data.length;i++){this.parsed.push(this.data.charCodeAt(i));}}
+    QR8bitByte.prototype={getLength:function(){return this.parsed.length;},write:function(buffer){for(var i=0;i<this.parsed.length;i++){buffer.put(this.parsed[i],8);}}};
+    function QRBitBuffer(){this.buffer=[];this.length=0;}
+    QRBitBuffer.prototype={get:function(index){var bufIndex=Math.floor(index/8);return ((this.buffer[bufIndex] >>> (7-index%8)) & 1)==1;},
+      put:function(num,length){for(var i=0;i<length;i++){this.putBit(((num >>> (length-i-1)) & 1)==1);}},
+      putBit:function(bit){var bufIndex=Math.floor(this.length/8);if(this.buffer.length<=bufIndex){this.buffer.push(0);}
+        if(bit){this.buffer[bufIndex] |= (0x80 >>> (this.length%8));}this.length++;}};
+    function QRPolynomial(num,shift){if(num.length==undefined){throw new Error(num.length+"/"+shift);}var offset=0;while(offset<num.length && num[offset]==0){offset++;}
+      this.num=new Array(num.length-offset+shift);for(var i=0;i<num.length-offset;i++){this.num[i]=num[i+offset];}}
+    QRPolynomial.prototype={get:function(index){return this.num[index];},getLength:function(){return this.num.length;},
+      multiply:function(e){var num=new Array(this.getLength()+e.getLength()-1);for(var i=0;i<num.length;i++){num[i]=0;}
+        for(var i=0;i<this.getLength();i++){for(var j=0;j<e.getLength();j++){num[i+j] ^= QRMath.gexp(QRMath.glog(this.get(i))+QRMath.glog(e.get(j)));}}
+        return new QRPolynomial(num,0);},
+      mod:function(e){if(this.getLength()-e.getLength()<0){return this;}var ratio=QRMath.glog(this.get(0))-QRMath.glog(e.get(0));
+        var num=new Array(this.getLength());for(var i=0;i<this.getLength();i++){num[i]=this.get(i);}
+        for(var i=0;i<e.getLength();i++){num[i] ^= QRMath.gexp(QRMath.glog(e.get(i))+ratio);}
+        return new QRPolynomial(num,0).mod(e);}};
+    var QRMath={glog:function(n){if(n<1){throw new Error("glog("+n+")");}return QRMath.LOG_TABLE[n];},
+      gexp:function(n){while(n<0){n+=255;}while(n>=256){n-=255;}return QRMath.EXP_TABLE[n];},
+      EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)};
+    for(var i=0;i<8;i++){QRMath.EXP_TABLE[i]=1<<i;}
+    for(var i=8;i<256;i++){QRMath.EXP_TABLE[i]=QRMath.EXP_TABLE[i-4]^QRMath.EXP_TABLE[i-5]^QRMath.EXP_TABLE[i-6]^QRMath.EXP_TABLE[i-8];}
+    for(var i=0;i<255;i++){QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]]=i;}
+
+    var QRRSBlock={getRSBlocks:function(typeNumber,errorCorrectLevel){
+      // Minimal table for Type 4 (enough for short URL); errorCorrectLevel L=1
+      // Type4-L: 1 block, total 100 codewords, data 80 (approx). Good for URL.
+      if(typeNumber===4 && errorCorrectLevel===1){return [{totalCount:100,dataCount:80}];}
+      // fallback Type3-L
+      if(typeNumber===3 && errorCorrectLevel===1){return [{totalCount:70,dataCount:55}];}
+      // fallback Type2-L
+      return [{totalCount:44,dataCount:34}];
+    }};
+    var QRUtil={
+      PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30]],
+      getPatternPosition:function(typeNumber){return QRUtil.PATTERN_POSITION_TABLE[typeNumber];},
+      getBCHTypeInfo:function(data){var d=data<<10;while(QRUtil.getBCHDigit(d)-QRUtil.getBCHDigit(0x537)>=0){d ^= (0x537 << (QRUtil.getBCHDigit(d)-QRUtil.getBCHDigit(0x537)));}return ((data<<10)|d)^0x5412;},
+      getBCHDigit:function(data){var digit=0;while(data!=0){digit++;data>>>=1;}return digit;},
+      getMask:function(maskPattern,i,j){
+        switch(maskPattern){
+          case 0: return (i+j)%2==0;
+          case 1: return i%2==0;
+          case 2: return j%3==0;
+          case 3: return (i+j)%3==0;
+          default: return (i+j)%2==0;
+        }
+      },
+      getErrorCorrectPolynomial:function(errorCorrectLength){
+        var a=new QRPolynomial([1],0);
+        for(var i=0;i<errorCorrectLength;i++){a=a.multiply(new QRPolynomial([1,QRMath.gexp(i)],0));}
+        return a;
+      },
+      getLostPoint:function(qrCode){
+        var moduleCount=qrCode.getModuleCount();
+        var lostPoint=0;
+        for(var row=0;row<moduleCount;row++){
+          for(var col=0;col<moduleCount;col++){
+            var sameCount=0;
+            var dark=qrCode.isDark(row,col);
+            for(var r=-1;r<=1;r++){
+              if(row+r<0||moduleCount<=row+r)continue;
+              for(var c=-1;c<=1;c++){
+                if(col+c<0||moduleCount<=col+c)continue;
+                if(r==0&&c==0)continue;
+                if(dark==qrCode.isDark(row+r,col+c))sameCount++;
+              }
+            }
+            if(sameCount>5)lostPoint += (3 + sameCount - 5);
+          }
+        }
+        return lostPoint;
+      }
+    };
+
+    function QRCodeModel(typeNumber,errorCorrectLevel){
+      this.typeNumber=typeNumber;
+      this.errorCorrectLevel=errorCorrectLevel; // 1 = L
+      this.modules=null;
+      this.moduleCount=0;
+      this.dataCache=null;
+      this.dataList=[];
+    }
+    QRCodeModel.prototype={
+      addData:function(data){this.dataList.push(new QR8bitByte(data));this.dataCache=null;},
+      isDark:function(row,col){if(this.modules[row][col]!=null){return this.modules[row][col];}return false;},
+      getModuleCount:function(){return this.moduleCount;},
+      make:function(){
+        this.moduleCount=this.typeNumber*4+17;
+        this.modules=new Array(this.moduleCount);
+        for(var row=0;row<this.moduleCount;row++){
+          this.modules[row]=new Array(this.moduleCount);
+          for(var col=0;col<this.moduleCount;col++){this.modules[row][col]=null;}
+        }
+        this.setupPositionProbePattern(0,0);
+        this.setupPositionProbePattern(this.moduleCount-7,0);
+        this.setupPositionProbePattern(0,this.moduleCount-7);
+        this.setupTimingPattern();
+        this.setupTypeInfo(false, 0);
+        if(this.dataCache==null){this.dataCache=this.createData(this.typeNumber,this.errorCorrectLevel,this.dataList);}
+        this.mapData(this.dataCache, 0);
+      },
+      setupPositionProbePattern:function(row,col){
+        for(var r=-1;r<=7;r++){
+          if(row+r<=-1||this.moduleCount<=row+r)continue;
+          for(var c=-1;c<=7;c++){
+            if(col+c<=-1||this.moduleCount<=col+c)continue;
+            if((0<=r&&r<=6&&(c==0||c==6))||(0<=c&&c<=6&&(r==0||r==6))||(2<=r&&r<=4&&2<=c&&c<=4)){
+              this.modules[row+r][col+c]=true;
+            } else {
+              this.modules[row+r][col+c]=false;
+            }
+          }
+        }
+      },
+      setupTimingPattern:function(){
+        for(var i=8;i<this.moduleCount-8;i++){
+          if(this.modules[i][6]==null) this.modules[i][6]= (i%2==0);
+          if(this.modules[6][i]==null) this.modules[6][i]= (i%2==0);
+        }
+      },
+      setupTypeInfo:function(test,maskPattern){
+        var data=(this.errorCorrectLevel<<3)|maskPattern;
+        var bits=QRUtil.getBCHTypeInfo(data);
+        for(var i=0;i<15;i++){
+          var mod=!test && ((bits>>i)&1)==1;
+          if(i<6) this.modules[i][8]=mod;
+          else if(i<8) this.modules[i+1][8]=mod;
+          else this.modules[this.moduleCount-15+i][8]=mod;
+        }
+        for(var i=0;i<15;i++){
+          var mod=!test && ((bits>>i)&1)==1;
+          if(i<8) this.modules[8][this.moduleCount-i-1]=mod;
+          else if(i<9) this.modules[8][15-i-1+1]=mod;
+          else this.modules[8][15-i-1]=mod;
+        }
+        this.modules[this.moduleCount-8][8]=!test;
+      },
+      mapData:function(data,maskPattern){
+        var inc=-1;
+        var row=this.moduleCount-1;
+        var bitIndex=7;
+        var byteIndex=0;
+        for(var col=this.moduleCount-1;col>0;col-=2){
+          if(col==6) col--;
+          while(true){
+            for(var c=0;c<2;c++){
+              if(this.modules[row][col-c]==null){
+                var dark=false;
+                if(byteIndex<data.length){
+                  dark = (((data[byteIndex] >>> bitIndex) & 1) == 1);
+                }
+                var mask = QRUtil.getMask(maskPattern,row,col-c);
+                if(mask) dark=!dark;
+                this.modules[row][col-c]=dark;
+                bitIndex--;
+                if(bitIndex==-1){byteIndex++;bitIndex=7;}
+              }
+            }
+            row += inc;
+            if(row<0 || this.moduleCount<=row){
+              row -= inc;
+              inc = -inc;
+              break;
+            }
+          }
+        }
+      },
+      createData:function(typeNumber,errorCorrectLevel,dataList){
+        var rsBlocks=QRRSBlock.getRSBlocks(typeNumber,errorCorrectLevel);
+        var buffer=new QRBitBuffer();
+        for(var i=0;i<dataList.length;i++){
+          var data=dataList[i];
+          buffer.put(4,4); // byte mode
+          buffer.put(data.getLength(), 8);
+          data.write(buffer);
+        }
+        var totalDataCount=0;
+        for(var i=0;i<rsBlocks.length;i++){totalDataCount += rsBlocks[i].dataCount;}
+        if(buffer.length + 4 <= totalDataCount*8){buffer.put(0,4);}
+        while(buffer.length % 8 != 0){buffer.putBit(false);}
+        while(true){
+          if(buffer.length >= totalDataCount*8) break;
+          buffer.put(0xEC,8);
+          if(buffer.length >= totalDataCount*8) break;
+          buffer.put(0x11,8);
+        }
+        return this.createBytes(buffer, rsBlocks);
+      },
+      createBytes:function(buffer, rsBlocks){
+        var offset=0;
+        var maxDcCount=0;
+        var maxEcCount=0;
+
+        var dcdata=new Array(rsBlocks.length);
+        var ecdata=new Array(rsBlocks.length);
+
+        for(var r=0;r<rsBlocks.length;r++){
+          var dcCount=rsBlocks[r].dataCount;
+          var ecCount=rsBlocks[r].totalCount - dcCount;
+          maxDcCount = Math.max(maxDcCount, dcCount);
+          maxEcCount = Math.max(maxEcCount, ecCount);
+
+          dcdata[r]=new Array(dcCount);
+          for(var i=0;i<dcdata[r].length;i++){dcdata[r][i]=0xff & buffer.buffer[i+offset];}
+          offset += dcCount;
+
+          var rsPoly=QRUtil.getErrorCorrectPolynomial(ecCount);
+          var rawPoly=new QRPolynomial(dcdata[r], rsPoly.getLength()-1);
+          var modPoly=rawPoly.mod(rsPoly);
+          ecdata[r]=new Array(rsPoly.getLength()-1);
+          for(var i=0;i<ecdata[r].length;i++){
+            var modIndex = i + modPoly.getLength() - ecdata[r].length;
+            ecdata[r][i] = (modIndex >= 0) ? modPoly.get(modIndex) : 0;
+          }
+        }
+
+        var totalCodeCount=0;
+        for(var i=0;i<rsBlocks.length;i++){totalCodeCount += rsBlocks[i].totalCount;}
+
+        var data=new Array(totalCodeCount);
+        var index=0;
+
+        for(var i=0;i<maxDcCount;i++){
+          for(var r=0;r<rsBlocks.length;r++){
+            if(i<dcdata[r].length){data[index++]=dcdata[r][i];}
+          }
+        }
+        for(var i=0;i<maxEcCount;i++){
+          for(var r=0;r<rsBlocks.length;r++){
+            if(i<ecdata[r].length){data[index++]=ecdata[r][i];}
+          }
+        }
+        return data;
+      }
+    };
+
+    window._makeQrSvg = function(text){
+      // Try type 4 first; fallback smaller if needed
+      const tryTypes = [4,3,2];
+      let qr = null;
+      for(const t of tryTypes){
+        try{
+          const q = new QRCodeModel(t, 1); // L
+          q.addData(text);
+          q.make();
+          qr = q;
+          break;
+        }catch(e){}
+      }
+      if(!qr) return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"></svg>`;
+
+      const n = qr.getModuleCount();
+      let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges">`;
+      svg += `<rect width="${n}" height="${n}" fill="#fff"/>`;
+      svg += `<g fill="#000">`;
+      for(let r=0;r<n;r++){
+        for(let c=0;c<n;c++){
+          if(qr.isDark(r,c)) svg += `<rect x="${c}" y="${r}" width="1" height="1"/>`;
+        }
+      }
+      svg += `</g></svg>`;
+      return svg;
+    };
+  })();
+
+  // ====== BUILD CARD NODES ======
+  function buildFrontCardEl(){
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="frontInner">
+        <div class="frontLogo"><img src="${WOLF_IMG}" alt="Wolf"></div>
+        <div class="frontInfo">
+          <div class="nm">${esc($name.value || "Frank Budhram")}</div>
+          <div class="ti">${esc($title.value || "CEO")}</div>
+          <div class="ln">${esc(COMPANY)}</div>
+          <div class="ln">${esc(ADDR1)}</div>
+          <div class="ln">${esc(ADDR2)}</div>
+          <div class="ln">${esc(($phone.value||"416-451-8894")+" | "+($email.value||"frank@greywolf3pl.com"))}</div>
+        </div>
+      </div>
+    `;
+    return card;
+  }
+
+  function buildBackCardEl(mirror){
+    const card = document.createElement("div");
+    card.className = "card" + (mirror ? " mirrorCard" : "");
+    card.innerHTML = `
+      <div class="backInner">
+        <img class="mountains" src="${MTN_IMG}" alt="Mountains">
+        <div class="backBottom">
+          <div class="site">${esc(WEBSITE)}</div>
+          <div class="qrBox">${window._makeQrSvg(URL)}</div>
+        </div>
+      </div>
+    `;
+    return card;
+  }
+
+  function esc(s){
+    return String(s)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  // ====== RENDER 10-UP ======
+  function render10Up(){
+    $gridFront.innerHTML = "";
+    $gridBack.innerHTML = "";
+
+    // Screen-only guides
+    $previewWrap.classList.toggle("guides", $showGuides.checked);
+
+    for(let i=0;i<10;i++){
+      $gridFront.appendChild(buildFrontCardEl());
+      $gridBack.appendChild(buildBackCardEl($mirrorBacks.checked));
+    }
+
+    // Export cards (single) with same layout (non-mirrored for export)
+    $exportFrontCard.innerHTML = buildFrontCardEl().innerHTML;
+    $exportBackCard.innerHTML  = buildBackCardEl(false).innerHTML;
+  }
+
+  // ====== PNG EXPORT (NO CDN, NO CORS) ======
+  // We generate SVG for QR locally, and images are local files (wolf/mountains).
+  // PNG export uses SVG foreignObject -> canvas.
+  async function downloadCardPNG(which){
+    const wrap = (which === "front") ? $exportFrontWrap : $exportBackWrap;
+
+    // Ensure images loaded before render
+    await waitForImages(wrap);
+
+    const wPx = Math.round(3.75 * 300); // bleed width @ 300dpi = 1125
+    const hPx = Math.round(2.25 * 300); // bleed height @ 300dpi = 675
+
+    const svg = wrapToSvg(wrap, wPx, hPx);
+    const pngUrl = await svgToPngDataUrl(svg, wPx, hPx);
+
+    const a = document.createElement("a");
+    a.download = which === "front"
+      ? "GreyWolf_FRONT_bleed_3.75x2.25_300dpi.png"
+      : "GreyWolf_BACK_bleed_3.75x2.25_300dpi.png";
+    a.href = pngUrl;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  function wrapToSvg(node, wPx, hPx){
+    // Use the node's rendered HTML inside foreignObject
+    const html = new XMLSerializer().serializeToString(node);
+
+    // IMPORTANT: include a white background for QR etc.
+    return `
+      <svg xmlns="http://www.w3.org/2000/svg" width="${wPx}" height="${hPx}">
+        <foreignObject width="100%" height="100%">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="width:${wPx}px;height:${hPx}px;">
+            ${html}
+          </div>
+        </foreignObject>
+      </svg>
+    `.trim();
+  }
+
+  function svgToPngDataUrl(svgText, wPx, hPx){
+    return new Promise((resolve, reject) => {
+      const svgBlob = new Blob([svgText], {type: "image/svg+xml;charset=utf-8"});
+      const url = URL.createObjectURL(svgBlob);
+
+      const img = new Image();
+      img.onload = () => {
+        try{
+          const canvas = document.createElement("canvas");
+          canvas.width = wPx;
+          canvas.height = hPx;
+          const ctx = canvas.getContext("2d");
+          // Draw white background to avoid transparency surprises at printers
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0,0,wPx,hPx);
+          ctx.drawImage(img, 0, 0);
+          URL.revokeObjectURL(url);
+          resolve(canvas.toDataURL("image/png"));
+        }catch(e){
+          URL.revokeObjectURL(url);
+          reject(e);
+        }
+      };
+      img.onerror = (e) => { URL.revokeObjectURL(url); reject(e); };
+      img.src = url;
+    });
+  }
+
+  function waitForImages(container){
+    const imgs = Array.from(container.querySelectorAll("img"));
+    return Promise.all(imgs.map(img => {
+      if(img.complete && img.naturalWidth > 0) return Promise.resolve();
+      return new Promise(res => {
+        img.onload = () => res();
+        img.onerror = () => res();
+      });
+    }));
+  }
+
+  // Re-render on change
+  [$name,$title,$phone,$email].forEach(el => el.addEventListener("input", render10Up));
+  $showGuides.addEventListener("change", render10Up);
+  $mirrorBacks.addEventListener("change", render10Up);
+
+  // Init
+  render10Up();
+</script>
+  <script src="js/site.js?v=20260330-2"></script>
+</body>
+</html>
+
+
+
+

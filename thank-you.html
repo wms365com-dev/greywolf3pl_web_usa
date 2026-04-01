@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-WJ744VRBSD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WJ744VRBSD');
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Thank You | Grey Wolf 3PL</title>
+<meta content="noindex, nofollow" name="robots"/>
+<link href="style.css?v=20260324-2" rel="stylesheet"/>
+<meta content="Grey Wolf 3PL services: warehousing, fulfillment, and distribution across Canada from the GTA." name="description"/>
+<link href="https://www.greywolf3pl.com/thank-you.html" rel="canonical"/>
+<style>
+/* Header - Black background */
+header {
+  min-height: 240px !important;
+  padding: 40px 0 30px;
+  background: #000 !important;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(255,255,255,0.06);
+  position: relative;
+}
+
+/* Large dominant logo */
+header .logo img {
+  height: 220px !important;
+  width: auto !important;
+  max-height: none !important;
+  max-width: 100% !important;
+  filter: drop-shadow(0 10px 24px rgba(255,255,255,0.35));
+  transition: all 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  transform: scale(0.9);
+  animation: logoPop 1.6s forwards 0.3s;
+}
+
+@keyframes logoPop {
+  to { transform: scale(1); }
+}
+
+header .logo:hover img {
+  transform: scale(1.12) translateY(-10px);
+  filter: drop-shadow(0 20px 48px rgba(255,255,255,0.45));
+}
+
+/* Improved dropdown menu - clean & modern on hover */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav > ul > li {
+  position: relative;
+  display: inline-block;
+}
+
+nav > ul > li > a {
+  padding: 12px 18px;
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s ease;
+}
+
+nav > ul > li:hover > a {
+  color: #ccc;
+}
+
+/* Dropdown container */
+nav ul ul {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(0,0,0,0.94);
+  min-width: 260px;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+  padding: 12px 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Show dropdown on hover */
+nav > ul > li:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Dropdown items */
+nav ul ul li {
+  display: block;
+}
+
+nav ul ul li a {
+  padding: 12px 24px;
+  color: #eee;
+  display: block;
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+}
+
+nav ul ul li a:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  padding-left: 32px;
+}
+
+/* Small arrow above dropdown */
+nav > ul > li > ul::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgba(0,0,0,0.94);
+}
+
+/* Unified button styling */
+.btn, .cta-btn, .call-btn, .quote-submit, .btn-link, .learn-more, .btn.primary, .btn.secondary {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  padding: 12px 24px;
+  background: #222;
+  color: #fff !important;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+
+.btn:hover, .cta-btn:hover, .call-btn:hover, .quote-submit:hover, .btn-link:hover, .learn-more:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  background: #333;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: -60%; left: -100%;
+  width: 60%; height: 220%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+  transition: left 0.7s ease;
+}
+
+.btn:hover::before {
+  left: 160%;
+}
+
+/* Service grid fix + stagger animation */
+.service-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+  overflow: visible !important;
+  min-height: auto !important;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Retailer logos (unchanged) */
+.retailers-carousel .retailer-card {
+  height: 140px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  transition: all 0.45s ease;
+}
+
+.retailers-carousel .retailer-card img {
+  max-height: 90px;
+  object-fit: contain;
+}
+</style>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="favicon.png" rel="icon" type="image/png"/><style>/* Theme baseline: Montserrat */
+html, body { font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+</style></head>
+<body>
+
+<!-- Preload splash + service worker cache -->
+<div id="gw-splash" class="gw-splash" aria-hidden="true">
+  <div class="gw-splash-inner">
+    <img src="logo_wolf_invert.png" class="gw-splash-logo" alt="">
+  </div>
+</div>
+<script>
+(function(){
+  var splash = document.getElementById('gw-splash');
+  if(!splash) return;
+  var started = Date.now();
+  function hide(){
+    if(!splash) return;
+    var elapsed = Date.now() - started;
+    var wait = Math.max(0, 900 - elapsed); // show at least ~1s
+    setTimeout(function(){
+      if(!splash) return;
+      splash.classList.add('hide');
+      setTimeout(function(){
+        if(splash && splash.parentNode) splash.parentNode.removeChild(splash);
+      }, 520);
+    }, wait);
+  }
+  window.addEventListener('load', hide);
+  // safety fallback
+  setTimeout(hide, 2500);
+})();
+</script>
+<script>
+(function(){
+  if(!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+})();
+</script>
+
+<header>
+<div class="container">
+<div class="logo">
+<img alt="Grey Wolf logo" src="logo_wolf_invert.png"/>
+</div>
+<div class="menu-toggle"><i class="fas fa-bars"></i></div>
+<nav>
+<ul>
+<li>
+<a href="#services">Services</a>
+<ul>
+<li><a href="warehousing.html">Warehousing &amp; Storage</a></li>
+<li><a href="ecommerce.html">Ecommerce Fulfillment</a></li>
+<li><a href="shipping.html">Shipping &amp; Parcel Management</a></li>
+<li><a href="container.html">Container Stuffing &amp; De-Stuffing</a></li>
+<li><a href="crossdocking.html">Cross-Docking &amp; Transloading</a></li>
+<li><a href="copacking.html">Co-Packing &amp; Value-Add</a></li>
+<li><a href="inventory.html">Inventory Visibility &amp; Returns</a></li>
+<li><a href="compliance.html">Compliance &amp; Quality</a></li>
+<li><a href="crossborder.html">Cross-Border Logistics</a></li>
+<li><a href="tracking.html">Tracking</a></li>
+</ul>
+</li>
+<li><a href="#about">About</a></li>
+<li>
+<a href="#">Resources</a>
+<ul>
+<li><a href="guide.html">3PL Guide</a></li>
+<li><a href="mississauga.html">Mississauga 3PL</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="tracking.html">Tracking</a></li>
+</ul>
+</li>
+<li><a href="international.html">International</a></li>
+<li><a href="driver-help.html">Driver Help</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a class="call-btn" href="tel:+14164518894">Call 416-451-8894</a></li>
+<li><a class="cta-btn" href="index.html#contact">Get a Free Quote</a></li>
+<li><a href="tracking.html">Tracking</a></li>
+</ul>
+<div class="header-flags">
+<img alt="Canada" src="canada-flag.png"/>
+<img alt="USA" src="usa-flag.png"/>
+</div>
+</nav>
+</div>
+<div class="header-flags">
+<img alt="Canada" src="canada-flag.png"/>
+<img alt="USA" src="usa-flag.png"/>
+</div>
+</header>
+<main style="max-width:900px;margin:0 auto;padding:22px 16px;">
+<h1>Thank you - we received your request.</h1>
+<p>Our team will review your details and get back to you shortly.</p>
+<p>If you need help right away, email <a href="mailto:info@greywolf3pl.com">info@greywolf3pl.com</a>.</p>
+<p><a href="index.html" style="text-decoration:underline;">Return to the homepage</a></p>
+</main>
+<script>
+(function(){
+  function detect(){
+    var isMobile = false;
+    try{
+      isMobile = window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
+      // UA fallback for tablets/phones
+      var ua = navigator.userAgent || "";
+      if(/Mobi|Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(ua)) isMobile = true;
+    }catch(e){}
+    document.documentElement.classList.toggle("is-mobile", !!isMobile);
+    document.documentElement.classList.toggle("is-desktop", !isMobile);
+    document.documentElement.setAttribute("data-device", isMobile ? "mobile" : "desktop");
+  }
+  detect();
+  window.addEventListener("resize", function(){ detect(); }, {passive:true});
+})();
+</script>
+<script>
+(function(){
+  // Track clicks on elements with data-track attribute
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('[data-track]');
+    if(!el || typeof gtag !== 'function') return;
+    var name = el.getAttribute('data-track') || 'click';
+    var label = el.getAttribute('href') || (el.textContent || '').trim().slice(0, 80);
+    gtag('event', name, { 'event_category': 'engagement', 'event_label': label });
+  });
+})();
+</script>
+<footer>
+<div class="container">
+<p>&copy; <span class="js-year"></span> Grey Wolf 3PL &amp; Logistics Inc. All rights reserved. &bull; <a href="sitemap.html">Site Map</a> &bull; <a href="privacy.html">Privacy</a> &bull; <a href="cookie-policy.html">Cookie Policy</a></p>
+<div class="social-icons">
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+</div>
+</div>
+</footer><script>(function(){
+  var els = document.querySelectorAll('.js-year');
+  var y = new Date().getFullYear();
+  for (var i=0; i<els.length; i++){ els[i].textContent = y; }
+})();</script>  <script src="js/site.js?v=20260330-2"></script>
+</body>
+</html>
+
+
+

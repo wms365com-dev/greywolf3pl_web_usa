@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">Howling wolf logo</title>
+  <desc id="desc">A stylized howling wolf head inside a circular crest.</desc>
+  <defs>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#90b2d2"/>
+      <stop offset="100%" stop-color="#bf7e43"/>
+    </linearGradient>
+    <linearGradient id="wolfFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6fbff"/>
+      <stop offset="100%" stop-color="#d9e5ef"/>
+    </linearGradient>
+  </defs>
+  <circle cx="110" cy="110" r="98" fill="#09131d"/>
+  <circle cx="110" cy="110" r="91" fill="none" stroke="url(#ring)" stroke-width="6"/>
+  <path d="M135 28c-10 14-18 28-22 43l-12-10-26 17 14 15c-14 10-25 24-31 42l20-7 7 18 16-10c6 20 14 36 27 51l11-17 26 7-8-22 14-9-14-15 7-13-18-3 3-13-22 7 5-13-12-5 8-17-13-8 4-18z" fill="url(#wolfFill)" opacity=".12"/>
+  <path d="M151 37c-12 9-23 21-31 37l-9-9-25 14 16 15c-18 12-31 29-38 52l24-10 7 17 18-10c6 20 16 37 29 51l10-16 23 8-6-20 14-10-14-15 9-15-18-4 2-11-23 7 6-15-13-4 10-16-14-8 3-18z" fill="#162434"/>
+  <path d="M145 48c-11 8-22 20-29 35l-11-9-14 10 15 13c-19 12-31 28-36 48l22-9 8 16 16-10c6 21 16 37 28 48l8-14 19 6-5-18 13-10-13-13 8-13-16-3 2-9-20 6 5-13-10-4 9-14-12-6 3-17z" fill="url(#wolfFill)"/>
+  <path d="M101 93l11 12 10-12 8 5-7 14 14 2-12 12 12 12-15 10 4 14-16-5-7 11c-10-13-17-27-21-45l-15 9-7-15-14 6c7-18 19-32 35-41z" fill="#09131d"/>
+  <path d="M130 61c11-12 22-22 31-26l-8 17 13 8-10 16 11 4-7 15 20-6-3 10c-14 1-28-1-40-7-6-13-8-24-7-31z" fill="#09131d"/>
+  <path d="M138 84c10 2 20 1 31-3l-8 16 18 4-8 13 13 14-15 10 5 15-17-6-8 12c-6-7-10-16-14-29 11-12 15-28 3-46z" fill="#09131d"/>
+  <path d="M118 71c9 15 26 24 50 24" fill="none" stroke="#90b2d2" stroke-linecap="round" stroke-width="5"/>
+  <path d="M126 57c13 18 33 28 59 28" fill="none" stroke="#bf7e43" stroke-linecap="round" stroke-width="4" opacity=".85"/>
+  <circle cx="137" cy="95" r="3.5" fill="#90b2d2"/>
+</svg>

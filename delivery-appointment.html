@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Delivery Appointment | Grey Wolf 3PL</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="description" content="Book a delivery appointment with Grey Wolf 3PL in Mississauga. Standard dock hours are Monday to Friday, 8:30 AM to 4:00 PM.">
+  <link rel="canonical" href="https://www.greywolf3pl.com/delivery-appointment.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Grey Wolf 3PL &amp; Logistics Inc">
+  <meta property="og:title" content="Book a Delivery Appointment | Grey Wolf 3PL">
+  <meta property="og:description" content="Schedule inbound deliveries at Grey Wolf 3PL. Standard hours auto-confirm when space is available, while after-hours requests are reviewed for extra-fee approval.">
+  <meta property="og:url" content="https://www.greywolf3pl.com/delivery-appointment.html">
+  <meta property="og:image" content="https://www.greywolf3pl.com/hero_new.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Book a Delivery Appointment | Grey Wolf 3PL">
+  <meta name="twitter:description" content="Schedule inbound deliveries at Grey Wolf 3PL in Mississauga.">
+  <meta name="twitter:image" content="https://www.greywolf3pl.com/hero_new.jpg">
+  <link rel="stylesheet" href="style.css?v=20260324-2">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <style>
+    .appointment-page {
+      background: linear-gradient(180deg, #08131d 0%, #0f1d2b 28%, #eef3f7 28%, #f7f9fb 100%);
+      color: #102131;
+      min-height: 100vh;
+    }
+
+    .appointment-hero {
+      color: #eef4fb;
+      overflow: hidden;
+      padding: 6rem 0 3.2rem;
+      position: relative;
+    }
+
+    .appointment-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(240, 161, 74, 0.16), transparent 24%),
+        radial-gradient(circle at right center, rgba(104, 140, 176, 0.18), transparent 28%);
+      pointer-events: none;
+    }
+
+    .appointment-hero .container,
+    .appointment-main .container {
+      position: relative;
+      width: min(1180px, calc(100% - 2rem));
+      z-index: 1;
+    }
+
+    .appointment-hero-layout {
+      display: grid;
+      gap: 1.3rem;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+      align-items: start;
+    }
+
+    .appointment-eyebrow {
+      color: #f0b36e;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .appointment-hero h1 {
+      color: #f7fafc;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.5rem, 5.4vw, 4.4rem);
+      letter-spacing: -0.05em;
+      line-height: 0.98;
+      margin-bottom: 1rem;
+      max-width: 12ch;
+    }
+
+    .appointment-hero p,
+    .appointment-side-card p {
+      color: #bfd0df;
+      font-size: 1.03rem;
+      line-height: 1.72;
+    }
+
+    .appointment-highlight-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .appointment-highlight-list span,
+    .appointment-side-card li {
+      align-items: start;
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .appointment-highlight-list i,
+    .appointment-side-card i {
+      color: #f0b36e;
+      margin-top: 0.2rem;
+    }
+
+    .appointment-side-card,
+    .appointment-card,
+    .appointment-note,
+    .availability-banner {
+      background: rgba(255, 255, 255, 0.76);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(16, 33, 49, 0.08);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(10, 20, 30, 0.1);
+    }
+
+    .appointment-side-card {
+      background: rgba(10, 18, 28, 0.84);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #edf3fa;
+      padding: 1.45rem;
+    }
+
+    .appointment-side-card strong {
+      color: #f0b36e;
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.55rem;
+      text-transform: uppercase;
+    }
+
+    .appointment-side-card h2 {
+      color: #f7fafc;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      line-height: 1.08;
+      margin-bottom: 0.8rem;
+    }
+
+    .appointment-side-card ul {
+      display: grid;
+      gap: 0.9rem;
+      list-style: none;
+      margin: 1rem 0 0;
+      padding: 0;
+    }
+
+    .appointment-main {
+      padding: 0 0 5rem;
+    }
+
+    .appointment-grid {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr);
+      margin-top: -1.25rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .appointment-card,
+    .appointment-note {
+      padding: 1.4rem;
+    }
+
+    .appointment-card h2,
+    .appointment-note h2 {
+      color: #102131;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      line-height: 1.08;
+      margin-bottom: 0.8rem;
+    }
+
+    .appointment-note p,
+    .appointment-card p {
+      color: #5b6b7a;
+      line-height: 1.72;
+    }
+
+    .appointment-info-grid {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .appointment-info-item {
+      background: rgba(16, 33, 49, 0.04);
+      border: 1px solid rgba(16, 33, 49, 0.08);
+      border-radius: 22px;
+      padding: 1rem;
+    }
+
+    .appointment-info-item strong {
+      color: #102131;
+      display: block;
+      font-size: 0.96rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .appointment-info-item span {
+      color: #5b6b7a;
+      display: block;
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .appointment-form {
+      margin-top: 1rem;
+    }
+
+    .appointment-form-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .appointment-form .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .appointment-form label {
+      color: #213447;
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+    }
+
+    .appointment-form input,
+    .appointment-form select,
+    .appointment-form textarea {
+      background: #fffdfa;
+      border: 1px solid rgba(16, 33, 49, 0.12);
+      border-radius: 18px;
+      color: #102131;
+      font: inherit;
+      padding: 0.95rem 1rem;
+      width: 100%;
+    }
+
+    .appointment-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .appointment-form input:focus,
+    .appointment-form select:focus,
+    .appointment-form textarea:focus {
+      border-color: #d86a2d;
+      box-shadow: 0 0 0 4px rgba(216, 106, 45, 0.12);
+      outline: none;
+    }
+
+    .availability-banner {
+      align-items: center;
+      display: flex;
+      gap: 0.85rem;
+      margin: 0.8rem 0 1.2rem;
+      padding: 1rem 1.1rem;
+    }
+
+    .availability-banner i {
+      color: #d86a2d;
+      font-size: 1.1rem;
+    }
+
+    .availability-banner strong {
+      color: #102131;
+      display: block;
+      font-size: 0.96rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .availability-banner span {
+      color: #5b6b7a;
+      display: block;
+      line-height: 1.55;
+    }
+
+    .availability-banner.is-ok {
+      border-color: rgba(61, 128, 77, 0.22);
+      box-shadow: 0 18px 40px rgba(61, 128, 77, 0.08);
+    }
+
+    .availability-banner.is-ok i {
+      color: #397d4c;
+    }
+
+    .availability-banner.is-warning {
+      border-color: rgba(240, 161, 74, 0.28);
+      box-shadow: 0 18px 40px rgba(240, 161, 74, 0.08);
+    }
+
+    .availability-banner.is-warning i {
+      color: #bb6f2f;
+    }
+
+    .availability-banner.is-full {
+      border-color: rgba(220, 92, 76, 0.26);
+      box-shadow: 0 18px 40px rgba(220, 92, 76, 0.08);
+    }
+
+    .availability-banner.is-full i {
+      color: #c04d3d;
+    }
+
+    .appointment-inline-note {
+      color: #5f7080;
+      font-size: 0.9rem;
+      margin-top: -0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .appointment-checkbox {
+      align-items: start;
+      display: flex;
+      gap: 0.8rem;
+      margin: 1rem 0 1.2rem;
+    }
+
+    .appointment-checkbox input {
+      flex: 0 0 auto;
+      margin-top: 0.15rem;
+      width: 18px;
+    }
+
+    .appointment-checkbox label {
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .appointment-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .appointment-actions .btn {
+      border-radius: 999px;
+      font-weight: 800;
+      padding: 1rem 1.35rem;
+      text-decoration: none;
+    }
+
+    .appointment-actions .btn-primary {
+      background: linear-gradient(135deg, #d86a2d 0%, #f0a14a 100%);
+      color: #08131d;
+    }
+
+    .appointment-actions .btn-secondary {
+      background: rgba(16, 33, 49, 0.06);
+      border: 1px solid rgba(16, 33, 49, 0.08);
+      color: #102131;
+    }
+
+    .appointment-footnote {
+      color: #607181;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .sr-only {
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    @media (max-width: 980px) {
+      .appointment-hero {
+        padding-top: 5rem;
+      }
+
+      .appointment-hero-layout,
+      .appointment-grid,
+      .appointment-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .appointment-hero h1 {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body class="appointment-page brand-page">
+  <header>
+    <div class="container">
+      <a class="logo site-brand" href="index.html" aria-label="Grey Wolf 3PL home">
+        <img class="brand-mark" src="logo_wolf_invert.png" alt="Grey Wolf 3PL logo">
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html#services">Services</a>
+            <ul>
+              <li><a href="warehousing.html">Warehousing &amp; Storage</a></li>
+              <li><a href="ecommerce.html">Ecommerce Fulfillment</a></li>
+              <li><a href="shipping.html">Shipping &amp; Parcel Management</a></li>
+              <li><a href="container.html">Container Stuffing &amp; De-Stuffing</a></li>
+              <li><a href="crossdocking.html">Cross-Docking &amp; Transloading</a></li>
+              <li><a href="drayage.html">Ontario Drayage</a></li>
+              <li><a href="copacking.html">Co-Packing &amp; Value-Add</a></li>
+              <li><a href="inventory.html">Inventory Visibility &amp; Returns</a></li>
+              <li><a href="compliance.html">Compliance &amp; Quality</a></li>
+              <li><a href="crossborder.html">Cross-Border Logistics</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#why-grey-wolf">About</a></li>
+          <li>
+            <a href="guide.html">Resources</a>
+            <ul>
+              <li><a href="guide.html">3PL Guide</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="mississauga.html">Mississauga 3PL</a></li>
+              <li><a href="international.html">International</a></li>
+              <li><a href="tracking.html">Tracking</a></li>
+              <li><a href="delivery-appointment.html">Delivery Appointments</a></li>
+              <li><a href="sitemap.html">Site Map</a></li>
+            </ul>
+          </li>
+          <li><a href="driver-help.html">Driver Help</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="tel:+14164518894" class="call-btn">Call 416-451-8894</a></li>
+          <li><a href="delivery-appointment.html" class="cta-btn">Book a dock</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="appointment-hero">
+      <div class="container appointment-hero-layout">
+        <div class="appointment-hero-copy">
+          <p class="appointment-eyebrow">Inbound dock scheduling</p>
+          <h1>Book a delivery appointment without back-and-forth.</h1>
+          <p>Use this page to request inbound dock time at Grey Wolf 3PL. Standard hours, Monday to Friday from 8:30 AM to 4:00 PM, are auto-confirmed when capacity is available. Other times are accepted as requests, but extra fees may apply and Grey Wolf will confirm them by email.</p>
+          <div class="appointment-highlight-list">
+            <span><i class="fas fa-warehouse"></i> 3 dock doors can be scheduled at the same time.</span>
+            <span><i class="fas fa-clock"></i> Choose your unload duration so the schedule reflects real dock usage.</span>
+            <span><i class="fas fa-envelope"></i> Grey Wolf and the booking contact both receive an email update once the request is processed.</span>
+          </div>
+        </div>
+        <div class="appointment-side-card">
+          <strong>What to have ready</strong>
+          <h2>Bring the operational details up front.</h2>
+          <p>The more specific the appointment request, the easier it is to confirm the slot and hand the load off to the right dock door.</p>
+          <ul>
+            <li><i class="fas fa-circle-check"></i><span>Carrier name plus load type: LTL, FTL, or Container.</span></li>
+            <li><i class="fas fa-circle-check"></i><span>Reference number, BOL / PO / load ID, and trailer or container number if you have it.</span></li>
+            <li><i class="fas fa-circle-check"></i><span>Pallet count, piece count, and notes about floor-loaded or special handling requirements.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="appointment-main">
+      <div class="container appointment-grid">
+        <div class="appointment-note">
+          <h2>How the dock booking flow works</h2>
+          <p>This page is built to keep dock planning cleaner on both sides. Standard-hour bookings can be confirmed immediately if space is open. After-hours windows are saved and flagged for manual review so extra fees and staffing can be confirmed before the delivery is finalized.</p>
+          <div class="appointment-info-grid">
+            <div class="appointment-info-item">
+              <strong>Standard dock hours</strong>
+              <span>Monday to Friday, 8:30 AM to 4:00 PM. If a slot is open, the appointment is confirmed and an internal notice goes to info@greywolf3pl.com.</span>
+            </div>
+            <div class="appointment-info-item">
+              <strong>After-hours requests</strong>
+              <span>Early, late, weekend, or otherwise out-of-window bookings are saved as pending. Grey Wolf follows up by email to confirm the fee-based appointment.</span>
+            </div>
+            <div class="appointment-info-item">
+              <strong>Capacity protection</strong>
+              <span>The scheduler prevents more than 3 overlapping bookings so the same dock window cannot be overcommitted.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="appointment-card">
+          <h2>Request a delivery appointment</h2>
+          <p>Complete the fields below so Grey Wolf can match the load to the right dock window and keep the inbound tracker accurate.</p>
+
+          <div id="availability-box" class="availability-banner" aria-live="polite">
+            <i class="fas fa-calendar-check"></i>
+            <div>
+              <strong>Choose a date, time, and duration</strong>
+              <span>Weâ€™ll show whether the window is standard-hours or after-hours, and whether dock space is still open.</span>
+            </div>
+          </div>
+
+          <form class="appointment-form" action="delivery-appointment-submit.php" method="post">
+            <div class="appointment-form-grid">
+              <div class="form-group">
+                <label for="company_name">Company / Vendor</label>
+                <input id="company_name" name="company_name" type="text" autocomplete="organization" required>
+              </div>
+              <div class="form-group">
+                <label for="carrier_name">Carrier Name</label>
+                <input id="carrier_name" name="carrier_name" type="text" autocomplete="organization" required>
+              </div>
+            </div>
+
+            <div class="appointment-form-grid">
+              <div class="form-group">
+                <label for="load_type">Load Type</label>
+                <select id="load_type" name="load_type" required>
+                  <option value="">Choose one</option>
+                  <option value="LTL">LTL</option>
+                  <option value="FTL">FTL</option>
+                  <option value="Container">Container</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="reference_number">Reference</label>
+                <input id="reference_number" name="reference_number" type="text" placeholder="Reference, BOL, or primary load ID" required>
+              </div>
+            </div>
+
+            <div class="appointment-form-grid">
+              <div class="form-group">
+                <label for="secondary_reference">Secondary Reference</label>
+                <input id="secondary_reference" name="secondary_reference" type="text" placeholder="PO, container number, or receiving reference">
+              </div>
+              <div class="form-group">
+                <label for="equipment_id">Trailer / Container / Equipment ID</label>
+                <input id="equipment_id" name="equipment_id" type="text" placeholder="Optional but helpful">
+              </div>
+            </div>
+
+            <div class="appointment-form-grid">
+              <div class="form-group">
+                <label for="contact_name">Contact Name</label>
+                <input id="contact_name" name="contact_name" type="text" autocomplete="name" required>
+              </div>
+              <div class="form-group">
+                <label for="contact_email">Contact Email</label>
+                <input id="contact_email" name="contact_email" type="email" autocomplete="email" required>
+              </div>
+            </div>
+
+            <div class="appointment-form-grid">
+              <div class="form-group">
+                <label for="contact_phone">Contact Phone</label>
+                <input id="contact_phone" name="contact_phone" type="tel" autocomplete="tel" required>
+              </div>
+              <div class="form-group">
+                <label for="unload_type">Unload Type</label>
+                <select id="unload_type" name="unload_type">
+                  <option value="">Choose one</option>
+                  <option value="Palletized live unload">Palletized live unload</option>
+                  <option value="Floor loaded live unload">Floor loaded live unload</option>
+                  <option value="Drop trailer">Drop trailer</option>
+                  <option value="Special handling">Special handling</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="appointment-form-grid">
+              <div class="form-group">
+                <label for="appointment_date">Appointment Date</label>
+                <input id="appointment_date" name="appointment_date" type="date" required>
+              </div>
+              <div class="form-group">
+                <label for="appointment_time">Appointment Start Time</label>
+                <input id="appointment_time" name="appointment_time" type="time" step="1800" required>
+              </div>
+            </div>
+
+            <div class="appointment-form-grid">
+              <div class="form-group">
+                <label for="duration_minutes">Unload Duration</label>
+                <select id="duration_minutes" name="duration_minutes" required>
+                  <option value="">Choose one</option>
+                  <option value="30">30 minutes</option>
+                  <option value="60">60 minutes</option>
+                  <option value="90">90 minutes</option>
+                  <option value="120">120 minutes</option>
+                  <option value="150">150 minutes</option>
+                  <option value="180">180 minutes</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="pallet_count">Pallet Count</label>
+                <input id="pallet_count" name="pallet_count" type="number" min="0" step="1" placeholder="Optional">
+              </div>
+            </div>
+
+            <div class="appointment-form-grid">
+              <div class="form-group">
+                <label for="piece_count">Piece Count</label>
+                <input id="piece_count" name="piece_count" type="number" min="0" step="1" placeholder="Optional">
+              </div>
+              <div class="form-group">
+                <label for="notes">Notes / Special Instructions</label>
+                <textarea id="notes" name="notes" placeholder="Use this for floor-loaded details, special handling, late arrival notes, or anything receiving should know."></textarea>
+              </div>
+            </div>
+
+            <p class="appointment-inline-note">Need to change a booked time? Use this form for a new request, then email info@greywolf3pl.com with the original appointment ID so Grey Wolf can update the inbound tracker cleanly.</p>
+
+            <div class="appointment-checkbox">
+              <input id="ack_fees" name="ack_fees" type="checkbox" value="yes" required>
+              <label for="ack_fees">I understand that standard hours are Monday to Friday, 8:30 AM to 4:00 PM, and requests outside that window may carry extra fees and require manual email confirmation.</label>
+            </div>
+
+            <input type="hidden" name="website" value="">
+            <input type="hidden" name="form_started_at" id="form_started_at" value="">
+
+            <div class="appointment-actions">
+              <button class="btn btn-primary" type="submit">Book appointment</button>
+              <a class="btn btn-secondary" href="tel:+14164518894">Call dispatch</a>
+            </div>
+
+            <p class="appointment-footnote">Grey Wolf automatically prevents more than 3 overlapping appointments, so if a slot is full youâ€™ll be asked to choose a different window before the request is saved.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-layout">
+      <div>
+        <p class="footer-brand">Grey Wolf 3PL &amp; Logistics Inc</p>
+        <p class="footer-copy">Inbound scheduling, dock appointments and logistics support from Mississauga, Ontario.</p>
+      </div>
+      <div class="footer-links">
+        <a href="delivery-appointment.html">Book a dock</a>
+        <a href="warehousing.html">Warehousing</a>
+        <a href="tracking.html">Tracking</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="cookie-policy.html">Cookies</a>
+        <a href="sitemap.html">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var dateField = document.getElementById("appointment_date");
+      var timeField = document.getElementById("appointment_time");
+      var durationField = document.getElementById("duration_minutes");
+      var availabilityBox = document.getElementById("availability-box");
+      var formStartedField = document.getElementById("form_started_at");
+
+      if (formStartedField) {
+        formStartedField.value = new Date().toISOString();
+      }
+
+      if (dateField) {
+        dateField.min = new Date().toISOString().split("T")[0];
+      }
+
+      function renderAvailability(state, title, message) {
+        availabilityBox.className = "availability-banner " + state;
+        availabilityBox.innerHTML =
+          '<i class="fas ' + (state === 'is-full' ? 'fa-circle-xmark' : state === 'is-warning' ? 'fa-triangle-exclamation' : 'fa-circle-check') + '"></i>' +
+          '<div><strong>' + title + '</strong><span>' + message + '</span></div>';
+      }
+
+      function updateAvailability() {
+        var date = dateField ? dateField.value : "";
+        var time = timeField ? timeField.value : "";
+        var duration = durationField ? durationField.value : "";
+
+        if (!date || !time || !duration) {
+          renderAvailability("", "Choose a date, time, and duration", "Weâ€™ll show whether the window is standard-hours or after-hours, and whether dock space is still open.");
+          return;
+        }
+
+        fetch("appointment-availability.php?date=" + encodeURIComponent(date) + "&time=" + encodeURIComponent(time) + "&duration=" + encodeURIComponent(duration))
+          .then(function (response) { return response.json(); })
+          .then(function (data) {
+            if (!data.ok) {
+              renderAvailability("is-warning", "Need a complete time window", data.message || "Choose a valid date, time, and unload duration.");
+              return;
+            }
+
+            if (!data.available) {
+              renderAvailability("is-full", "That slot is full", data.message);
+              return;
+            }
+
+            if (data.standard) {
+              renderAvailability("is-ok", "Standard-hours slot available", data.message + " If you submit now, the appointment can be confirmed automatically.");
+              return;
+            }
+
+            renderAvailability("is-warning", "After-hours request window available", data.message);
+          })
+          .catch(function () {
+            renderAvailability("is-warning", "Availability check unavailable", "The live dock check is temporarily unavailable, but you can still submit the request and Grey Wolf will review it.");
+          });
+      }
+
+      [dateField, timeField, durationField].forEach(function (field) {
+        if (field) {
+          field.addEventListener("change", updateAvailability);
+        }
+      });
+    });
+  </script>
+  <script src="js/site.js?v=20260330-2"></script>
+</body>
+</html>
