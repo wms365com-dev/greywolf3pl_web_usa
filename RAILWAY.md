@@ -22,6 +22,18 @@ An environment template is included in [.env.railway.example](/E:/GreyWolfWebsit
   - drayage draft tracking events
   - dock appointments / inbound tracker
 
+## Recommended split setup
+
+If you want to keep the public website on Bluehost and use Railway only for backend + database:
+
+- Keep `www.greywolf3pl.com` and `greywolf3pl.com` on Bluehost for the front end
+- Point `api.greywolf3pl.com` to this Railway service
+- Set `GW_SITE_URL=https://www.greywolf3pl.com`
+- Set `GW_API_URL=https://api.greywolf3pl.com`
+- Set `GW_ALLOWED_ORIGINS=https://www.greywolf3pl.com,https://greywolf3pl.com`
+
+The front-end forms are prepared to submit to the Railway API host while keeping users on the main Grey Wolf site.
+
 ## Railway setup steps
 
 1. Create a new Railway project.
@@ -40,6 +52,8 @@ Set these in Railway:
 - `GW_TO_EMAIL=info@greywolf3pl.com`
 - `GW_FROM_DOMAIN=greywolf3pl.com`
 - `GW_SITE_URL=https://www.greywolf3pl.com`
+- `GW_API_URL=https://api.greywolf3pl.com`
+- `GW_ALLOWED_ORIGINS=https://www.greywolf3pl.com,https://greywolf3pl.com`
 - `PGSSLMODE=require`
 - `GW_DB_SSLMODE=require`
 - `GW_GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/AKfycbzKtrMBi3_Z5thT2MIU1ACdRlJwtuQ-CXIYkDJCxB7CtLoH-owo3fixF1ddR1e877gb/exec`

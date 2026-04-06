@@ -328,6 +328,6 @@ function tool_title($filename) {
     <p class="site-copyright">&copy; <span class="js-year"></span> Grey Wolf 3PL &amp; Logistics Inc. All rights reserved.</p>
   </footer>
 
-  <script src="../js/site.js?v=20260330-2"></script>
+  <script src="../js/site.js?v=20260405-1"></script>
 </body>
 </html>

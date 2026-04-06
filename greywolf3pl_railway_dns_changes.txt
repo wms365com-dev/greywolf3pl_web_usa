@@ -1,0 +1,59 @@
+Grey Wolf 3PL DNS changes for Railway
+Generated: 2026-04-05
+
+Important:
+- Use this as a DNS change checklist/reference.
+- Do NOT import a raw BIND zone file with an apex/root CNAME while the zone also has NS/MX/TXT records.
+- Keep all mail-related records intact.
+
+Current goal:
+- www.greywolf3pl.com should point to Railway
+- greywolf3pl.com should redirect or forward to https://www.greywolf3pl.com
+
+Recommended safe setup
+1. Keep this record:
+   Type: CNAME
+   Name: www
+   Value: nxu8gscd.up.railway.app
+   TTL: 3600
+
+2. Keep this record:
+   Type: TXT
+   Name: _railway-verify
+   Value: railway-verify=6e12dfdcea8cf4930ab408f5292efe7af7ce158d1d701773223386c82bc1551b
+   TTL: 3600
+
+3. Remove this old website record:
+   Type: A
+   Name: @
+   Value: 50.6.108.238
+   TTL: 3600
+
+4. For the root/apex domain greywolf3pl.com:
+   Preferred: configure domain forwarding from greywolf3pl.com to https://www.greywolf3pl.com
+   Forward type: Permanent (301)
+   Forward settings: Forward only
+
+5. Keep these existing mail and domain records unchanged:
+   TXT @ "v=spf1 include:spf.protection.outlook.com -all"
+   TXT @ "v=verifydomain MS=4686469"
+   TXT 299552141._domainkey "<existing DKIM key>"
+   TXT _dmarc "v=DMARC1; p=reject; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;"
+   CNAME autodiscover autodiscover.outlook.com.
+   CNAME _domainconnect _domainconnect.gd.domaincontrol.com.
+   MX @ 0 greywolf3pl-com.mail.protection.outlook.com.
+   NS @ ns47.domaincontrol.com.
+   NS @ ns48.domaincontrol.com.
+
+What to test after the DNS change
+1. https://www.greywolf3pl.com/health.php
+   Expected: database_configured=true and database_ready=true
+2. https://greywolf3pl.com
+   Expected: redirects to https://www.greywolf3pl.com
+3. Homepage loads on www
+4. Quote form submits
+5. Drayage form submits
+6. Delivery appointment form submits
+
+If your DNS provider supports a true apex ALIAS/ANAME/flattened CNAME and you want apex on Railway directly,
+use the exact apex instructions shown in Railway's custom-domain screen instead of forwarding.

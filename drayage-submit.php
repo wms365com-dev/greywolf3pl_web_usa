@@ -6,6 +6,9 @@ require_once __DIR__ . "/app-mail.php";
 require_once __DIR__ . "/app-http.php";
 require_once __DIR__ . "/app-db.php";
 
+gw_handle_preflight("POST, OPTIONS", "Content-Type, Accept, X-Requested-With");
+gw_send_cors_headers("POST, OPTIONS", "Content-Type, Accept, X-Requested-With");
+
 $TO_EMAIL = gw_config_to_email();
 $SUBJECT_PREFIX = "Drayage Request";
 $GOOGLE_SHEET_WEBHOOK_URL = gw_config_google_sheet_webhook_url();
@@ -30,6 +33,7 @@ function is_ajax_request() {
 
 function json_response($payload, $statusCode = 200) {
   http_response_code($statusCode);
+  header("X-Robots-Tag: noindex, nofollow", true);
   header("Content-Type: application/json; charset=UTF-8");
   echo json_encode($payload);
   exit;
@@ -45,7 +49,7 @@ function fail($message) {
 
   http_response_code(400);
   echo "<h2>Form submission error</h2><p>" . htmlspecialchars($message) . "</p>";
-  echo "<p><a href=\"drayage.html\">Go back</a></p>";
+  echo "<p><a href=\"" . htmlspecialchars(gw_config_site_href("drayage.html")) . "\">Go back</a></p>";
   exit;
 }
 
@@ -55,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 $honeypot = val("website");
 if ($honeypot !== "") {
-  header("Location: thank-you.html");
+  header("Location: " . gw_config_site_href("thank-you.html"));
   exit;
 }
 
@@ -63,7 +67,7 @@ $started = val("form_started_at");
 if ($started) {
   $t0 = strtotime($started);
   if ($t0 && (time() - $t0) < 3) {
-    header("Location: thank-you.html");
+    header("Location: " . gw_config_site_href("thank-you.html"));
     exit;
   }
 }
@@ -318,7 +322,7 @@ if (is_ajax_request()) {
 }
 
 if ($sent) {
-  header("Location: thank-you.html");
+  header("Location: " . gw_config_site_href("thank-you.html"));
   exit;
 }
 
@@ -329,6 +333,6 @@ if (!$sheetSynced) {
   echo "<p>Grey Wolf may need to review the request from the local server backup because the Google Sheet sync did not complete.</p>";
 }
 echo "<p><a href=\"mailto:" . htmlspecialchars($TO_EMAIL) . "?subject=Drayage%20Request\">Email Grey Wolf directly</a></p>";
-echo "<p><a href=\"drayage.html\">Back to drayage page</a></p>";
+echo "<p><a href=\"" . htmlspecialchars(gw_config_site_href("drayage.html")) . "\">Back to drayage page</a></p>";
 exit;
 ?>

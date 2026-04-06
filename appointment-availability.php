@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . "/appointment-lib.php";
 
+gw_handle_preflight("GET, OPTIONS", "Content-Type, Accept");
+gw_send_cors_headers("GET, OPTIONS", "Content-Type, Accept");
+
 header("Content-Type: application/json; charset=UTF-8");
 header("X-Robots-Tag: noindex, nofollow", true);
 

@@ -7,6 +7,9 @@ require_once __DIR__ . "/app-config.php";
 require_once __DIR__ . "/app-http.php";
 require_once __DIR__ . "/app-db.php";
 
+gw_handle_preflight("POST, OPTIONS", "Content-Type, Accept, X-Requested-With");
+gw_send_cors_headers("POST, OPTIONS", "Content-Type, Accept, X-Requested-With");
+
 header("Content-Type: application/json; charset=UTF-8");
 
 $GOOGLE_WEBHOOK_URL = gw_config_google_sheet_webhook_url();

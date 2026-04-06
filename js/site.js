@@ -43,6 +43,48 @@
     return path || "index.html";
   }
 
+  function normalizeBaseUrl(url) {
+    if (!url) return "";
+    return String(url).replace(/\/+$/, "");
+  }
+
+  function getPreferredSiteBase() {
+    if (window.GW_SITE_URL) {
+      return normalizeBaseUrl(window.GW_SITE_URL);
+    }
+
+    if (window.location.protocol === "file:") {
+      return "https://www.greywolf3pl.com";
+    }
+
+    return normalizeBaseUrl(window.location.origin || "https://www.greywolf3pl.com");
+  }
+
+  function getPreferredApiBase() {
+    if (window.GW_API_URL) {
+      return normalizeBaseUrl(window.GW_API_URL);
+    }
+
+    var host = (window.location.hostname || "").toLowerCase();
+    if (host && (host.indexOf(".up.railway.app") !== -1 || host === "api.greywolf3pl.com")) {
+      return normalizeBaseUrl(window.location.origin);
+    }
+
+    return "https://api.greywolf3pl.com";
+  }
+
+  function resolveApiUrl(path) {
+    var cleanPath = (path || "").trim();
+    if (!cleanPath) return getPreferredApiBase() + "/";
+    if (/^https?:\/\//i.test(cleanPath)) return cleanPath;
+    return getPreferredApiBase() + "/" + cleanPath.replace(/^\/+/, "");
+  }
+
+  window.GWSite = window.GWSite || {};
+  window.GWSite.siteBase = getPreferredSiteBase();
+  window.GWSite.apiBase = getPreferredApiBase();
+  window.GWSite.resolveApiUrl = resolveApiUrl;
+
   function shouldSkipReturningBanner() {
     var skippedPages = [
       "thank-you.html",
@@ -553,6 +595,14 @@
         ensureHiddenInput(form, "source_page", page);
       }
 
+      if (action === "quote-submit.php" || action === "lead-submit.php") {
+        form.setAttribute("action", resolveApiUrl(action));
+        action = form.getAttribute("action") || action;
+      } else if (/^https:\/\/api\.greywolf3pl\.com\//i.test(action) && getPreferredApiBase() !== "https://api.greywolf3pl.com") {
+        form.setAttribute("action", resolveApiUrl(action.replace(/^https:\/\/api\.greywolf3pl\.com\//i, "")));
+        action = form.getAttribute("action") || action;
+      }
+
       if (form.dataset.formBound === "true") return;
       form.dataset.formBound = "true";
 
@@ -571,19 +621,10 @@
           return;
         }
 
-        event.preventDefault();
-
         gtagSafe("form_submit", {
           event_category: "lead_generation",
           event_label: form.getAttribute("data-form-type") || action || ("form_" + index)
         });
-
-        gtagSafe("form_mailto_open", {
-          event_category: "lead_generation",
-          event_label: inferFormKind(form, action)
-        });
-
-        window.location.href = buildMailtoDraft(form);
       });
     });
   }
@@ -794,11 +835,11 @@
     injectBreadcrumbs();
     wireMenus();
     wireExpandableCards();
+    injectLeadPopup();
     wireForms();
     wireClickTracking();
     wireScrollDepth();
     injectWelcomeBackBanner();
-    injectLeadPopup();
   });
 
   window.addEventListener("resize", function () {

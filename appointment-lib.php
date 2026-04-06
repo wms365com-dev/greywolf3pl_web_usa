@@ -519,9 +519,9 @@ function gw_app_render_response_page($options) {
   $headline = isset($options["headline"]) ? $options["headline"] : $title;
   $message = isset($options["message"]) ? $options["message"] : "";
   $summary = isset($options["summary"]) ? $options["summary"] : array();
-  $primaryHref = isset($options["primary_href"]) ? $options["primary_href"] : "delivery-appointment.html";
+  $primaryHref = isset($options["primary_href"]) ? $options["primary_href"] : gw_config_site_href("delivery-appointment.html");
   $primaryLabel = isset($options["primary_label"]) ? $options["primary_label"] : "Back to delivery appointments";
-  $secondaryHref = isset($options["secondary_href"]) ? $options["secondary_href"] : "index.html";
+  $secondaryHref = isset($options["secondary_href"]) ? $options["secondary_href"] : gw_config_site_href("index.html");
   $secondaryLabel = isset($options["secondary_label"]) ? $options["secondary_label"] : "Back to home";
   $theme = isset($options["theme"]) ? $options["theme"] : "success";
 
@@ -534,7 +534,7 @@ function gw_app_render_response_page($options) {
   echo "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n";
   echo "  <title>" . gw_app_h($title) . " | Grey Wolf 3PL</title>\n";
   echo "  <meta name=\"robots\" content=\"noindex, nofollow\">\n";
-  echo "  <link rel=\"stylesheet\" href=\"style.css?v=20260324-2\">\n";
+  echo "  <link rel=\"stylesheet\" href=\"" . gw_app_h(gw_config_site_href("style.css?v=20260324-2")) . "\">\n";
   echo "  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n";
   echo "  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n";
   echo "  <link href=\"https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap\" rel=\"stylesheet\">\n";

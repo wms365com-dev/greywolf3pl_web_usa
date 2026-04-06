@@ -1106,7 +1106,7 @@
             <p>Start with the key contact and route details below. Submit will save the request to Grey Wolf's follow-up sheet and open a prefilled email to <strong>info@greywolf3pl.com</strong> so the team can respond with the right next step.</p>
             <p class="drayage-field-note">Required items are only marked if you try to submit before they are complete.</p>
             <span class="drayage-progress-status" id="drayage_progress_status" aria-live="polite"></span>
-            <form id="drayage-request-form" action="drayage-submit.php" method="post" novalidate>
+            <form id="drayage-request-form" action="https://api.greywolf3pl.com/drayage-submit.php" method="post" novalidate>
               <div class="drayage-form-steps">
                 <section class="drayage-form-step is-open" data-step>
                   <button class="drayage-step-toggle" type="button" aria-expanded="true">
@@ -1404,6 +1404,11 @@
         return;
       }
 
+      var apiBase = (window.GW_API_URL || ((window.location.hostname || "").indexOf(".up.railway.app") !== -1 ? window.location.origin : "https://api.greywolf3pl.com")).replace(/\/+$/, "");
+      function apiUrl(path) {
+        return apiBase + "/" + String(path || "").replace(/^\/+/, "");
+      }
+
       var formPanel = document.querySelector(".drayage-form-panel");
       var progressStatus = document.getElementById("drayage_progress_status");
       var draftTrackingIdField = document.getElementById("draft_tracking_id");
@@ -1412,13 +1417,15 @@
         return field.type !== "hidden";
       });
       var activeStepIndex = 0;
-      var draftSyncEndpoint = "drayage-draft-sync.php";
+      var draftSyncEndpoint = apiUrl("drayage-draft-sync.php");
       var saveDraftTimer = null;
       var draftStorageKey = "gw_drayage_draft_id";
       var draftSyncReady = window.location.protocol !== "file:";
       var submitButton = form.querySelector('button[type="submit"]');
       var submitButtonDefaultLabel = submitButton ? submitButton.textContent : "";
       var isSubmitting = false;
+
+      form.setAttribute("action", apiUrl("drayage-submit.php"));
 
       function setProgressStatus(message, state) {
         if (!progressStatus) {
@@ -1621,9 +1628,9 @@
 
         return fetch(draftSyncEndpoint, {
           method: "POST",
-          credentials: "same-origin",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Accept": "application/json"
           },
           body: body
         })
@@ -1892,11 +1899,9 @@
 
         requestBody = new FormData(form);
 
-        fetch(form.getAttribute("action") || "drayage-submit.php", {
+        fetch(form.getAttribute("action") || apiUrl("drayage-submit.php"), {
           method: "POST",
-          credentials: "same-origin",
           headers: {
-            "X-Requested-With": "XMLHttpRequest",
             "Accept": "application/json"
           },
           body: requestBody
@@ -2193,6 +2198,6 @@
       updateStepState();
     });
   </script>
-  <script src="js/site.js?v=20260330-2"></script>
+  <script src="js/site.js?v=20260405-1"></script>
 </body>
 </html>

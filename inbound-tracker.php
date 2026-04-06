@@ -592,6 +592,6 @@ $nextDate = date("Y-m-d", strtotime($selectedDate . " +1 day"));
     </div>
   </footer>
 
-  <script src="js/site.js?v=20260330-2"></script>
+  <script src="js/site.js?v=20260405-1"></script>
 </body>
 </html>

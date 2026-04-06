@@ -20,10 +20,19 @@ function val($k) {
   return isset($_POST[$k]) ? clean($_POST[$k]) : "";
 }
 
+function back_href() {
+  $sourcePage = val("source_page");
+  if ($sourcePage !== "") {
+    return gw_config_site_href(ltrim($sourcePage, "/"));
+  }
+
+  return gw_config_site_href("index.html");
+}
+
 function fail($msg) {
   http_response_code(400);
   echo "<h2>Form submission error</h2><p>" . htmlspecialchars($msg) . "</p>";
-  echo "<p><a href=\"index.html\">Go back</a></p>";
+  echo "<p><a href=\"" . htmlspecialchars(back_href()) . "\">Go back</a></p>";
   exit;
 }
 
@@ -33,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 $honeypot = val("website");
 if ($honeypot !== "") {
-  header("Location: thank-you.html");
+  header("Location: " . gw_config_site_href("thank-you.html"));
   exit;
 }
 
@@ -41,7 +50,7 @@ $started = val("form_started_at");
 if ($started) {
   $t0 = strtotime($started);
   if ($t0 && (time() - $t0) < 2) {
-    header("Location: thank-you.html");
+    header("Location: " . gw_config_site_href("thank-you.html"));
     exit;
   }
 }
@@ -172,7 +181,7 @@ $sent = gw_mail_send($TO_EMAIL, $subject, $body, $email, $name, array(
 ));
 
 if ($sent) {
-  header("Location: thank-you.html");
+  header("Location: " . gw_config_site_href("thank-you.html"));
   exit;
 }
 
@@ -180,7 +189,7 @@ http_response_code(200);
 echo "<h2>Thanks — we received your information.</h2>";
 echo "<p>Your submission was saved even though server email did not send automatically.</p>";
 echo "<p><a href=\"mailto:" . htmlspecialchars($TO_EMAIL) . "\">Email Grey Wolf directly</a></p>";
-echo "<p><a href=\"index.html\">Back to Home</a></p>";
+echo "<p><a href=\"" . htmlspecialchars(back_href()) . "\">Back to page</a></p>";
 exit;
 ?>
 

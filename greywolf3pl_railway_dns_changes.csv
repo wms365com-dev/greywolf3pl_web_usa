@@ -1,0 +1,12 @@
+Action,Type,Name,Value,TTL,Notes
+KEEP,CNAME,www,nxu8gscd.up.railway.app,3600,Points www to Railway
+KEEP,TXT,_railway-verify,railway-verify=6e12dfdcea8cf4930ab408f5292efe7af7ce158d1d701773223386c82bc1551b,3600,Railway domain verification
+REMOVE,A,@,50.6.108.238,3600,Old website host record
+FORWARD,HTTP Redirect,@,https://www.greywolf3pl.com,,Use permanent 301 forwarding if apex CNAME is not supported safely
+KEEP,TXT,@,"v=spf1 include:spf.protection.outlook.com -all",3600,Mail SPF
+KEEP,TXT,@,"v=verifydomain MS=4686469",3600,Existing verification
+KEEP,TXT,299552141._domainkey,"k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCfqqjLGZfBD6fU0ms6OLkS4n6aUNdMLBSh160kNeLDffUjv1sWvvnnaiS6xACeglsB4u8TZjtSWuLvRFDsHVlhTlTb9H8VgQXGT3JjIwNAc80NHuPhzcIDoZq7ZSfpE92oLoUci2E21w1AyXQFAvfwsUXKPM6mlo3k+ymJv9DcuQIDAQAB",3600,Mail DKIM
+KEEP,TXT,_dmarc,"v=DMARC1; p=reject; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;",3600,Mail DMARC
+KEEP,CNAME,autodiscover,autodiscover.outlook.com.,3600,Mail autodiscover
+KEEP,CNAME,_domainconnect,_domainconnect.gd.domaincontrol.com.,3600,Provider integration
+KEEP,MX,@,greywolf3pl-com.mail.protection.outlook.com.,3600,Mail routing priority 0

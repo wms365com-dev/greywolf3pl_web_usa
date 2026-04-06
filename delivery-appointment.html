@@ -497,11 +497,11 @@
             <i class="fas fa-calendar-check"></i>
             <div>
               <strong>Choose a date, time, and duration</strong>
-              <span>Weâ€™ll show whether the window is standard-hours or after-hours, and whether dock space is still open.</span>
+              <span>We'll show whether the window is standard-hours or after-hours, and whether dock space is still open.</span>
             </div>
           </div>
 
-          <form class="appointment-form" action="delivery-appointment-submit.php" method="post">
+          <form class="appointment-form" action="https://api.greywolf3pl.com/delivery-appointment-submit.php" method="post">
             <div class="appointment-form-grid">
               <div class="form-group">
                 <label for="company_name">Company / Vendor</label>
@@ -651,11 +651,21 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      var apiBase = (window.GW_API_URL || ((window.location.hostname || "").indexOf(".up.railway.app") !== -1 ? window.location.origin : "https://api.greywolf3pl.com")).replace(/\/+$/, "");
+      function apiUrl(path) {
+        return apiBase + "/" + String(path || "").replace(/^\/+/, "");
+      }
+
+      var form = document.querySelector(".appointment-form");
       var dateField = document.getElementById("appointment_date");
       var timeField = document.getElementById("appointment_time");
       var durationField = document.getElementById("duration_minutes");
       var availabilityBox = document.getElementById("availability-box");
       var formStartedField = document.getElementById("form_started_at");
+
+      if (form) {
+        form.setAttribute("action", apiUrl("delivery-appointment-submit.php"));
+      }
 
       if (formStartedField) {
         formStartedField.value = new Date().toISOString();
@@ -678,11 +688,15 @@
         var duration = durationField ? durationField.value : "";
 
         if (!date || !time || !duration) {
-          renderAvailability("", "Choose a date, time, and duration", "Weâ€™ll show whether the window is standard-hours or after-hours, and whether dock space is still open.");
+          renderAvailability("", "Choose a date, time, and duration", "We'll show whether the window is standard-hours or after-hours, and whether dock space is still open.");
           return;
         }
 
-        fetch("appointment-availability.php?date=" + encodeURIComponent(date) + "&time=" + encodeURIComponent(time) + "&duration=" + encodeURIComponent(duration))
+        fetch(apiUrl("appointment-availability.php") + "?date=" + encodeURIComponent(date) + "&time=" + encodeURIComponent(time) + "&duration=" + encodeURIComponent(duration), {
+          headers: {
+            "Accept": "application/json"
+          }
+        })
           .then(function (response) { return response.json(); })
           .then(function (data) {
             if (!data.ok) {
@@ -714,6 +728,6 @@
       });
     });
   </script>
-  <script src="js/site.js?v=20260330-2"></script>
+  <script src="js/site.js?v=20260405-1"></script>
 </body>
 </html>

@@ -63,6 +63,135 @@ if (!function_exists("gw_config_site_href")) {
   }
 }
 
+if (!function_exists("gw_config_api_url")) {
+  function gw_config_api_url() {
+    $explicit = trim((string)gw_env("GW_API_URL", ""));
+    if ($explicit !== "") {
+      return rtrim($explicit, "/");
+    }
+
+    $railwayDomain = trim((string)gw_env("RAILWAY_PUBLIC_DOMAIN", ""));
+    if ($railwayDomain !== "") {
+      return "https://" . $railwayDomain;
+    }
+
+    return "https://api.greywolf3pl.com";
+  }
+}
+
+if (!function_exists("gw_config_api_href")) {
+  function gw_config_api_href($path = "") {
+    $base = gw_config_api_url();
+    $path = trim((string)$path);
+
+    if ($path === "" || $path === "/") {
+      return $base . "/";
+    }
+
+    return $base . "/" . ltrim($path, "/");
+  }
+}
+
+if (!function_exists("gw_normalize_origin")) {
+  function gw_normalize_origin($origin) {
+    $origin = trim((string)$origin);
+    if ($origin === "") {
+      return "";
+    }
+
+    if (strtolower($origin) === "null") {
+      return "null";
+    }
+
+    $parts = @parse_url($origin);
+    if (!is_array($parts) || empty($parts["host"])) {
+      return rtrim($origin, "/");
+    }
+
+    $scheme = !empty($parts["scheme"]) ? strtolower((string)$parts["scheme"]) : "https";
+    $host = strtolower((string)$parts["host"]);
+    $port = isset($parts["port"]) ? ":" . (int)$parts["port"] : "";
+
+    return $scheme . "://" . $host . $port;
+  }
+}
+
+if (!function_exists("gw_config_allowed_origins")) {
+  function gw_config_allowed_origins() {
+    static $origins = null;
+
+    if ($origins !== null) {
+      return $origins;
+    }
+
+    $configured = trim((string)gw_env("GW_ALLOWED_ORIGINS", ""));
+    $rawOrigins = array();
+
+    if ($configured !== "") {
+      $rawOrigins = preg_split('/\s*,\s*/', $configured);
+    } else {
+      $rawOrigins = array(
+        gw_config_site_url(),
+        "https://www.greywolf3pl.com",
+        "https://greywolf3pl.com",
+        "http://www.greywolf3pl.com",
+        "http://greywolf3pl.com"
+      );
+
+      $railwayDomain = trim((string)gw_env("RAILWAY_PUBLIC_DOMAIN", ""));
+      if ($railwayDomain !== "") {
+        $rawOrigins[] = "https://" . $railwayDomain;
+      }
+    }
+
+    $origins = array_values(array_filter(array_unique(array_map("gw_normalize_origin", $rawOrigins))));
+    return $origins;
+  }
+}
+
+if (!function_exists("gw_is_allowed_origin")) {
+  function gw_is_allowed_origin($origin) {
+    $origin = gw_normalize_origin($origin);
+    if ($origin === "") {
+      return false;
+    }
+
+    return in_array($origin, gw_config_allowed_origins(), true);
+  }
+}
+
+if (!function_exists("gw_send_cors_headers")) {
+  function gw_send_cors_headers($methods = "GET, POST, OPTIONS", $headers = "Content-Type, Accept, X-Requested-With") {
+    $origin = isset($_SERVER["HTTP_ORIGIN"]) ? gw_normalize_origin($_SERVER["HTTP_ORIGIN"]) : "";
+    if ($origin !== "" && gw_is_allowed_origin($origin)) {
+      header("Access-Control-Allow-Origin: " . $origin);
+      header("Vary: Origin");
+      header("Access-Control-Allow-Methods: " . $methods);
+      header("Access-Control-Allow-Headers: " . $headers);
+      header("Access-Control-Max-Age: 86400");
+    }
+  }
+}
+
+if (!function_exists("gw_handle_preflight")) {
+  function gw_handle_preflight($methods = "GET, POST, OPTIONS", $headers = "Content-Type, Accept, X-Requested-With") {
+    if (strtoupper((string)($_SERVER["REQUEST_METHOD"] ?? "")) !== "OPTIONS") {
+      return;
+    }
+
+    gw_send_cors_headers($methods, $headers);
+    $origin = isset($_SERVER["HTTP_ORIGIN"]) ? gw_normalize_origin($_SERVER["HTTP_ORIGIN"]) : "";
+
+    if ($origin !== "" && !gw_is_allowed_origin($origin)) {
+      http_response_code(403);
+      exit;
+    }
+
+    http_response_code(204);
+    exit;
+  }
+}
+
 if (!function_exists("gw_config_google_sheet_webhook_url")) {
   function gw_config_google_sheet_webhook_url() {
     return trim((string)gw_env(

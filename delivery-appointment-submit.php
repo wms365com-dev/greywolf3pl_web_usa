@@ -3,14 +3,17 @@ require_once __DIR__ . "/appointment-lib.php";
 
 global $GW_APPOINTMENT_TO_EMAIL;
 
+$appointmentPageHref = gw_config_site_href("delivery-appointment.html");
+$homePageHref = gw_config_site_href("index.html");
+
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   gw_app_render_response_page(array(
     "title" => "Invalid request",
     "headline" => "This booking link only accepts form submissions.",
     "message" => "Please return to the delivery appointment page and submit the booking form there.",
-    "primary_href" => "delivery-appointment.html",
+    "primary_href" => $appointmentPageHref,
     "primary_label" => "Go to booking page",
-    "secondary_href" => "index.html",
+    "secondary_href" => $homePageHref,
     "secondary_label" => "Back to home",
     "theme" => "error"
   ));
@@ -18,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 $honeypot = gw_app_val("website");
 if ($honeypot !== "") {
-  header("Location: delivery-appointment.html");
+  header("Location: " . $appointmentPageHref);
   exit;
 }
 
@@ -26,7 +29,7 @@ $started = gw_app_val("form_started_at");
 if ($started !== "") {
   $startStamp = strtotime($started);
   if ($startStamp && (time() - $startStamp) < 3) {
-    header("Location: delivery-appointment.html");
+    header("Location: " . $appointmentPageHref);
     exit;
   }
 }
@@ -75,7 +78,7 @@ if (!empty($missing)) {
     "title" => "Missing information",
     "headline" => "A few booking details are still missing.",
     "message" => "Please go back and complete: " . gw_app_h(implode(", ", $missing)) . ".",
-    "primary_href" => "delivery-appointment.html",
+    "primary_href" => $appointmentPageHref,
     "primary_label" => "Back to booking form",
     "secondary_href" => "tel:+14164518894",
     "secondary_label" => "Call 416-451-8894",
@@ -88,7 +91,7 @@ if (!filter_var($post["contact_email"], FILTER_VALIDATE_EMAIL)) {
     "title" => "Invalid email",
     "headline" => "Please enter a valid contact email.",
     "message" => "We use this address to confirm the dock appointment and share any after-hours approval details.",
-    "primary_href" => "delivery-appointment.html",
+    "primary_href" => $appointmentPageHref,
     "primary_label" => "Back to booking form",
     "secondary_href" => "mailto:" . $GW_APPOINTMENT_TO_EMAIL,
     "secondary_label" => "Email Grey Wolf",
@@ -102,9 +105,9 @@ if (!in_array($duration, gw_app_allowed_durations(), true)) {
     "title" => "Invalid duration",
     "headline" => "Choose one of the listed unload durations.",
     "message" => "Appointments are scheduled in 30-minute blocks so dock capacity stays accurate.",
-    "primary_href" => "delivery-appointment.html",
+    "primary_href" => $appointmentPageHref,
     "primary_label" => "Back to booking form",
-    "secondary_href" => "index.html",
+    "secondary_href" => $homePageHref,
     "secondary_label" => "Back to home",
     "theme" => "error"
   ));
@@ -115,7 +118,7 @@ if (!gw_app_is_checked("ack_fees")) {
     "title" => "Acknowledgement required",
     "headline" => "Please acknowledge the standard and after-hours appointment policy.",
     "message" => "That confirmation helps carriers understand that bookings outside Monday to Friday, 8:30 AM to 4:00 PM may carry extra fees and require manual approval.",
-    "primary_href" => "delivery-appointment.html",
+    "primary_href" => $appointmentPageHref,
     "primary_label" => "Back to booking form",
     "secondary_href" => "tel:+14164518894",
     "secondary_label" => "Call 416-451-8894",
@@ -129,9 +132,9 @@ if (!$startDateTime) {
     "title" => "Invalid date or time",
     "headline" => "Please choose a valid appointment date and time.",
     "message" => "The requested booking window could not be parsed. Try again using the date and time fields on the form.",
-    "primary_href" => "delivery-appointment.html",
+    "primary_href" => $appointmentPageHref,
     "primary_label" => "Back to booking form",
-    "secondary_href" => "index.html",
+    "secondary_href" => $homePageHref,
     "secondary_label" => "Back to home",
     "theme" => "error"
   ));
@@ -143,7 +146,7 @@ if ($endDateTime <= new DateTimeImmutable()) {
     "title" => "Past appointment",
     "headline" => "Please choose a future appointment window.",
     "message" => "The requested dock window has already passed. Select a new appointment time and resubmit.",
-    "primary_href" => "delivery-appointment.html",
+    "primary_href" => $appointmentPageHref,
     "primary_label" => "Back to booking form",
     "secondary_href" => "tel:+14164518894",
     "secondary_label" => "Call dispatch",
@@ -157,7 +160,7 @@ if (!$lock) {
     "title" => "Scheduling unavailable",
     "headline" => "The dock calendar is temporarily unavailable.",
     "message" => "Please try again in a moment, or contact Grey Wolf directly if you need immediate help securing an inbound slot.",
-    "primary_href" => "delivery-appointment.html",
+    "primary_href" => $appointmentPageHref,
     "primary_label" => "Try again",
     "secondary_href" => "mailto:" . $GW_APPOINTMENT_TO_EMAIL,
     "secondary_label" => "Email Grey Wolf",
@@ -191,7 +194,7 @@ try {
         "Scheduled date" => $duplicate["appointment_date"],
         "Scheduled time" => gw_app_time_label(gw_app_row_start($duplicate))
       ),
-      "primary_href" => "delivery-appointment.html",
+      "primary_href" => $appointmentPageHref,
       "primary_label" => "Book a different time",
       "secondary_href" => "mailto:" . $GW_APPOINTMENT_TO_EMAIL . "?subject=Update%20Delivery%20Appointment",
       "secondary_label" => "Email Grey Wolf",
@@ -210,7 +213,7 @@ try {
         "Dock capacity" => "3 doors in use",
         "Next step" => "Pick a different slot"
       ),
-      "primary_href" => "delivery-appointment.html",
+      "primary_href" => $appointmentPageHref,
       "primary_label" => "Choose another time",
       "secondary_href" => "tel:+14164518894",
       "secondary_label" => "Call dispatch",
@@ -227,7 +230,7 @@ try {
       "title" => "Scheduling error",
       "headline" => "The appointment could not be prepared.",
       "message" => "Please go back and try again. If the issue continues, email " . $GW_APPOINTMENT_TO_EMAIL . " with the carrier name and requested dock time.",
-      "primary_href" => "delivery-appointment.html",
+      "primary_href" => $appointmentPageHref,
       "primary_label" => "Back to booking form",
       "secondary_href" => "mailto:" . $GW_APPOINTMENT_TO_EMAIL,
       "secondary_label" => "Email Grey Wolf",
@@ -244,7 +247,7 @@ try {
       "title" => "Scheduling unavailable",
       "headline" => "We couldn't save the appointment right now.",
       "message" => "No booking was confirmed. Please try again in a moment or contact Grey Wolf directly.",
-      "primary_href" => "delivery-appointment.html",
+      "primary_href" => $appointmentPageHref,
       "primary_label" => "Try again",
       "secondary_href" => "tel:+14164518894",
       "secondary_label" => "Call dispatch",
@@ -306,7 +309,7 @@ gw_app_render_response_page(array(
   "headline" => $appointment["status"] === "confirmed" ? "Your delivery appointment is on the schedule." : "Your after-hours appointment request is pending review.",
   "message" => $message,
   "summary" => $summary,
-  "primary_href" => "delivery-appointment.html",
+  "primary_href" => $appointmentPageHref,
   "primary_label" => "Book another appointment",
   "secondary_href" => "mailto:" . $GW_APPOINTMENT_TO_EMAIL . "?subject=Delivery%20Appointment%20" . rawurlencode($appointment["appointment_id"]),
   "secondary_label" => "Email Grey Wolf"

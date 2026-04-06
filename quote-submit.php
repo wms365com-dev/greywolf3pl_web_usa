@@ -27,7 +27,7 @@ function fail($msg) {
   // Simple fallback response (keeps it clear for users)
   http_response_code(400);
   echo "<h2>Form submission error</h2><p>" . htmlspecialchars($msg) . "</p>";
-  echo "<p><a href=\"index.html\">Go back</a></p>";
+  echo "<p><a href=\"" . htmlspecialchars(gw_config_site_href("index.html")) . "\">Go back</a></p>";
   exit;
 }
 
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 $honeypot = val("website");
 if ($honeypot !== "") {
   // Pretend success to bots
-  header("Location: thank-you.html");
+  header("Location: " . gw_config_site_href("thank-you.html"));
   exit;
 }
 
@@ -50,7 +50,7 @@ if ($started) {
   $t0 = strtotime($started);
   if ($t0 && (time() - $t0) < 3) {
     // Too fast
-    header("Location: thank-you.html");
+    header("Location: " . gw_config_site_href("thank-you.html"));
     exit;
   }
 }
@@ -176,7 +176,7 @@ $sent = gw_mail_send($TO_EMAIL, $subject, $body, $email, $name, array(
 
 // Redirect to thank-you either way (prevents user resubmits)
 if ($sent) {
-  header("Location: thank-you.html");
+  header("Location: " . gw_config_site_href("thank-you.html"));
   exit;
 } else {
   // If mail() fails (some hosts require SMTP), still show a friendly message with next step.
@@ -184,7 +184,7 @@ if ($sent) {
   echo "<h2>Thanks — we received your request.</h2>";
   echo "<p>We couldn't auto-email right now (server mail disabled). Your submission was saved and we'll still follow up.</p>";
   echo "<p>If you need to reach us immediately: <a href=\"mailto:" . htmlspecialchars($TO_EMAIL) . "\">" . htmlspecialchars($TO_EMAIL) . "</a></p>";
-  echo "<p><a href=\"index.html\">Back to Home</a></p>";
+  echo "<p><a href=\"" . htmlspecialchars(gw_config_site_href("index.html")) . "\">Back to Home</a></p>";
   exit;
 }
 ?>
