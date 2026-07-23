@@ -48,7 +48,7 @@ $nextDate = date("Y-m-d", strtotime($selectedDate . " +1 day"));
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Internal inbound tracker for Grey Wolf dock appointments.">
   <link rel="canonical" href="https://www.greywolf3pl.com/inbound-tracker.php">
-  <link rel="stylesheet" href="style.css?v=20260324-2">
+  <link rel="stylesheet" href="style.css?v=20260409-2">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

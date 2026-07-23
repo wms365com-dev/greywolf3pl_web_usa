@@ -6296,3 +6296,19 @@ body.retailer-page {
   }
 }
 
+/* 2026-04-09 desktop dropdown hover bridge */
+@media (min-width: 981px) {
+  .home-page nav ul ul,
+  .brand-page nav ul ul,
+  body.legacy-page nav ul ul {
+    top: calc(100% - 0.15rem);
+  }
+
+  .home-page nav > ul > li,
+  .brand-page nav > ul > li,
+  body.legacy-page nav > ul > li {
+    margin-bottom: -0.4rem;
+    padding-bottom: 0.4rem;
+  }
+}
+

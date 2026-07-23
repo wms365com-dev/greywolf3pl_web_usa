@@ -534,7 +534,7 @@ function gw_app_render_response_page($options) {
   echo "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n";
   echo "  <title>" . gw_app_h($title) . " | Grey Wolf 3PL</title>\n";
   echo "  <meta name=\"robots\" content=\"noindex, nofollow\">\n";
-  echo "  <link rel=\"stylesheet\" href=\"" . gw_app_h(gw_config_site_href("style.css?v=20260324-2")) . "\">\n";
+  echo "  <link rel=\"stylesheet\" href=\"" . gw_app_h(gw_config_site_href("style.css?v=20260409-2")) . "\">\n";
   echo "  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n";
   echo "  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n";
   echo "  <link href=\"https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap\" rel=\"stylesheet\">\n";

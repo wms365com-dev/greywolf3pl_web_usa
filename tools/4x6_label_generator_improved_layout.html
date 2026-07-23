@@ -324,7 +324,7 @@
       flex-direction: column;
       justify-content: center;
       min-height: 0;
-      padding: 0.10in 0 0.08in;
+      padding: 0.14in 0 0.07in;
     }
 
     .pallet-word {
@@ -373,6 +373,61 @@
       line-height: 1.1;
       text-align: center;
       word-break: break-all;
+    }
+
+    .brand-strip {
+      align-items: center;
+      border: 2px solid #000;
+      display: flex;
+      flex: 0 0 auto;
+      gap: 0.12in;
+      justify-content: center;
+      margin-bottom: 0.06in;
+      padding: 0.05in 0.08in;
+      text-align: center;
+    }
+
+    .brand-logo {
+      display: block;
+      filter: brightness(0);
+      flex: 0 0 auto;
+      height: 0.56in;
+      object-fit: contain;
+      width: 0.46in;
+    }
+
+    .brand-copy {
+      flex: 0 1 auto;
+      min-width: 0;
+    }
+
+    .brand-company {
+      display: block;
+      font-size: 0.21in;
+      font-weight: 900;
+      letter-spacing: 0.015em;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    .brand-legal,
+    .brand-action {
+      display: block;
+      font-weight: 800;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+
+    .brand-legal {
+      font-size: 0.082in;
+      letter-spacing: 0.055em;
+      margin-top: 0.01in;
+    }
+
+    .brand-action {
+      font-size: 0.105in;
+      letter-spacing: 0.025em;
+      margin-top: 0.015in;
     }
 
     .print-frame {
@@ -486,6 +541,14 @@
           </div>
 
           <div>
+            <label for="direction">Direction</label>
+            <select id="direction">
+              <option value="INBOUND">Inbound</option>
+              <option value="OUTBOUND">Outbound</option>
+            </select>
+          </div>
+
+          <div>
             <label for="date">Date</label>
             <input id="date" type="date">
           </div>
@@ -546,9 +609,9 @@
 
     function getPalletFontSize(num) {
       const len = String(num).length;
-      if (len === 1) return "3.05in";
-      if (len === 2) return "2.70in";
-      if (len === 3) return "2.05in";
+      if (len === 1) return "2.78in";
+      if (len === 2) return "2.48in";
+      if (len === 3) return "1.95in";
       return "1.55in";
     }
 
@@ -643,9 +706,18 @@
       return { datePart, timePart };
     }
 
-    function buildLabelMarkup(vendor, container, date, total, palletNo, uniqueRaw, barcodeSvg, labelType) {
+    function buildLabelMarkup(vendor, container, date, total, palletNo, uniqueRaw, barcodeSvg, labelType, brandAction, brandLogoUrl) {
       return `
         <div class="label">
+          <div class="brand-strip">
+            <img class="brand-logo" src="${brandLogoUrl}" alt="Grey Wolf logo">
+            <div class="brand-copy">
+              <strong class="brand-company">Grey Wolf 3PL</strong>
+              <span class="brand-legal">&amp; Logistics Inc.</span>
+              <span class="brand-action">${brandAction} | GreyWolf3PL.ca</span>
+            </div>
+          </div>
+
           <div class="header-box">
             <div class="vendor">${vendor || "&nbsp;"}</div>
             <div class="container-code">${container}</div>
@@ -674,6 +746,7 @@
       const vendorRaw = document.getElementById("vendor").value.trim();
       const containerRaw = document.getElementById("container").value.trim() || "TCNU3258822";
       const labelTypeRaw = document.getElementById("labelType").value || "PALLET";
+      const directionRaw = document.getElementById("direction").value || "INBOUND";
       const dateRaw = document.getElementById("date").value;
       const totalRaw = parseInt(document.getElementById("total").value, 10);
       const startRaw = parseInt(document.getElementById("startPallet").value, 10);
@@ -682,6 +755,8 @@
       const container = escapeHtml(containerRaw.toUpperCase());
       const date = escapeHtml(dateRaw);
       const labelType = escapeHtml(labelTypeRaw.toUpperCase());
+      const brandAction = directionRaw.toUpperCase() === "OUTBOUND" ? "SHIPPED" : "INBOUND";
+      const brandLogoUrl = escapeHtml(new URL("../logo_wolf.png", window.location.href).href);
       const total = (!isNaN(totalRaw) && totalRaw > 0) ? totalRaw : 1;
       const startPallet = (!isNaN(startRaw) && startRaw > 0) ? startRaw : 1;
       const stamp = getBatchTimestamp(dateRaw);
@@ -692,7 +767,7 @@
         const palletNo = startPallet + idx;
         const uniqueRaw = safeCode39(labelTypeRaw.toUpperCase() + "-" + stamp.datePart + "-" + stamp.timePart + "-" + containerRaw.toUpperCase() + "-" + palletNo);
         const barcodeSvg = buildCode39Svg(uniqueRaw);
-        const labelMarkup = buildLabelMarkup(vendor, container, date, total, palletNo, uniqueRaw, barcodeSvg, labelType);
+        const labelMarkup = buildLabelMarkup(vendor, container, date, total, palletNo, uniqueRaw, barcodeSvg, labelType, brandAction, brandLogoUrl);
 
         previewLabels.push('<div class="preview-sheet">' + labelMarkup + "</div>");
         printLabels.push(labelMarkup);
@@ -800,7 +875,7 @@
           flex-direction: column;
           justify-content: center;
           min-height: 0;
-          padding: 0.10in 0 0.08in;
+          padding: 0.14in 0 0.07in;
         }
 
         .pallet-word {
@@ -850,6 +925,61 @@
           text-align: center;
           word-break: break-all;
         }
+
+        .brand-strip {
+          align-items: center;
+          border: 2px solid #000;
+          display: flex;
+          flex: 0 0 auto;
+          gap: 0.12in;
+          justify-content: center;
+          margin-bottom: 0.06in;
+          padding: 0.05in 0.08in;
+          text-align: center;
+        }
+
+        .brand-logo {
+          display: block;
+          filter: brightness(0);
+          flex: 0 0 auto;
+          height: 0.56in;
+          object-fit: contain;
+          width: 0.46in;
+        }
+
+        .brand-copy {
+          flex: 0 1 auto;
+          min-width: 0;
+        }
+
+        .brand-company {
+          display: block;
+          font-size: 0.21in;
+          font-weight: 900;
+          letter-spacing: 0.015em;
+          line-height: 1.05;
+          text-transform: uppercase;
+        }
+
+        .brand-legal,
+        .brand-action {
+          display: block;
+          font-weight: 800;
+          line-height: 1.15;
+          text-transform: uppercase;
+        }
+
+        .brand-legal {
+          font-size: 0.082in;
+          letter-spacing: 0.055em;
+          margin-top: 0.01in;
+        }
+
+        .brand-action {
+          font-size: 0.105in;
+          letter-spacing: 0.025em;
+          margin-top: 0.015in;
+        }
       `;
     }
 
@@ -875,7 +1005,7 @@
       }, 150);
     }
 
-    document.querySelectorAll("input").forEach(function (input) {
+    document.querySelectorAll("input, select").forEach(function (input) {
       input.addEventListener("input", generate);
       input.addEventListener("change", generate);
     });

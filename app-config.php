@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 if (!function_exists("gw_env")) {
   function gw_env($key, $default = "") {
@@ -75,7 +75,7 @@ if (!function_exists("gw_config_api_url")) {
       return "https://" . $railwayDomain;
     }
 
-    return "https://api.greywolf3pl.com";
+    return "https://greywolf3plwebusa-production.up.railway.app";
   }
 }
 
@@ -254,3 +254,4 @@ if (!function_exists("gw_config_smtp_options")) {
     );
   }
 }
+

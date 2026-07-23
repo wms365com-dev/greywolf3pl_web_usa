@@ -39,7 +39,7 @@ function tool_title($filename) {
   <title>Grey Wolf Private Tools</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Private Grey Wolf utility page for internal HTML tools.">
-  <link rel="stylesheet" href="../style.css?v=20260324-2">
+  <link rel="stylesheet" href="../style.css?v=20260409-2">
   <link rel="icon" type="image/png" href="../favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

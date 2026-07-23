@@ -1,0 +1,55 @@
+# Secrets and local environment
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.railway.example
+
+# Dependencies and package caches
+node_modules/
+.npm-cache/
+vendor/
+
+# Build output
+dist/
+build/
+out/
+.next/
+
+# Local databases and generated submissions
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+form_submissions/
+
+# Logs
+logs/
+*.log
+error_log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache and temp files
+.cache/
+.tmp/
+tmp/
+temp/
+tmp_doc_media/
+*.tmp
+tmp-*.docx
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+
+# Archives and generated transfer files
+*.zip
+*.tar
+*.tar.gz
+*.7z
+

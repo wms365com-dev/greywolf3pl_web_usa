@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -17,8 +17,9 @@
   <meta name="twitter:title" content="Book a Delivery Appointment | Grey Wolf 3PL">
   <meta name="twitter:description" content="Schedule inbound deliveries at Grey Wolf 3PL in Mississauga in the Greater Toronto Area.">
   <meta name="twitter:image" content="https://www.greywolf3pl.com/hero_new.jpg">
-  <link rel="stylesheet" href="style.css?v=20260324-2">
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css?v=20260409-2">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -501,7 +502,7 @@
             </div>
           </div>
 
-          <form class="appointment-form" action="https://api.greywolf3pl.com/delivery-appointment-submit.php" method="post">
+          <form class="appointment-form" action="https://greywolf3plwebusa-production.up.railway.app/delivery-appointment-submit.php" method="post">
             <div class="appointment-form-grid">
               <div class="form-group">
                 <label for="company_name">Company / Vendor</label>
@@ -625,7 +626,7 @@
               <a class="btn btn-secondary" href="tel:+14164518894">Call dispatch</a>
             </div>
 
-            <p class="appointment-footnote">Grey Wolf automatically prevents more than 3 overlapping appointments, so if a slot is full youâ€™ll be asked to choose a different window before the request is saved.</p>
+            <p class="appointment-footnote">Grey Wolf automatically prevents more than 3 overlapping appointments, so if a slot is full youÃ¢â‚¬â„¢ll be asked to choose a different window before the request is saved.</p>
           </form>
         </div>
       </div>
@@ -651,7 +652,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      var apiBase = (window.GW_API_URL || ((window.location.hostname || "").indexOf(".up.railway.app") !== -1 ? window.location.origin : "https://api.greywolf3pl.com")).replace(/\/+$/, "");
+      var apiBase = (window.GW_API_URL || ((window.location.hostname || "").indexOf(".up.railway.app") !== -1 ? window.location.origin : "https://greywolf3plwebusa-production.up.railway.app")).replace(/\/+$/, "");
       function apiUrl(path) {
         return apiBase + "/" + String(path || "").replace(/^\/+/, "");
       }
@@ -731,3 +732,4 @@
   <script src="js/site.js?v=20260405-1"></script>
 </body>
 </html>
+

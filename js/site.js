@@ -70,7 +70,7 @@
       return normalizeBaseUrl(window.location.origin);
     }
 
-    return "https://api.greywolf3pl.com";
+    return "https://greywolf3plwebusa-production.up.railway.app";
   }
 
   function resolveApiUrl(path) {
@@ -196,6 +196,7 @@
             '<li><a href="crossborder.html">Cross-Border Logistics</a></li>' +
           '</ul>' +
         '</li>' +
+        '<li class="nav-item"><a href="index.html#locations">Locations</a></li>' +
         '<li class="nav-item"><a href="index.html#why-grey-wolf">Why Grey Wolf</a></li>' +
         '<li class="nav-item nav-item-resources"><a href="guide.html">Resources</a>' +
           '<ul>' +
@@ -598,7 +599,7 @@
       if (action === "quote-submit.php" || action === "lead-submit.php") {
         form.setAttribute("action", resolveApiUrl(action));
         action = form.getAttribute("action") || action;
-      } else if (/^https:\/\/api\.greywolf3pl\.com\//i.test(action) && getPreferredApiBase() !== "https://api.greywolf3pl.com") {
+      } else if (/^https:\/\/api\.greywolf3pl\.com\//i.test(action) && getPreferredApiBase() !== "https://greywolf3plwebusa-production.up.railway.app") {
         form.setAttribute("action", resolveApiUrl(action.replace(/^https:\/\/api\.greywolf3pl\.com\//i, "")));
         action = form.getAttribute("action") || action;
       }
@@ -846,4 +847,5 @@
     applyDeviceClasses();
   });
 })();
+
 
