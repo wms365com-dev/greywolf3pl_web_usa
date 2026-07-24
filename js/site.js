@@ -836,11 +836,9 @@
     injectBreadcrumbs();
     wireMenus();
     wireExpandableCards();
-    injectLeadPopup();
     wireForms();
     wireClickTracking();
     wireScrollDepth();
-    injectWelcomeBackBanner();
   });
 
   window.addEventListener("resize", function () {
