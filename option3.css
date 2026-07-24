@@ -2301,3 +2301,42 @@
     opacity: 1 !important;
   }
 }
+
+/* 2026-07-24 accessibility contrast lock */
+body.home-page #locations .eyebrow,
+body.home-page #contact .eyebrow,
+body.home-page #locations .location-region,
+body.home-page #locations .location-link,
+body.home-page #contact .contact-detail strong,
+body.home-page #contact .quote-progress strong {
+  color: #0d5b9e !important;
+}
+
+body.home-page #locations .section-heading > p:last-child,
+body.home-page #locations .location-disclosure,
+body.home-page #contact .contact-intro > p,
+body.home-page #contact .quote-panel-header > p:not(.eyebrow),
+body.home-page #contact .quote-next-steps li,
+body.home-page #contact .contact-detail span,
+body.home-page #contact .map-note,
+body.home-page #contact .map-caption {
+  color: #40566b !important;
+}
+
+body.home-page #contact .contact-quick-links .btn-primary,
+body.home-page #contact .quote-panel .btn-primary {
+  background: #b91f15 !important;
+  border-color: #b91f15 !important;
+  color: #ffffff !important;
+}
+
+body.home-page #contact .contact-quick-links .btn-secondary {
+  background: #0b2a4a !important;
+  border-color: #0b2a4a !important;
+  color: #ffffff !important;
+}
+
+body.home-page #contact .map-route-link {
+  background: #0d5b9e !important;
+  color: #ffffff !important;
+}

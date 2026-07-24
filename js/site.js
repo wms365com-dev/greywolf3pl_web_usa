@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   function gtagSafe(eventName, payload) {
     try {
       if (typeof window.gtag === "function") {
@@ -192,7 +192,13 @@
             '<li><a href="shipping.html">Shipping &amp; Distribution</a></li>' +
           '</ul>' +
         '</li>' +
-        '<li class="nav-item"><a href="index.html#locations">Locations</a></li>' +
+        '<li class="nav-item nav-item-locations"><a href="index.html#locations">Locations</a>' +
+          '<ul>' +
+            '<li><a href="mississauga.html">Mississauga facility</a></li>' +
+            '<li><a href="calgary-3pl.html">Calgary service region</a></li>' +
+            '<li><a href="delta-bc-3pl.html">Delta service region</a></li>' +
+          '</ul>' +
+        '</li>' +
         '<li class="nav-item"><a href="index.html#industries">Industries</a></li>' +
         '<li class="nav-item"><a href="index.html#why-grey-wolf">Why Grey Wolf</a></li>' +
         '<li class="nav-item nav-item-resources"><a href="guide.html">Resources</a>' +
