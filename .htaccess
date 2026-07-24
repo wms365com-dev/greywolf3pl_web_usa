@@ -6,9 +6,9 @@ DirectoryIndex index.html index.php
 <IfModule mod_rewrite.c>
 RewriteEngine On
 # Legacy location URL redirects to clean canonical hubs.
-RewriteRule ^mississauga\.html$ /locations/mississauga-3pl-warehouse/ [R=301,L,NC]
-RewriteRule ^calgary-3pl\.html$ /locations/calgary-3pl-warehouse/ [R=301,L,NC]
-RewriteRule ^delta-bc-3pl\.html$ /locations/delta-bc-3pl-warehouse/ [R=301,L,NC]
+RewriteRule ^mississauga\.html$ https://www.greywolf3pl.com/locations/mississauga-3pl-warehouse/ [R=301,L,NC]
+RewriteRule ^calgary-3pl\.html$ https://www.greywolf3pl.com/locations/calgary-3pl-warehouse/ [R=301,L,NC]
+RewriteRule ^delta-bc-3pl\.html$ https://www.greywolf3pl.com/locations/delta-bc-3pl-warehouse/ [R=301,L,NC]
 
 # Force the canonical HTTPS + www host.
 RewriteCond %{REQUEST_URI} !^/health\.php$ [NC]
