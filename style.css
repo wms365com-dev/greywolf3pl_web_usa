@@ -6312,3 +6312,17 @@ body.retailer-page {
   }
 }
 
+/* 2026-07-24 simplified national-network navigation */
+@media (min-width: 981px) {
+  body.legacy-page nav > ul > li.nav-mega > ul {
+    display: grid;
+    gap: 0.2rem 0.65rem;
+    grid-template-columns: repeat(2, minmax(210px, 1fr));
+    width: 500px;
+  }
+
+  body.legacy-page nav > ul > li.nav-mega > ul li a {
+    min-height: 44px;
+  }
+}
+

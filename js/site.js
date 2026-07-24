@@ -182,35 +182,27 @@
 
     if (navList && navList.dataset.legacyUpgraded !== "true") {
       navList.innerHTML =
-        '<li class="nav-item nav-item-services"><a href="index.html#services">Services</a>' +
+        '<li class="nav-item nav-item-services nav-mega"><a href="index.html#services">Services</a>' +
           '<ul>' +
             '<li><a href="warehousing.html">Warehousing &amp; Storage</a></li>' +
             '<li><a href="ecommerce.html">Ecommerce Fulfillment</a></li>' +
-            '<li><a href="shipping.html">Shipping &amp; Parcel Management</a></li>' +
-            '<li><a href="container.html">Container Stuffing &amp; De-Stuffing</a></li>' +
             '<li><a href="crossdocking.html">Cross-Docking &amp; Transloading</a></li>' +
-            '<li><a href="drayage.html">Ontario Drayage</a></li>' +
+            '<li><a href="container.html">Container Handling</a></li>' +
             '<li><a href="copacking.html">Co-Packing &amp; Value-Add</a></li>' +
-            '<li><a href="inventory.html">Inventory Visibility &amp; Returns</a></li>' +
-            '<li><a href="compliance.html">Compliance &amp; Quality</a></li>' +
-            '<li><a href="crossborder.html">Cross-Border Logistics</a></li>' +
+            '<li><a href="shipping.html">Shipping &amp; Distribution</a></li>' +
           '</ul>' +
         '</li>' +
         '<li class="nav-item"><a href="index.html#locations">Locations</a></li>' +
+        '<li class="nav-item"><a href="index.html#industries">Industries</a></li>' +
         '<li class="nav-item"><a href="index.html#why-grey-wolf">Why Grey Wolf</a></li>' +
         '<li class="nav-item nav-item-resources"><a href="guide.html">Resources</a>' +
           '<ul>' +
             '<li><a href="guide.html">3PL Guide</a></li>' +
             '<li><a href="faq.html">FAQ</a></li>' +
             '<li><a href="mississauga.html">Mississauga 3PL</a></li>' +
-            '<li><a href="international.html">International</a></li>' +
-            '<li><a href="tracking.html">Tracking</a></li>' +
-            '<li><a href="delivery-appointment.html">Delivery Appointments</a></li>' +
             '<li><a href="sitemap.html">Site Map</a></li>' +
           '</ul>' +
         '</li>' +
-        '<li class="nav-item"><a href="driver-help.html">Driver Help</a></li>' +
-        '<li class="nav-item"><a href="index.html#contact">Contact</a></li>' +
         '<li class="nav-item nav-action nav-action-call"><a href="tel:+14164518894" class="call-btn">Call 416-451-8894</a></li>' +
         '<li class="nav-item nav-action nav-action-quote"><a href="index.html#quote-form" class="cta-btn">Request a Quote</a></li>';
       navList.dataset.legacyUpgraded = "true";
@@ -618,6 +610,10 @@
       });
 
       form.addEventListener("submit", function (event) {
+        if (form.classList.contains("quote-wizard") && form.dataset.currentStep === "1") {
+          return;
+        }
+
         if (typeof form.reportValidity === "function" && !form.reportValidity()) {
           return;
         }
@@ -628,6 +624,77 @@
         });
       });
     });
+  }
+
+  function wireQuoteWizard() {
+    var form = document.querySelector("form.quote-wizard");
+    if (!form || form.dataset.quoteWizardBound === "true") return;
+
+    var steps = form.querySelectorAll("[data-form-step]");
+    var nextButton = form.querySelector("[data-quote-next]");
+    var backButton = form.querySelector("[data-quote-back]");
+    var currentLabel = form.querySelector("[data-current-step-label]");
+    var stepName = form.querySelector("[data-step-name]");
+    var currentStep = 1;
+
+    if (steps.length !== 2 || !nextButton || !backButton) return;
+    form.dataset.quoteWizardBound = "true";
+
+    function showStep(stepNumber, focusFirst) {
+      currentStep = stepNumber;
+      form.dataset.currentStep = String(stepNumber);
+
+      Array.prototype.forEach.call(steps, function (step) {
+        var isCurrent = step.getAttribute("data-form-step") === String(stepNumber);
+        step.hidden = !isCurrent;
+      });
+
+      if (currentLabel) currentLabel.textContent = String(stepNumber);
+      if (stepName) stepName.textContent = stepNumber === 1 ? "Contact" : "Operation";
+
+      if (focusFirst) {
+        var activeStep = form.querySelector('[data-form-step="' + stepNumber + '"]');
+        var firstField = activeStep && activeStep.querySelector("input:not([type='hidden']), select, textarea");
+        if (firstField) firstField.focus();
+      }
+
+      gtagSafe("quote_step_view", {
+        event_category: "lead_generation",
+        event_label: "step_" + stepNumber
+      });
+    }
+
+    function validateStep(stepNumber) {
+      var step = form.querySelector('[data-form-step="' + stepNumber + '"]');
+      var fields = step ? step.querySelectorAll("input, select, textarea") : [];
+
+      for (var i = 0; i < fields.length; i += 1) {
+        if (!fields[i].checkValidity()) {
+          fields[i].reportValidity();
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    nextButton.addEventListener("click", function () {
+      if (!validateStep(1)) return;
+      showStep(2, true);
+    });
+
+    backButton.addEventListener("click", function () {
+      showStep(1, true);
+    });
+
+    form.addEventListener("submit", function (event) {
+      if (currentStep === 1) {
+        event.preventDefault();
+        if (validateStep(1)) showStep(2, true);
+      }
+    });
+
+    showStep(1, false);
   }
 
   function wireClickTracking() {
@@ -837,6 +904,7 @@
     wireMenus();
     wireExpandableCards();
     wireForms();
+    wireQuoteWizard();
     wireClickTracking();
     wireScrollDepth();
   });
