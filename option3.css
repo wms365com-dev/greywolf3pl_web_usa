@@ -464,8 +464,12 @@
 }
 
 .home-page .pin-mississauga {
-  left: 79%;
-  top: 70%;
+  left: 63.5%;
+  top: 92.7%;
+}
+
+.home-page .route-east-mobile {
+  display: none;
 }
 
 .home-page .network-flow {
@@ -971,6 +975,18 @@
 
   .home-page .network-map {
     aspect-ratio: 1.18 / 1;
+  }
+
+  .home-page .pin-mississauga {
+    left: 66.6%;
+  }
+
+  .home-page .route-east-desktop {
+    display: none;
+  }
+
+  .home-page .route-east-mobile {
+    display: block;
   }
 
   .home-page .network-pin strong {
