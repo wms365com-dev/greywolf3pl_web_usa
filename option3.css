@@ -820,10 +820,139 @@
 }
 
 .home-page .map-card {
+  background: linear-gradient(180deg, var(--gw-white), var(--gw-ice-50)) !important;
   border-color: var(--gw-line) !important;
   border-radius: var(--gw-radius-md) !important;
+  color: var(--gw-ink) !important;
   box-shadow: var(--gw-shadow-md) !important;
   overflow: hidden;
+}
+
+.home-page .map-card-heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.home-page .map-card-heading .map-note {
+  margin-bottom: 0.35rem !important;
+}
+
+.home-page .map-card-heading h3 {
+  color: var(--gw-navy-950);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.home-page .map-route-link {
+  align-items: center;
+  background: var(--gw-blue-600);
+  border-radius: 999px;
+  color: var(--gw-white) !important;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 0.82rem;
+  font-weight: 800;
+  gap: 0.45rem;
+  padding: 0.68rem 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.home-page .map-route-link:hover {
+  background: var(--gw-navy-950);
+  transform: translateY(-1px);
+}
+
+.home-page .map-location-list {
+  align-items: stretch;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  margin-bottom: 0.9rem;
+}
+
+.home-page .map-location-item {
+  align-items: center;
+  background: var(--gw-white);
+  border: 1px solid var(--gw-line);
+  border-radius: 14px;
+  color: var(--gw-navy-950) !important;
+  display: flex;
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0.75rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-page .map-location-item:hover {
+  border-color: var(--gw-blue-500);
+  box-shadow: 0 8px 20px rgba(12, 54, 91, 0.09);
+}
+
+.home-page .map-location-item > span:last-child {
+  min-width: 0;
+}
+
+.home-page .map-location-item strong,
+.home-page .map-location-item small {
+  display: block;
+}
+
+.home-page .map-location-item strong {
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.home-page .map-location-item small {
+  color: var(--gw-muted);
+  font-size: 0.71rem;
+  line-height: 1.4;
+  margin-top: 0.18rem;
+}
+
+.home-page .map-location-icon {
+  align-items: center;
+  background: var(--gw-ice-100);
+  border-radius: 11px;
+  color: var(--gw-blue-600);
+  display: inline-flex;
+  flex: 0 0 38px;
+  height: 38px;
+  justify-content: center;
+}
+
+.home-page .map-location-item-airport .map-location-icon {
+  background: rgba(231, 49, 55, 0.1);
+  color: var(--gw-red);
+}
+
+.home-page .map-location-connection {
+  align-items: center;
+  color: var(--gw-muted);
+  display: inline-flex;
+  justify-content: center;
+}
+
+.home-page .map-container {
+  border: 1px solid var(--gw-line);
+}
+
+.home-page .map-caption {
+  align-items: center;
+  color: var(--gw-muted) !important;
+  display: flex;
+  font-size: 0.76rem !important;
+  gap: 0.45rem;
+  line-height: 1.45;
+  margin: 0.75rem 0 0 !important;
+}
+
+.home-page .map-caption i {
+  color: var(--gw-red);
 }
 
 .home-page footer {
@@ -920,6 +1049,29 @@
 
   .home-page .location-card-featured {
     grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 680px) {
+  .home-page .map-card-heading {
+    display: block;
+  }
+
+  .home-page .map-route-link {
+    margin-top: 0.85rem;
+  }
+
+  .home-page .map-location-list {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page .map-location-connection {
+    height: 18px;
+    transform: rotate(90deg);
+  }
+
+  .home-page .map-container {
+    height: 300px;
   }
 }
 
