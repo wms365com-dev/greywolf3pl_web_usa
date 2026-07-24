@@ -958,6 +958,87 @@
 
 .home-page .map-container {
   border: 1px solid var(--gw-line);
+  overflow: hidden;
+  position: relative;
+}
+
+.home-page .map-place-callout {
+  align-items: center;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(23, 38, 58, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(7, 24, 43, 0.2);
+  color: var(--gw-ink) !important;
+  display: flex;
+  gap: 0.55rem;
+  max-width: 205px;
+  padding: 0.58rem 0.68rem;
+  position: absolute;
+  text-decoration: none;
+  transform: translate(-50%, -100%);
+  transition: box-shadow 180ms ease, transform 180ms ease;
+  z-index: 3;
+}
+
+.home-page .map-place-callout::after {
+  background: inherit;
+  border-bottom: 1px solid rgba(23, 38, 58, 0.15);
+  border-right: 1px solid rgba(23, 38, 58, 0.15);
+  bottom: -5px;
+  content: "";
+  height: 9px;
+  left: calc(50% - 5px);
+  position: absolute;
+  transform: rotate(45deg);
+  width: 9px;
+}
+
+.home-page .map-place-callout:hover {
+  box-shadow: 0 14px 30px rgba(7, 24, 43, 0.26);
+  transform: translate(-50%, calc(-100% - 2px));
+}
+
+.home-page .map-place-callout strong,
+.home-page .map-place-callout small {
+  display: block;
+}
+
+.home-page .map-place-callout strong {
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.home-page .map-place-callout small {
+  color: var(--gw-muted);
+  font-size: 0.61rem;
+  line-height: 1.3;
+  margin-top: 0.12rem;
+}
+
+.home-page .map-place-pin {
+  align-items: center;
+  background: var(--gw-red);
+  border-radius: 999px;
+  color: var(--gw-white);
+  display: inline-flex;
+  flex: 0 0 30px;
+  height: 30px;
+  justify-content: center;
+}
+
+.home-page .map-place-callout-airport {
+  left: 29%;
+  top: 42%;
+}
+
+.home-page .map-place-callout-warehouse {
+  left: 68%;
+  top: 70%;
+}
+
+.home-page .map-place-callout-warehouse .map-place-pin {
+  background: var(--gw-blue-600);
 }
 
 .home-page .map-caption {
