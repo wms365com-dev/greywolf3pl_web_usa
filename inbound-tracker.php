@@ -420,7 +420,7 @@ $nextDate = date("Y-m-d", strtotime($selectedDate . " +1 day"));
             <ul>
               <li><a href="guide.html">3PL Guide</a></li>
               <li><a href="faq.html">FAQ</a></li>
-              <li><a href="mississauga.html">Mississauga 3PL</a></li>
+              <li><a href="/locations/mississauga-3pl-warehouse/">Mississauga 3PL</a></li>
               <li><a href="international.html">International</a></li>
               <li><a href="tracking.html">Tracking</a></li>
               <li><a href="delivery-appointment.html">Delivery Appointments</a></li>

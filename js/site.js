@@ -194,9 +194,9 @@
         '</li>' +
         '<li class="nav-item nav-item-locations"><a href="index.html#locations">Locations</a>' +
           '<ul>' +
-            '<li><a href="mississauga.html">Mississauga facility</a></li>' +
-            '<li><a href="calgary-3pl.html">Calgary service region</a></li>' +
-            '<li><a href="delta-bc-3pl.html">Delta service region</a></li>' +
+            '<li><a href="/locations/mississauga-3pl-warehouse/">Mississauga facility</a></li>' +
+            '<li><a href="/locations/calgary-3pl-warehouse/">Calgary service region</a></li>' +
+            '<li><a href="/locations/delta-bc-3pl-warehouse/">Delta service region</a></li>' +
           '</ul>' +
         '</li>' +
         '<li class="nav-item"><a href="index.html#industries">Industries</a></li>' +
@@ -205,7 +205,7 @@
           '<ul>' +
             '<li><a href="guide.html">3PL Guide</a></li>' +
             '<li><a href="faq.html">FAQ</a></li>' +
-            '<li><a href="mississauga.html">Mississauga 3PL</a></li>' +
+            '<li><a href="/locations/mississauga-3pl-warehouse/">Mississauga 3PL</a></li>' +
             '<li><a href="sitemap.html">Site Map</a></li>' +
           '</ul>' +
         '</li>' +
@@ -295,7 +295,7 @@
     }
 
     if (file === "mississauga.html" || file.indexOf("-warehouse.html") !== -1) {
-      return { file: file, label: pageLabel, section: "Locations", sectionHref: "mississauga.html" };
+      return { file: file, label: pageLabel, section: "Locations", sectionHref: "/locations/mississauga-3pl-warehouse/" };
     }
 
     return { file: file, label: pageLabel, section: "", sectionHref: "" };
